@@ -20,8 +20,27 @@ Route::get('/', function () {
     return view('about.index');
 });
 
+Route::get('/home', function () {
+    if(auth()->user()->user_type == 'STUDENT') {
+        return view('students.home');
+    } else {
+        return view('schools.home');
+    }
+})->middleware('auth');
+
+
+// Auth Routes
+Route::get('auth/signout', [AuthController::class, 'signout']);
+Route::get('auth/signin');
+
 Route::get('/register', function() {
     return view('auth.register');
-} );
+})->name('login');
+
+// Students' Routes
 Route::get('/register/student', [StudentController::class, 'create'] );
+Route::post('/register/student', [StudentController::class, 'store'] );
+
+// Schools' Routes
 Route::get('/register/school',  [SchoolController::class, 'create'] );
+Route::post('/register/school',  [SchoolController::class, 'store'] );
