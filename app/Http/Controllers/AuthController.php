@@ -62,4 +62,9 @@ class AuthController extends Controller
     {
         //
     }
+
+    public function signout() {
+        auth()->logout();
+        return redirect('/home');
+    }
 }

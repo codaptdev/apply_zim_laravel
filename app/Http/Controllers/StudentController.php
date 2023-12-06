@@ -2,11 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
+
+    private $cities = [
+        "Harare",
+        "Bulawayo",
+        "Chitungwiza",
+        "Mutare",
+        "Gweru",
+        "Kwekwe",
+        "Zvishavane",
+        "Ruwa",
+        "Epworth",
+        "Masvingo",
+        "Marondera",
+        "Norton",
+        "Bindura",
+        "Hwange",
+        "Beitbridge",
+        "Gwanda",
+        "Chinhoyi",
+        "Kariba",
+        "Kadoma",
+        "Rusape",
+        "Plumtree",
+    ];
+
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +47,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view("auth.create_student", [
+            "cities" => $this->cities
+        ]);
     }
 
     /**
@@ -28,7 +57,50 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|email|unique:users,email',
+            'password'=> 'required',
+            'first_name' => 'required',
+            'town_city' => 'required',
+            'surname' => 'required'
+        ]);
+
+        $user = new User([
+            'email' => $request->email,
+            'password' => $request->password,
+            'name' => $request->first_name . ' ' . $request->surname,
+            'user_type' => 'STUDENT',
+        ]);
+
+        if (User::all()->where('email', $request->email)->count() > 0) {
+
+            redirect()->back()->withErrors([
+                'This email is already in use'
+            ]);
+        } else {
+            $user->save();
+        }
+
+        if (Auth::attempt($request->only(['email','password']))) {
+
+            $student = new Student();
+            $student->id = auth()->user()->id;
+            $student->first_name = $request->first_name;
+            $student->email = $request->email;
+            $student->surname = $request->surname;
+            $student->level =  strtoupper($request->level);
+            $student->town_city = $request->town_city;
+
+            $student->save();
+            return redirect('/home');
+        } else {
+            return redirect()->back()->withErrors([
+                'email' => 'That email already exists',
+                'password' => 'Sorry Somthing went wrong try again'
+            ]);
+        }
+
+
     }
 
     /**
