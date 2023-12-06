@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique()->nullable(false);
             $table->string('town_city');
             $table->string('address');
-            $table->string('logo_url');
+            $table->string('logo_url')->nullable(true);
             $table->enum('level', ['PRIMARY', 'SECONDARY', 'TERTIARY']);
             $table->timestamps();
         });
