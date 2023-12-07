@@ -17,7 +17,7 @@
         <br>
         <div class="grid grid-cols-1 md:grid-cols-3 w-full h-full gap-3 ">
 
-            <a href="">View School Info</a>
+            <a href="/myschool/edit">Edit School Info</a>
             <a href="/schools/{{$school->name}}">View School Profile</a>
             <a href="">Edit School Profile</a>
 
