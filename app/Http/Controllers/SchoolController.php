@@ -136,7 +136,9 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        //
+        $school = School::all()->where('id', auth()->user()->id)->first();
+        $cities = $this->cities;
+        return view('schools.edit', compact('school', 'cities'));
     }
 
     /**
@@ -144,7 +146,24 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        //
+        $request->validate([
+            'address' => 'required',
+            'town_city' => 'required',
+            'year_established' => 'required|numeric',
+        ]);
+
+
+        $school = School::all()->where('id', auth()->user()->id)->first();
+
+        $school->id = auth()->user()->id;
+        $school->name = $request->name;
+        $school->year_established = $request->year_established;
+        $school->level =  strtoupper($request->level);
+        $school->town_city = $request->town_city;
+        $school->address = $request->address;
+        $school->update();
+
+        return redirect('/myschool')->with('message','Your school information was updated');
     }
 
     /**

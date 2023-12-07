@@ -48,6 +48,8 @@ Route::post('/register/school',  [SchoolController::class, 'store'] );
 
 // My School Routes
 Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth');
+Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth');
+Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth');
 Route::get('/schools/{name}',  [SchoolController::class, 'index'] );
 
 
