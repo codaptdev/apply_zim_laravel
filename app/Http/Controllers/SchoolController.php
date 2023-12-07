@@ -6,7 +6,6 @@ use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class SchoolController extends Controller
 {
@@ -39,9 +38,11 @@ class SchoolController extends Controller
         "Plumtree",
     ];
 
-    public function index()
+    public function index(string $name)
     {
-        //
+        $school = School::all()->where('name', $name)->first();
+
+        return view('schools.index', compact('school'));
     }
 
     /**
@@ -152,5 +153,20 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         //
+    }
+
+    public function myschool()
+
+    {
+
+        if(auth()->user()->user_type == 'SCHOOL') {
+
+            $school = School::all()->where('id', auth()->user()->id)->first();
+            return view('schools.myschool', [
+                'school' => $school
+            ]);
+        } else {
+            return redirect('/home');
+        }
     }
 }

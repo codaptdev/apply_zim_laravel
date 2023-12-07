@@ -46,6 +46,10 @@ Route::post('/register/student', [StudentController::class, 'store'] );
 Route::get('/register/school',  [SchoolController::class, 'create'] );
 Route::post('/register/school',  [SchoolController::class, 'store'] );
 
+// My School Routes
+Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth');
+Route::get('/schools/{name}',  [SchoolController::class, 'index'] );
+
 
 // Search Routes
 Route::get('/search', [SchoolController::class, 'show'])->name('search');
