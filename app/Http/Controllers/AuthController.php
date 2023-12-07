@@ -12,7 +12,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-        //
+        return view("auth.index");
     }
 
     /**
@@ -36,7 +36,7 @@ class AuthController extends Controller
      */
     public function show(User $user)
     {
-        //
+
     }
 
     /**
@@ -66,5 +66,20 @@ class AuthController extends Controller
     public function signout() {
         auth()->logout();
         return redirect('/home');
+    }
+
+    public function signin(Request $request) {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if  (auth()->attempt($request->only(['email', 'password']))) {
+            return redirect('/home');
+        } else {
+            return redirect()->back()->withErrors([
+                'email' => 'Wrong email or password'
+            ]);
+        }
     }
 }
