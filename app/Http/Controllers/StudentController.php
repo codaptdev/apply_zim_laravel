@@ -62,7 +62,8 @@ class StudentController extends Controller
             'password'=> 'required',
             'first_name' => 'required',
             'town_city' => 'required',
-            'surname' => 'required'
+            'surname' => 'required',
+            'confirm-password' => ['required', 'same:password'],
         ]);
 
         $user = new User([

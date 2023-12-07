@@ -65,6 +65,7 @@ class SchoolController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email',
             'password'=> 'required',
+            'confirm-password' => ['required', 'same:password'],
             'address' => 'required',
             'town_city' => 'required',
             'year_established' => 'required|numeric',

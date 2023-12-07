@@ -13,7 +13,7 @@
 
     @if ($errors->any())
         @foreach ($errors->all() as $error)
-            <div class=" alert alert-danger">{{$error}}</div>
+            <div class="p-5 bg-red-400 w-full">{{$error}}</div>
         @endforeach
     @endif
 
@@ -37,6 +37,10 @@
 
         <br>
 
+        <label>Confirm Password</label>
+        <input required type="password" name="confirm-password" >
+
+        <br>
 
 
         <label>Address</label>

@@ -44,6 +44,11 @@
 
         <br>
 
+        <label>Confirm Password</label>
+        <input required type="password" name="confirm-password" >
+
+        <br>
+
         <label> Town or City </label>
         <select required type="text" name="town_city" placeholder="e.g Harare" >
             @foreach ($cities as $city)
