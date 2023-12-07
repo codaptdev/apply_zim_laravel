@@ -62,12 +62,12 @@ class SchoolController extends Controller
     public function store(Request $request)
     {
 
-        $this->validate($request, [
+        $request->validate([
             'email' => 'required|email|unique:users,email',
             'password'=> 'required',
             'address' => 'required',
             'town_city' => 'required',
-            'year_established' => 'required|numeric'
+            'year_established' => 'required|numeric',
         ]);
 
         $user = new User([
@@ -100,10 +100,7 @@ class SchoolController extends Controller
             $school->save();
             return redirect('/home');
         } else {
-            return redirect()->back()->withErrors([
-                'email' => 'That email already exists',
-                'password' => 'Sorry Somthing went wrong try again'
-            ]);
+            return redirect()->back();
         }
 
     }

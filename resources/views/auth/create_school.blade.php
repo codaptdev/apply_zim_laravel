@@ -10,7 +10,14 @@
 <body class="bg-stone-50 flex flex-col justify-center items-center py-20" >
     <h1 class=" text-3xl text-slate-400 font-serif" >ApplyZim</h1>
 
-    <h1 class="text-4xl my-10 font-medium text-center w-1/2" >Lets get your school on board</h1>
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <div class=" alert alert-danger">{{$error}}</div>
+        @endforeach
+    @endif
+
+    <h1 class="text-4xl my-10 font-medium text-center w-1/2" >School Registration</h1>
 
     <form action="/register/school" method="POST" class="bg-white " >
         @csrf
@@ -67,6 +74,6 @@
     </form>
 
     <br>
-    <a href="">Already have an account? Sign In</a>
+    <a href="/auth/signin">Already have an account? Sign In</a>
 </body>
 </html>

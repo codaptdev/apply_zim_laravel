@@ -8,11 +8,18 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-stone-50 flex flex-col justify-center items-center py-20" >
-    <h1 class=" text-3xl text-slate-400 font-serif" >ApplyZim</h1>
 
+    @foreach ($errors->all() as $error)
+        <div class="w-full p-5 bg-red-300 mb-10">
+            <p>{{$error}}</p>
+        </div>
+    @endforeach
+
+
+
+    <h1 class=" text-3xl text-slate-400 font-serif" >ApplyZim</h1>
     <h1 class="text-4xl my-10 font-medium text-center w-1/2" >Student Registration</h1>
 
-    <h1>{{$errors}}</h1>
 
     <form action="/register/student" method="POST" class="bg-white " >
         @csrf
@@ -62,6 +69,6 @@
     </form>
 
     <br>
-    <a href="">Already have an account? Sign In</a>
+    <a href="auth/signin">Already have an account? Sign In</a>
 </body>
 </html>
