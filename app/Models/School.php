@@ -14,4 +14,8 @@ class School extends Model
         return $this->where("name","LIKE","%". $search ."%")
         ->get();
     }
+
+    public function user() {
+        return $this->belongsTo('users');
+    }
 }
