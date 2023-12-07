@@ -74,6 +74,6 @@
     </form>
 
     <br>
-    <a href="/auth/signin">Already have an account? Sign In</a>
+    <a href={{url('auth/signin')}}>Already have an account? Sign In</a>
 </body>
 </html>

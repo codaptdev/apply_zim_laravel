@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Register School</title>
+    <title>Register Student</title>
     @vite('resources/css/app.css')
 </head>
 <body class="bg-stone-50 flex flex-col justify-center items-center py-20" >
@@ -69,6 +69,6 @@
     </form>
 
     <br>
-    <a href="auth/signin">Already have an account? Sign In</a>
+    <a href={{url('auth/signin')}}>Already have an account? Sign In</a>
 </body>
 </html>

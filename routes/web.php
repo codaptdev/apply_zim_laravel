@@ -31,11 +31,12 @@ Route::get('/home', function () {
 
 // Auth Routes
 Route::get('auth/signout', [AuthController::class, 'signout']);
-Route::get('auth/signin');
+Route::get('auth/signin', [AuthController::class,'index'])->name('login');
+Route::post('auth/signin', [AuthController::class,'signin']);
 
 Route::get('/register', function() {
     return view('auth.register');
-})->name('login');
+});
 
 // Students' Routes
 Route::get('/register/student', [StudentController::class, 'create'] );
