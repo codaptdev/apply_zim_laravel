@@ -74,3 +74,25 @@ a {
     color: blue;
     font-weight: 600;
 }
+
+.search {
+    background: whitesmoke;
+    border: solid;
+    border-color: rgb(190, 190, 190);
+    border-width: 1px;
+    border-radius: 15px;
+    height: 45px;
+    width: 75%;
+    padding-left: 15px;
+}
+
+.search-btn {
+    width: 25%;
+    background-color: rgb(75, 99, 255);
+    border-radius: 15px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

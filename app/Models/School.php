@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class School extends Model
 {
 
-
     use HasFactory;
+
+    public function searchLike(string $search) {
+        return $this->where("name","LIKE","%". $search ."%")
+        ->get();
+    }
 }

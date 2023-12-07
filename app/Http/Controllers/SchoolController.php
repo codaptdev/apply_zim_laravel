@@ -39,7 +39,6 @@ class SchoolController extends Controller
         "Plumtree",
     ];
 
-
     public function index()
     {
         //
@@ -109,9 +108,26 @@ class SchoolController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(School $school)
+    public function show(Request $request)
     {
-        //
+        $schools = [];
+
+        if (strtoupper($request->name) == 'ALL') {
+            $schools = School::all();
+            $query = $request->name;
+            return view('students.search', compact('query', 'schools'));
+        }
+
+        if($request->name !== null) {
+            $model = new School();
+            $schools = $model->searchLike($request->name);
+            $query = $request->name;
+        } else {
+            $query = '';
+        }
+
+        return view('students.search', compact('query', 'schools'));
+
     }
 
     /**
