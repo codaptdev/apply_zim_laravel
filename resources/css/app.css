@@ -21,6 +21,25 @@
     background:  rgb(0, 28, 209);
 }
 
+
+.red-link-btn {
+    background-color: rgb(254, 142, 122);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    border-radius: 15px;
+    transition: all 0.5s;
+}
+
+.red-link-btn:hover {
+    background:  tomato;
+}
+
 h1 {
     font-size: 45px;
     font-weight: bold;
