@@ -1,7 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "codapt/applyzim",
+    "version": "0.1.3",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A platform for schools and students.",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
