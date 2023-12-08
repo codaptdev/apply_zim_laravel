@@ -38,11 +38,35 @@ class SchoolController extends Controller
         "Plumtree",
     ];
 
+    /** Get a school by its name */
     public function index(string $name)
     {
-        $school = School::all()->where('name', $name)->first();
+        $school = School::all()->where('name' , $name)->first();
 
-        return view('schools.index', compact('school'));
+        if($school === null) {
+            return view('schools.404', [
+                'isId' => false,
+                'nameOrId' => $name
+            ]);
+        } else {
+            return view('schools.index', compact('school'));
+        }
+    }
+
+    /** Get a school by its id */
+    public function indexWithID($id)
+    {
+        $school = School::find( $id );
+
+        if($school === null) {
+            return view('schools.404', [
+                'isId' => true,
+                'nameOrId' => $id
+            ]);
+        } else {
+            return view('schools.index', compact('school'));
+        }
+
     }
 
     /**

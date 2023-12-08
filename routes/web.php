@@ -17,7 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('about.index');
+    if(auth()->guest()) {
+        return view('about.index');
+    } else {
+        return redirect('/home');
+    }
 });
 
 Route::get('/home', function () {
@@ -50,7 +54,14 @@ Route::post('/register/school',  [SchoolController::class, 'store'] );
 Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth');
 Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth');
 Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth');
+
+// Get school with ID
+Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
+->where('id', '[1-9]+');
+
+// Get school with name
 Route::get('/schools/{name}',  [SchoolController::class, 'index'] );
+
 
 
 // Search Routes
