@@ -8,9 +8,27 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div class="flex flex-col w-full h-full" >
+    <main class="flex flex-col mb-24 pb-5 w-full h-full" >
         <x-navbar></x-navbar>
         {{$slot}}
-    </div>
-</body>
-</html>
+    </main>
+
+    @guest
+
+
+    <footer class=" text-white fixed bottom-0 left-0  w-full p-5 justify-center items-center flex  flex-col md:flex-row bg-indigo-500" >
+
+        <div class="flex flex-col w-full text-xl flex-auto h-full justify-center items-start" >
+            <p>Apply Zim is a platform here for both</p>
+            <p class="font-semibold text-2xl" >Student & Schools</p>
+
+        </div>
+
+        <div class="flex justify-end items-center w-1/4 font-bold h-full" >
+            <a href="/register" class="bg-white hover:text-indigo-700 py-3 px-6 rounded-full text-black" >Join ApplyZim</a>
+        </div>
+
+        </footer>
+    @endguest
+        </body>
+        </html>

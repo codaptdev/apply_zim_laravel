@@ -1,6 +1,6 @@
 <x-main-layout>
     <div class="flex flex-col px-5 md:px-16 items-center justify-center py-10 " >
-        <h1 class="text-6xl font-bold mb-32">Register</h1>
+        <h1 class="text-6xl font-bold mb-10">Register</h1>
 
         {{-- Options --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full h-full justify-center items-center " >
