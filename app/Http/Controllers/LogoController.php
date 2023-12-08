@@ -12,7 +12,15 @@ class LogoController extends Controller
         return view('schools.logo');
     }
 
+    public function get() {
+
+    }
+
     public function update(Request $request) {
+
+        $request->validate([
+            'logo' => ['required', 'mimes:png,jpg,jpeg']
+        ]);
 
         // Grab the auth school model
         $school = School::find(auth()->user()->id);
