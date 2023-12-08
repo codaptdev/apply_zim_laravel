@@ -4,7 +4,7 @@
         <div class="flex-row flex">
 
             <div class="flex  bg-slate-300 w-32 h-32 mr-5 rounded-xl" >
-
+                <img src={{$school->logo_url}}  alt="School Logo" class='w-full h-full' >
             </div>
 
             <div class="flex flex-col flex-auto" >
