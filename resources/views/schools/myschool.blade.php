@@ -20,6 +20,7 @@
             <a href="/myschool/edit">Edit School Info</a>
             <a href="/schools/{{$school->name}}">View School Profile</a>
             <a href="">Edit School Profile</a>
+            <a href="/myschool/logo/edit">Edit School Logo</a>
 
         </div>
 
