@@ -56,9 +56,10 @@ Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('au
 Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth');
 Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth');
 
-// My School Upload Logo
+// My School Logo
 Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth');
 Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
+
 
 // Get school with ID
 Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )

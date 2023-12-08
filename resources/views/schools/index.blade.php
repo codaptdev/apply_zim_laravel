@@ -9,9 +9,12 @@
 
         <div class="flex-row flex">
 
-            <div class="flex  bg-slate-300 w-32 h-32 mr-5 rounded-xl" >
-
-            </div>
+            {{-- Logo --}}
+        <div class="flex  bg-slate-300 w-auto h-auto mr-5 rounded-xl" >
+            @if ($school->logo_url !== null)
+                <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='w-full h-full rounded-xl' >
+            @endif
+        </div>
 
             <div class="flex flex-col flex-auto" >
                 <h1>{{$school->name}}</h1>
