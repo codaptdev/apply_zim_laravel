@@ -21,7 +21,7 @@
 
     <h1 class="text-4xl my-10 font-medium text-center w-1/2" >Welcome Back</h1>
 
-    <form class="w-full" action={{url("auth/signin")}} method="POST" class="bg-white " >
+    <form class="" action={{url("auth/signin")}} method="POST" class="bg-white " >
         @csrf
 
         <label> Email</label>
