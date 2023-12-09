@@ -2,7 +2,7 @@
 
     {{-- Logo --}}
 
-    <a class="text-3xl w-1/5 font-bold text-black hover:text-indigo-500 cursor-pointer font-serif transition-all " >ApplyZim</a>
+    <a href="/" class="text-3xl w-1/5 font-bold text-black hover:text-indigo-500 cursor-pointer font-serif transition-all " >ApplyZim</a>
 
     @guest
 
