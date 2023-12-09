@@ -4,12 +4,13 @@
 
     {{-- Header --}}
     <div class="flex flex-row justify-start items-center w-full">
-        {{-- Logo --}}
-        <div class="flex  bg-slate-300 w-auto h-auto mr-5 rounded-xl" >
-            @if ($school->logo_url !== null)
-                <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='w-full h-full rounded-xl' >
-            @endif
-        </div>
+
+            {{-- Logo --}}
+            <div class="flex   border-slate-200 md:w-1/4 w-2/3 h-40 bg-slate-300 mr-5 rounded-xl" >
+                @if ($school->logo_url !== null)
+                    <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
+                @endif
+            </div>
 
         {{-- Name --}}
         <div class="w-full h-full flex  justify-start items-start" >

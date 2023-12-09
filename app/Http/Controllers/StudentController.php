@@ -93,7 +93,7 @@ class StudentController extends Controller
             $student->town_city = $request->town_city;
 
             $student->save();
-            return redirect('/home');
+            return redirect('/home')->with('message', 'Welcome ' .$student->first_name . '. We are glad to have you on board');
         } else {
             return redirect()->back()->withErrors([
                 'email' => 'That email already exists',

@@ -10,9 +10,9 @@
         <div class="flex-row flex">
 
             {{-- Logo --}}
-        <div class="flex  bg-slate-300 w-auto h-auto mr-5 rounded-xl" >
+        <div class="flex   border-slate-200 w-40 h-40  mr-5 rounded-xl" >
             @if ($school->logo_url !== null)
-                <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='w-full h-full rounded-xl' >
+                <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
             @endif
         </div>
 

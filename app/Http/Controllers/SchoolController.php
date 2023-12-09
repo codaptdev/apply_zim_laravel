@@ -123,7 +123,7 @@ class SchoolController extends Controller
             $school->town_city = $request->town_city;
             $school->address = $request->address;
             $school->save();
-            return redirect('/home');
+            return redirect('/home')->with('message', 'Welcome ' .$school->name . '. We are glad to have you on board');
         } else {
             return redirect()->back();
         }
