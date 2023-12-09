@@ -36,7 +36,7 @@ Route::get('/home', function () {
 })->middleware('auth');
 
 // Navigation
-Route::get('/menu', [NavigationController::class, 'fullSreenNav']);
+Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
 Route::get('/navigate/back', [NavigationController::class, 'navigateBack']);
 
 

@@ -14,7 +14,7 @@
         <x-navbar></x-navbar>
         {{$slot}}
     </main>
-    
+
     <x-message />
 
     @guest
@@ -25,10 +25,9 @@
             <div class="flex flex-col w-full text-xl flex-auto h-full justify-center items-start" >
                 <p>Apply Zim is a platform here for both</p>
                 <p class="font-semibold text-2xl" >Student & Schools</p>
-
             </div>
 
-            <div class="flex justify-end items-center w-1/4 font-bold h-full" >
+            <div class="flex md:mt-0 mt-2 justify-start md:justify-end items-center w-full  md:w-1/4 font-bold h-full" >
                 <a href="/register" class="bg-white hover:text-indigo-700 py-3 px-6 rounded-full text-black" >Join ApplyZim</a>
             </div>
 

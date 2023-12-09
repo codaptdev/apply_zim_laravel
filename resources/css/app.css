@@ -48,7 +48,7 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 65%;
     padding: 60px;
     border-radius: 15px;
     border: solid;
@@ -115,3 +115,10 @@ a {
     align-items: center;
     color: white;
 }
+
+@media only screen and (max-width:800px) {
+    form {
+        width: 90%;
+    }
+}
+

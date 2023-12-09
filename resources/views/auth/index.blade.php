@@ -7,7 +7,7 @@
     <title>Sign In</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-stone-50 flex flex-col justify-center items-center py-20" >
+<body class="bg-stone-50 flex md:p-20 p-5 flex-col justify-center items-center py-20" >
 
     @foreach ($errors->all() as $error)
         <div class="w-full p-5 bg-red-300 mb-10">
@@ -21,7 +21,7 @@
 
     <h1 class="text-4xl my-10 font-medium text-center w-1/2" >Welcome Back</h1>
 
-    <form action={{url("auth/signin")}} method="POST" class="bg-white " >
+    <form class="w-full" action={{url("auth/signin")}} method="POST" class="bg-white " >
         @csrf
 
         <label> Email</label>

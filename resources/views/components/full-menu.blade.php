@@ -28,24 +28,25 @@
 
         @auth
             @if (auth()->user()->user_type == "STUDENT")
-                <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
-                    <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/search">Search</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/profile">Applications</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
+                <div class="  flex flex-col justify-center mt-10 items-center text-xl font-bold  gap-1 w-full" >
+                    <a class="hover:text-indigo-500 my-2 " href="/home">Home</a>
+                    <a class="hover:text-indigo-500 my-2 " href="/search">Search</a>
+                    <a class="hover:text-indigo-500 my-2 " href="/profile">Applications</a>
+                    <a class="hover:text-indigo-500 my-2 " href="/settings">Settings</a>
                 </div>
             @else
                 <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
-                        <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
-                        <a class="hover:text-indigo-500 mx-2 text-black " href="/applications">Applications</a>
-                        <a class="hover:text-indigo-500 mx-2 text-black " href="/myschool">My School</a>
-                        <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
+                        <a class="hover:text-indigo-500 my-2 " href="/home">Home</a>
+                        <a class="hover:text-indigo-500 my-2 " href="/applications">Applications</a>
+                        <a class="hover:text-indigo-500 my-2 " href="/myschool">My School</a>
+                        <a class="hover:text-indigo-500 my-2 " href="/settings">Settings</a>
                 </div>
             @endif
 
             {{-- Action Button --}}
-            <div class="w-1/5 flex flex-col justify-end items-center " >
-                <a href="/auth/signout" class="bg-indigo-500 drop-shadow-md px-9 py-3 rounded-xl text-white   w-1/2 flex justify-center items-center " >Sign Out</a>
+            <div class="w-full flex flex-col justify-end items-center " >
+                <br>
+                <a href="/auth/signout" class="bg-indigo-500 drop-shadow-md px-9 py-3 rounded-xl text-white w-1/2 flex justify-center items-center " >Sign Out</a>
             </div>
         @endauth
 

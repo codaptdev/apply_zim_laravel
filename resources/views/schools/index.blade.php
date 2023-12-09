@@ -31,7 +31,7 @@
 
         <br>
         <br>
-        <div class="grid grid-cols-1 md:grid-cols-3 w-full h-full gap-3 ">
+        <div class="grid md:grid-cols-3 w-full h-full gap-3 ">
 
             <div class=" text-center bg-slate-100 rounded-xl p-10 flex flex-col items-center justify-center" >
                 <p class="text-slate-400 text-3xl font-semibold "  >City</p>
@@ -43,15 +43,12 @@
                 <h1>{{$school->year_established}}</h1>
             </div>
 
-            <div class=" text-center bg-slate-100 rounded-xl p-10 flex flex-col items-center justify-center" >
+            <div class=" text-center h-full  w-full bg-slate-100 rounded-xl p-10 flex flex-col items-center justify-center" >
                 <p class="text-slate-400 text-3xl font-semibold "  >Address</p>
                 <h1 class="text-3xl text-center" >{{$school->address}}</h1>
             </div>
 
         </div>
-
-
-        Profile goes here
 
 
     </div>

@@ -1,6 +1,6 @@
 @props(['school'])
 
-<div class="flex flex-col w-full mb-5 mx-10 cursor-pointer hover:bg-slate-200 bg-slate-50 p-10 rounded-xl" >
+<div class="flex flex-col w-full mb-5 mx-10 cursor-pointer hover:bg-slate-200 bg-slate-50 p-5 md:p-10 rounded-xl" >
 
     {{-- Header --}}
     <div class="flex flex-row justify-start items-center w-full">
@@ -13,7 +13,7 @@
 
         {{-- Name --}}
         <div class="w-full h-full flex  justify-start items-start" >
-            <h1>{{$school->name}}</h1>
+        <h1 class="md:text-5xl text-3xl" >{{$school->name}}</h1>
         </div>
     </div>
 
