@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
+use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,11 @@ Route::get('/home', function () {
         return view('schools.home');
     }
 })->middleware('auth');
+
+// Navigation
+Route::get('/menu', [NavigationController::class, 'fullSreenNav']);
+Route::get('/navigate/back', [NavigationController::class, 'navigateBack']);
+
 
 
 // Auth Routes
