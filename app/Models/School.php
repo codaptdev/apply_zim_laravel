@@ -18,4 +18,8 @@ class School extends Model
     public function user() {
         return $this->belongsTo('users');
     }
+
+    public function profile() {
+        return $this->hasOne('profiles');
+    }
 }
