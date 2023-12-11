@@ -6,16 +6,16 @@
     <div class="flex flex-col  md:flex-row justify-start items-start w-full">
 
             {{-- Logo --}}
-            <div class="flex  border-slate-200 md:w-1/4 w-1/2 h-40 mb-5 md:mb-0 bg-slate-300 mr-5 rounded-xl" >
+            <div class="flex  border-slate-200 md:w-1/4 w-1/2 h-full mb-5 md:mb-0 bg-slate-300 mr-5 rounded-xl" >
                 @if ($school->logo_url !== null)
-                    <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
+                    <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl xl:aspect-square' >
                 @endif
             </div>
 
         {{-- Name --}}
         <div class="w-full h-full flex flex-col  justify-start items-start" >
-        <h1 class="md:text-5xl text-3xl" >{{$school->name}}</h1>
-        <p class="mt-3 font-semibold w-3/4 text-slate-600 text-lg" >{{$school->about}}</p>
+        <h1 class="md:text-5xl text-3xl xl:text-7xl" >{{$school->name}}</h1>
+        <p class="mt-3 font-semibold xl:font-normal w-3/4 text-slate-600 text-lg xl:text-4xl" >{{$school->about}}</p>
         </div>
     </div>
 
