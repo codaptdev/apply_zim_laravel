@@ -40,7 +40,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Profile $profile)
+    public function edit(Request $request, Profile $profile)
     {
 
         if (auth()->user()->user_type == 'STUDENT') {
@@ -48,9 +48,11 @@ class ProfileController extends Controller
         }
 
         $school = School::find(auth()->user()->id);
+        $fallBack = $request->headers->get('referer');
 
         return view("profiles.edit", [
-            'school' => $school
+            'school' => $school,
+            'fall_back' => $fallBack
         ]);
 
     }

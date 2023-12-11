@@ -85,6 +85,8 @@
             <br>
 
             <input type="submit" class="link-btn shadow-md" value="Update Profile"/>
+            <br>
+            <a  class="red-link-btn shadow-md" href="{{url($fall_back)}}" >Discard Changes</a>
 
         </form>
 

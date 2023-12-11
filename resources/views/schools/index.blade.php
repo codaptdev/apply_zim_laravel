@@ -10,9 +10,13 @@
         <div class="flex-row flex">
 
             {{-- Logo --}}
-        <div class="flex   border-slate-200 w-40 h-40  mr-5 rounded-xl" >
+        <div class="flex justify-center items-center   border-slate-300 w-40 h-40  mr-5 rounded-xl" >
             @if ($school->logo_url !== null)
                 <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
+            @else
+                @if (auth()->user()->id == $school->id)
+                    <a href="{{url('/myschool/logo/edit')}}" >Upload A logo</a>
+                @endif
             @endif
         </div>
 
@@ -22,7 +26,7 @@
 
                 @auth
                     @if (auth()->user()->id == $school->id)
-                        <a  class="text-xl" href="">Edit</a>
+                        <a  class="text-xl" href="{{url('/myschool/profile/edit')}}">Edit</a>
                     @endif
                 @endauth
 
