@@ -21,6 +21,17 @@ return new class extends Migration
             $table->string('address');
             $table->string('logo_url')->nullable(true);
             $table->enum('level', ['PRIMARY', 'SECONDARY', 'TERTIARY']);
+            $table->text('about')->nullable();
+            $table->text('body')->nullable();
+            $table->text('website_url')->nullable();
+            $table->text('application_url')->nullable();
+            $table->text('instagram')->nullable();
+            $table->text('twitter')->nullable();
+            $table->text('facebook')->nullable();
+            $table->text('banner_url')->nullable();
+            $table->text('application_process')->nullable();
+            $table->integer('tuition_max')->unsigned()->nullable();
+            $table->integer('tuition_min')->unsigned()->nullable();
             $table->timestamps();
         });
     }
