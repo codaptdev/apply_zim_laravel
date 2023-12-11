@@ -66,11 +66,6 @@ class ProfileController extends Controller
         $request->validate([
             'tuition_min' => ['required', 'numeric', 'min:0'],
             'tuition_max' => ['required', 'numeric', 'min:0'],
-            'twitter' => ['url'],
-            'instagran' => ['url'],
-            'facebook' => ['url'],
-            'application_url' => ['url'],
-            'website_url' => ['url'],
         ]);
 
         $school = School::find(auth()->user()->id);
