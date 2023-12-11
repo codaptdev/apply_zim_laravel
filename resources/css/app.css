@@ -131,6 +131,10 @@ a {
     form {
         width: 90%;
     }
+
+    th, td {
+        padding: none;
+    }
 }
 
 table {
