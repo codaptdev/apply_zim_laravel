@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavigationController;
@@ -73,7 +74,9 @@ Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('a
 Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
 
 // Application Routes
-
+// This is not a get request as such but more of a post but using a get method made it easier
+// to implement this
+Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth');
 
 // Get school with ID
 Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )

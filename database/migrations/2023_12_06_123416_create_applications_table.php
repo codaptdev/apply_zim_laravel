@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('applications', function (Blueprint $table) {
-            $table->string('student_id')->nullable(false);
-            $table->string('school_id')->nullable(false);
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('school_id')->references('id')->on('schools');
+            $table->integer('student_id')->nullable(false);
+            $table->integer('school_id')->nullable(false);
+            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('school_id')->references('id')->on('users');
             $table->primary(['school_id', 'student_id']);
             $table->timestamps();
         });
