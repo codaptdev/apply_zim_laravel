@@ -72,6 +72,8 @@ Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middlew
 Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth');
 Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
 
+// Application Routes
+
 
 // Get school with ID
 Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )

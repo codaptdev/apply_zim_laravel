@@ -9,7 +9,7 @@
 
         <div class="md:flex-row flex flex-col">
 
-            {{-- Logo --}}
+        {{-- Logo --}}
         <div class="flex justify-center items-center   border-slate-300 w-60 h-60 md:h-40 md:w-40  mr-5 rounded-xl" >
             @if ($school->logo_url !== null)
                 <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
@@ -78,20 +78,47 @@
 
         </div>
 
-        <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
-            <a class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply</a>
-        </div>
+
 
         <br>
         <br>
         <br>
         <x-markdown>{{$school->body}}</x-markdown>
 
-        <div class="bg-slate-100 p-10 rounded-2xl my-10" >
-            <h1 class="text-4xl" >Application Process</h1>
-            <br>
-            <p class="text-xl text-slate-600" >{{$school->application_process}}</p>
+        <div class="grid grid-cols-1 mt-10 gap-3 md:grid-cols-2">
+
+            @if ($school->tuition_min != null)
+                <div class=" text-center bg-green-100 rounded-xl p-5 flex flex-col items-center justify-center" >
+                    <p class="text-slate-400 text-2xl font-semibold "  >Min Tuition USD</p>
+                    <h1>${{$school->tuition_min}}</h1>
+                </div>
+            @endif
+
+            @if ($school->tuition_max != null)
+                <div class=" text-center bg-orange-100 rounded-xl p-5 flex flex-col items-center justify-center" >
+                    <p class="text-slate-400 text-2xl font-semibold "  >Max Tuition USD</p>
+                    <h1>${{$school->tuition_max}}</h1>
+                </div>
+            @endif
         </div>
+
+        @if ($school->application_process != null)
+            <div class="bg-slate-100 p-10 rounded-2xl my-10" >
+                <h1 class="text-4xl" >Application Process</h1>
+                <br>
+                <p class="text-xl text-slate-600" >{{$school->application_process}}</p>
+            </div>
+        @endif
+
+        @auth
+
+            @if (auth()->user()->user_type == 'STUDENT')
+
+            @endif
+            <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
+                <a href="/apply?school_id={{$school->id}}" class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply to {{$school->name}}</a>
+            </div>
+        @endauth
 
     </div>
 </x-main-layout>
