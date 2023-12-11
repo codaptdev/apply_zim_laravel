@@ -60,7 +60,34 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        dd($request->all());
+
+        $request->validate([
+            'tuition_min' => ['required', 'numeric', 'min:0'],
+            'tuition_max' => ['required', 'numeric', 'min:0'],
+            'twitter' => ['url'],
+            'instagran' => ['url'],
+            'facebook' => ['url'],
+            'application_url' => ['url'],
+            'website_url' => ['url'],
+        ]);
+
+        $school = School::find(auth()->user()->id);
+
+        $school->about = $request->about;
+        $school->body = $request->body;
+        $school->website_url = $request->website_url;
+        $school->application_url = $request->application_url;
+        $school->instagram = $request->instagram;
+        $school->facebook = $request->facebook;
+        $school->twitter = $request->twitter;
+        $school->application_process = $request->application_process;
+        $school->tuition_min = $request->tuition_min;
+        $school->tuition_max = $request->tuition_max;
+
+        $school->update();
+
+        return redirect('/myschool')->with('message', 'Your profile was updated successfully');
+
     }
 
     /**

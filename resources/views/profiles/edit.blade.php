@@ -14,9 +14,7 @@
              placeholder="Whats your school all about..."
              name="about"
              rows="5"
-            >
-                {{$school->about}}
-            </textarea>
+            >{{$school->about}}</textarea>
 
             <br>
 
@@ -24,19 +22,17 @@
             <p class="my-2 text-slate-500" > Your school's profile body is where you can include all the neccessary detail in Markdown
             </p>
 
-            <a href="">Learn more about Markdown</a>
+            <a class="mb-2" href="">New to Markdown? Click here</a>
             <textarea
              required type="text"
              name="body"
              rows="10"
-            >
-                {{$school->about}}
-            </textarea>
+            >{{$school->body}}</textarea>
 
             <br>
 
             <label>School Website Url</label>
-            <input value="{{$school->webiste_url}}" required type="url" name="webiste_url" placeholder="e.g https://myschool.com" >
+            <input value="{{$school->website_url}}" required type="url" name="website_url" placeholder="e.g https://myschool.com" >
 
             <br>
 
@@ -45,7 +41,7 @@
                 We reccomend that you put the link to either a website or document spelling out the application procedure or a form where students can fill in
                 to apply.
             </p>
-            <input value="{{$school->webiste_url}}" required type="url" name="application_url" placeholder="e.g https://myschool.com" >
+            <input value="{{$school->application_url}}" required type="url" name="application_url" placeholder="e.g https://myschool.com" >
 
             <br>
 
@@ -59,8 +55,8 @@
 
             <br>
 
-            <label>X Url (Formally Tweeter) <span class="bg-slate-200 text-sm  text-slate-500 py-1 px-2 rounded-full" >Optional</span></label>
-            <input  value="{{$school->tweeter}}" type="url" name="twitter" >
+            <label>X Url (Formally Twitter) <span class="bg-slate-200 text-sm  text-slate-500 py-1 px-2 rounded-full" >Optional</span></label>
+            <input  value="{{$school->twitter}}" type="url" name="twitter" >
 
             <br>
 
@@ -72,19 +68,17 @@
              required type="text"
              name="application_process"
              rows="7"
-            >
-            {{$school->application_process}}
-            </textarea>
+            >{{$school->application_process}}</textarea>
 
             <br>
 
             <label>Tuition Min </label>
-            <input required type="number" min="0" placeholder="e.g $2000" name="tuition_min" >
+            <input required type="number" min="0" value="{{$school->tuition_max}}" placeholder="e.g 2000" name="tuition_min" >
 
             <br>
 
             <label>Tuition Max </label>
-            <input required type="number" min="0" placeholder="e.g $3000" name="tuition_max" >
+            <input required type="number" value="{{$school->tuition_max}}" min="0" placeholder="e.g 3000" name="tuition_max" >
 
             <br>
 
