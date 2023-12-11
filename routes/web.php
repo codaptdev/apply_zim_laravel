@@ -77,6 +77,10 @@ Route::post('/myschool/logo/update', [LogoController::class,'update'])->middlewa
 // This is not a get request as such but more of a post but using a get method made it easier
 // to implement this
 Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth');
+Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
+Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
+->middleware('auth')
+->where('id', '[0-9]+');
 
 // Get school with ID
 Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
@@ -84,7 +88,6 @@ Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
 
 // Get school with name
 Route::get('/schools/{name}',  [SchoolController::class, 'index'] );
-
 
 
 // Search Routes
