@@ -48,14 +48,14 @@
                 <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
                     <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/search">Search</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/profile">Applications</a>
+                    <a class="hover:text-indigo-500 mx-2 text-black " href="/applications">Applications</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
                 </div>
             @else
                 {{-- Full Nav for Schools --}}
                 <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
                     <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/applications">Applications</a>
+                    <a class="hover:text-indigo-500 mx-2 text-black " href="/myschoool/applications">Applications</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/myschool">My School</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
                 </div>

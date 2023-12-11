@@ -133,4 +133,33 @@ a {
     }
 }
 
+table {
+    width: 100%;
+}
 
+th {
+    background-color: rgb(203, 203, 203);
+    color: rgb(51, 51, 52);
+}
+
+td {
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid;
+    border-color: slategray;
+
+}
+
+th, td {
+    padding: 10px;
+}
+
+td:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td:nth-child(odd) {
+background-color: #ffffff;
+}
