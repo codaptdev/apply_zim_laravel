@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -63,9 +64,15 @@ Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('au
 Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth');
 Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth');
 
+// Myschool Profile Routes
+Route::post('/myschool/profile/update', [ProfileController::class,'update'] )->middleware('auth');
+Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middleware('auth');
+
 // My School Logo
 Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth');
 Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
+
+// Application Routes
 
 
 // Get school with ID
