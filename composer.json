@@ -1,6 +1,6 @@
 {
     "name": "codapt/applyzim",
-    "version": "0.2.0",
+    "version": "0.3.3",
     "type": "project",
     "description": "A platform for schools and students.",
     "keywords": ["laravel", "framework"],
