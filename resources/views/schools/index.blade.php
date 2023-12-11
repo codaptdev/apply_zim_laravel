@@ -113,11 +113,10 @@
         @auth
 
             @if (auth()->user()->user_type == 'STUDENT')
-
+                <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
+                    <a href="/apply?school_id={{$school->id}}" class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply to {{$school->name}}</a>
+                </div>
             @endif
-            <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
-                <a href="/apply?school_id={{$school->id}}" class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply to {{$school->name}}</a>
-            </div>
         @endauth
 
     </div>
