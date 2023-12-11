@@ -50,10 +50,10 @@ class User extends Authenticatable
 
 
     public function school() {
-        return $this->hasOne('schools');
+        return $this->hasOne(School::class);
     }
 
     public function student() {
-        return $this->hasOne('students');
+        return $this->hasOne(Student::class);
     }
 }

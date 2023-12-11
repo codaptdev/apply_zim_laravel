@@ -60,6 +60,7 @@ form {
 form>label {
     text-align:start;
     padding-left: 5px;
+    margin-bottom: 6px;
     font-weight: 500;
     color: rgb(74, 74, 74);
     font-size: 20px;
@@ -74,6 +75,16 @@ form>input {
     border-color: rgb(190, 190, 190);
     border-width: 1px;
     padding-left: 10px
+}
+
+form>textarea {
+    width: 100%;
+    background: whitesmoke;
+    border-radius: 15px;
+    border: solid;
+    border-color: rgb(190, 190, 190);
+    border-width: 1px;
+    padding: 10px;
 }
 
 
@@ -121,4 +132,5 @@ a {
         width: 90%;
     }
 }
+
 
