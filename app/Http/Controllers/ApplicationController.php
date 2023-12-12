@@ -23,7 +23,7 @@ class ApplicationController extends Controller
 
             foreach($applications as $application) {
                 $school = School::all()->find($application->school_id);
-                $school['date_applied'] = date_format($application->created_at, 'D d M y @ h:m');;
+                $school['date_applied'] = date_format($application->created_at, 'D d M y');;
                 $students[] = $school;
             }
 
@@ -40,7 +40,7 @@ class ApplicationController extends Controller
 
             foreach($applications as $application) {
                 $student = Student::find($application->student_id);
-                $student['date_applied'] = date_format($application->created_at, 'D d M y @ h:m');
+                $student['date_applied'] = date_format($application->created_at, 'D d M y');
                 $students[] = $student;
             }
 
