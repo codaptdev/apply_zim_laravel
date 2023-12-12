@@ -5,29 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\Student;
-use PhpParser\Parser;
-use Ramsey\Uuid\Type\Integer;
-
 class HomePageController extends Controller
 {
+    /** Show homepage for a user depending on their user type */
     public function index(Request $request) {
         if(auth()->user()->user_type == 'STUDENT') {
-            $student = Student::find(auth()->user()->id);
-
-            $school_model = new School();
-            $schools= $school_model->filter($request->key ?? '', $request->value ?? '');
-
-            return view('students.home', [
-                'greeting' => $this->greeting($student->first_name),
-                'schools' => $schools,
-                'filter_message' => $this->filterMessage($request->key ?? '', $request->value ?? ''),
-                'key' => $request->key ?? '',
-            ]);
+            return $this->studentsHome($request);
 
         } else {
-            $this->schoolsHome();
+            return $this->schoolsHome($request);
         }
     }
+
+
 
     // Example request home?key=town_city&value=Harare
     public function studentsHome(Request $request) {
@@ -38,12 +28,14 @@ class HomePageController extends Controller
 
         return view('students.home', [
             'greeting' => $this->greeting($student->first_name),
-            'schools' => $schools
+            'schools' => $schools,
+            'filter_message' => $this->filterMessage($request->key ?? '', $request->value ?? ''),
+            'key' => $request->key ?? '',
         ]);
     }
 
-    public function schoolsHome() {
-        return view('schools.home');
+    public function schoolsHome(Request $request) {
+        return redirect('/myschool');
     }
 
     public function greeting(string $name) : string {
