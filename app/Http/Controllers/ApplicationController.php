@@ -19,33 +19,35 @@ class ApplicationController extends Controller
             // For Students
 
             $applications = Application::all()->where('student_id', auth()->user()->id);
-            $schools = [];
+            $schools = []; // The array of applications sent to the front end
 
             foreach($applications as $application) {
-                $school = School::find($application->school_id);
+                $school = School::all()->find($application->school_id);
+                $school['date_applied'] = $application->created_at;
                 $schools[] = $school;
             }
 
             return view("students.applications", [
                 'schools' => $schools,
-                'applications' => $applications
             ]);
 
         } else {
 
             // For Schools
 
-            $applications = Application::all()->where('school_id', auth()->user()->id);
-            $students = [];
+            $applications = Application::all()->where('school_id', auth()->user()->id)->all();
+            $schools = []; // The array of applications sent to the front end
 
             foreach($applications as $application) {
                 $student = Student::find($application->student_id);
-                $students[] = $student;
+                $schools[] = [
+                    'student' => $student,
+                    'created_at' => $application->created_at
+                ];
             }
 
             return view("schools.applications", [
-                'students' => $students,
-                'applications' => $applications
+                'applications' => $schools,
             ]);
 
         }
