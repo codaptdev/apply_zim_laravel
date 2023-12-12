@@ -19,16 +19,16 @@ class ApplicationController extends Controller
             // For Students
 
             $applications = Application::all()->where('student_id', auth()->user()->id);
-            $schools = []; // The array of applications sent to the front end
+            $students = []; // The array of applications sent to the front end
 
             foreach($applications as $application) {
                 $school = School::all()->find($application->school_id);
-                $school['date_applied'] = $application->created_at;
-                $schools[] = $school;
+                $school['date_applied'] = date_format($application->created_at, 'D d M y @ h:m');;
+                $students[] = $school;
             }
 
             return view("students.applications", [
-                'schools' => $schools,
+                'schools' => $students,
             ]);
 
         } else {
@@ -36,18 +36,16 @@ class ApplicationController extends Controller
             // For Schools
 
             $applications = Application::all()->where('school_id', auth()->user()->id)->all();
-            $schools = []; // The array of applications sent to the front end
+            $students = []; // The array of students sent to the front end
 
             foreach($applications as $application) {
                 $student = Student::find($application->student_id);
-                $schools[] = [
-                    'student' => $student,
-                    'created_at' => $application->created_at
-                ];
+                $student['date_applied'] = date_format($application->created_at, 'D d M y @ h:m');
+                $students[] = $student;
             }
 
             return view("schools.applications", [
-                'applications' => $schools,
+                'students' => $students,
             ]);
 
         }

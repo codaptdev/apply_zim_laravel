@@ -30,11 +30,10 @@
 
                     {{-- Data --}}
                     @foreach ($students as $key => $student)
-                    <tr  >
+                    <tr>
                         <td class="hover:bg-slate-200" >{{$student->first_name}}</td>
                         <td class="hover:bg-slate-200" >{{$student->surname}}</td>
-                        <td class="hover:bg-slate-200" >{{$applications->all()[$key]->created_at}}</td>
-
+                        <td class="hover:bg-slate-200" >{{$student->date_applied}}</td>
                     </tr>
                     @endforeach
 
