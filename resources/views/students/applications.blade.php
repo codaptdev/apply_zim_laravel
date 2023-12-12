@@ -22,7 +22,7 @@
                     <tr>
                         <th>School</th>
                         <th>Application Url</th>
-                        {{-- <th>Date Applied</th> --}}
+                        <th>Date Applied</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,11 +31,11 @@
 
 
                     {{-- Data --}}
-                    @foreach ($schools as $key => $school)
+                    @foreach ($schools as $school)
                     <tr  >
                         <td class="hover:bg-slate-200" > <a href="/schools/{{$school->id}}">{{$school->name}}</a></td>
                         <td class="hover:bg-slate-200"> <a href="{{$school->application_url}}">{{$school->application_url}}</a></td>
-                        <td class="hover:bg-slate-200" >{{$applications[$key]->created_at}}</td>
+                        <td class="hover:bg-slate-200" >{{$school->date_applied}}</td>
                         <td class="hover:bg-red-200 hover:text-red-800 bg-red-400">
                             <a href="/applications/delete/{{$school->id}}">Delete</a>
                         </td>

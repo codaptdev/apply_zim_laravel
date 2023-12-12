@@ -1,7 +1,16 @@
 <x-main-layout>
 
+    @if ($fall_back !== url('/myschool/profile/edit'))
+        <a class="px-10 text-2xl" href='{{url($fall_back)}}'>⬅️ Go back</a>
+    @else
+        <a class="px-10 text-2xl" href="/myschool">⬅️ Go back To Myschool</a>
+    @endif
+
+
     <div class="flex flex-col justify-center items-center">
+
         <h1>Edit Profile</h1>
+        <br><br>
 
         <form action="/myschool/profile/update" method="POST" class="bg-white " >
             @csrf
@@ -22,7 +31,7 @@
             <p class="my-2 text-slate-500" > Your school's profile body is where you can include all the neccessary detail in Markdown
             </p>
 
-            <a class="mb-2" href="">New to Markdown? Click here</a>
+            <a class="mb-2" target="blank" href="https://www.markdownguide.org/cheat-sheet/">New to Markdown? Click here</a>
             <textarea
              required type="text"
              name="body"
