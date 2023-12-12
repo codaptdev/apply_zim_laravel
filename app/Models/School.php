@@ -15,6 +15,19 @@ class School extends Model
         ->get();
     }
 
+    /** Returns a filtered list of schools
+     *
+     * If the `$key` param is an empty string it will return all schoools
+     */
+    public function filter(string $key = '', string $value = '') {
+        // Check if the key param is empty
+        if($key == '') {
+            return $this->all();
+        } else {
+            return $this->all()->where($key, $value);
+        }
+    }
+
     public function user() {
         return $this->belongsTo('users');
     }
