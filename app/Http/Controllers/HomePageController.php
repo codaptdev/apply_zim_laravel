@@ -42,10 +42,14 @@ class HomePageController extends Controller
         $hour = now()->format('H');
         $period_of_day = '';
 
-        if ($hour >= 12) {
+        if ($hour < 12) {
+            $period_of_day = 'Morning ';
+        } else if ($hour >= 12 and $hour < 16) {
+
             $period_of_day = 'Afternoon ';
         } else {
-            $period_of_day = 'Morning ';
+
+            $period_of_day = 'Evening ';
         }
 
         $greeting = 'Good ' . $period_of_day . $name;
@@ -66,7 +70,7 @@ class HomePageController extends Controller
                 $out_str = 'Filtering by Schools In ' . $value;
                 break;
             case '':
-                $out_str  = 'All Schools';
+                $out_str  = 'Suggested Schools Based On Your Grade';
                 break;
             default:
                 $out_str  = "Invalid Filter with key: '" . $key . "'";
