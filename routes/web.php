@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
@@ -29,13 +30,7 @@ Route::get('/', function () {
     }
 });
 
-Route::get('/home', function () {
-    if(auth()->user()->user_type == 'STUDENT') {
-        return view('students.home');
-    } else {
-        return view('schools.home');
-    }
-})->middleware('auth');
+Route::get('/home', [HomePageController::class, 'index'])->middleware('auth');
 
 // Navigation
 Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
