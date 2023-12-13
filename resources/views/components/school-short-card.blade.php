@@ -1,34 +1,27 @@
 @props(['school'])
 
-<div class="flex flex-col w-full mb-5 mx-10 cursor-pointer hover:bg-slate-200 bg-slate-50 p-5 md:p-10 rounded-xl" >
+<div class="w-full rounded-xl p-5 mx-2 bg-stone-50  flex flex-col items-center justify-start border-2 border-slate-300" >
 
-    {{-- Header --}}
-    <div class="flex flex-col  md:flex-row justify-start items-start w-full">
-
+    <div class="w-full  mx-2  flex flex-row items-center justify-start ">
             {{-- Logo --}}
-            <div class="flex  border-slate-200 md:w-1/4 w-1/2 h-full mb-5 md:mb-0 bg-slate-300 mr-5 rounded-xl" >
-                @if ($school->logo_url !== null)
-                    <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl xl:aspect-square' >
-                @endif
-            </div>
+        <div class="flex border-slate-200 w-28 h-28 mb-5 md:mb-0 bg-slate-300 mr-5 rounded-xl" >
+            @if ($school->logo_url !== null)
+            <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
+            @endif
+        </div>
 
-        {{-- Name --}}
-        <div class="w-full h-full flex flex-col  justify-start items-start" >
-        <h1 class="md:text-5xl text-3xl xl:text-7xl" >{{$school->name}}</h1>
-        <p class="mt-3 font-semibold xl:font-normal w-3/4 text-slate-600 text-lg xl:text-4xl" >{{$school->about}}</p>
+        <div class="flex flex-col flex-auto  h-full">
+            <h1 class="text-3xl" >{{$school->name}}</h1>
+
+            <div class="md:flex grid grid-cols-2 gap-2 md:flex-row w-full md:mt-0 mt-2">
+                <a  class="bg-indigo-50 font-semibold text-indigo-800 py-1 px-4 mr-2 md:my-4 rounded-full hover:bg-indigo-300 cursor-pointer" href='{{url("schools/" . $school->id )}}'>Visit Profile</a>
+                <a  class="border-stone-400 border-2 bg-stone-200 font-semibold text-stone-800  py-1 px-4 mr-2 md:my-4 rounded-full hover:bg-stone-400 cursor-pointer">{{strtoupper($school->town_city)}}</a>
+                <a  class="border-stone-400 border-2 bg-stone-200 font-semibold text-stone-800  py-1 px-4 mr-2 md:my-4 rounded-full hover:bg-stone-400 cursor-pointer">{{strtoupper($school->level)}}</a>
+            </div>
         </div>
     </div>
 
-    {{-- Payload --}}
-    <div>
-        {{-- Tags --}}
-        <div class="flex flex-row" >
-            <a class="bg-stone-600 font-semibold text-white py-1 px-4 mr-2 my-4 rounded-full hover:bg-indigo-600 cursor-pointer">{{strtoupper($school->town_city)}}</a>
-            <a class="bg-slate-600 font-semibold text-white py-1 px-4 mr-2 my-4 rounded-full hover:bg-indigo-600 cursor-pointer">{{strtoupper($school->level)}}</a>
-        </div>
-
-
-        <a href="/schools/{{$school->name}}">View School Profile</a>
-
+    <div class="flex mt-3 flex-col w-full justify-start items-start">
+        <p class="lg:w-3/4 w-full font-medium text-slate-600 " >{{$school->about}}</p>
     </div>
 </div>

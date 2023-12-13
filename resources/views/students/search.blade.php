@@ -10,15 +10,23 @@
             </form>
         </div>
 
-        @forelse ($schools as $school)
-            <x-school-short-card :school='$school' />
-        @empty
-            @if ($query == '')
-                <p class="text-slate-400 text-xl text-center w-1/3" >Type a name of a school you are looking for in the search bar...</p>
-            @else
-                <p class="text-slate-400 text-xl " >The school "{{$query}}" was not found</p>
-            @endif
-        @endforelse
 
-    </div>
-</x-main-layout>
+        <div class="grid grid-cols-1 gap-3 w-full" >
+
+            @forelse ($schools as $school)
+
+            <x-school-short-card :school='$school' />
+
+            @empty
+            @if ($query == '')
+            <p class="text-slate-400 text-xl text-center w-1/3" >Type a name of a school you are looking for in the search bar...</p>
+            @else
+            <p class="text-slate-400 text-xl " >The school "{{$query}}" was not found</p>
+            @endif
+            @endforelse
+
+        </div>
+
+
+        </div>
+    </x-main-layout>
