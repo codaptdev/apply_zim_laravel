@@ -7,20 +7,37 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 class HomePageController extends Controller
 {
-    /** Show homepage for a user depending on their user type */
+    /** Show Index Route
+     *
+     * If a user is a guest then return the landing page
+     *
+     * Else if the user is authenticated redirect to the /home route
+     */
     public function index(Request $request) {
-        if(auth()->user()->user_type == 'STUDENT') {
-            return $this->studentsHome($request);
 
+        if(auth()->guest()) {
+            return view('about.index');
         } else {
-            return $this->schoolsHome($request);
+            return redirect('/home');
         }
+
     }
 
 
+    /** Redirects an authenticated user to their home route depending on
+     * their user type.
+      */
+    public function home(Request $request) {
+        if(auth()->user()->user_type == 'STUDENT') {
+            return $this->studentsHomeHelper($request);
 
-    // Example request home?key=town_city&value=Harare
-    public function studentsHome(Request $request) {
+        } else {
+            return $this->schoolsHomeHelper($request);
+        }
+    }
+
+    /** Helper function that  Returns the students home view */
+    private function studentsHomeHelper(Request $request) {
         $student = Student::find(auth()->user()->id);
 
         $school_model = new School();
@@ -29,16 +46,18 @@ class HomePageController extends Controller
         return view('students.home', [
             'greeting' => $this->greeting($student->first_name),
             'schools' => $schools,
-            'filter_message' => $this->filterMessage($request->key ?? '', $request->value ?? ''),
+            'filter_message' => $this->filterMessageHelper($request->key ?? '', $request->value ?? ''),
             'key' => $request->key ?? '',
         ]);
     }
 
-    public function schoolsHome(Request $request) {
+    /** Helper function that Returns the schools `myschool` home page */
+    private function schoolsHomeHelper(Request $request) {
         return redirect('/myschool');
     }
 
-    public function greeting(string $name) : string {
+    /** Generate a greeting based on the time of day */
+    private function greeting(string $name) : string {
         $hour = now()->format('H');
         $period_of_day = '';
 
@@ -58,7 +77,8 @@ class HomePageController extends Controller
 
     }
 
-    public function filterMessage(string $key, string $value) {
+    /** A helper that generates a filter message based on the query params passed */
+    private function filterMessageHelper(string $key, string $value) {
 
         $out_str = '';
 

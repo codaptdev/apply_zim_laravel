@@ -22,36 +22,27 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    if(auth()->guest()) {
-        return view('about.index');
-    } else {
-        return redirect('/home');
-    }
-});
+// Home page for unauthenticated users
+Route::get('/', [HomePageController::class, 'index'])->name('index');
 
-Route::get('/home', [HomePageController::class, 'index'])->middleware('auth');
+// Home page for authenticated users
+Route::get('/home', [HomePageController::class, 'home'])->middleware('auth');
+
 
 // Navigation
 Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
-Route::get('/navigate/back', [NavigationController::class, 'navigateBack']);
-
-
 
 // Auth Routes
 Route::get('auth/signout', [AuthController::class, 'signout']);
 Route::get('auth/signin', [AuthController::class,'index'])->name('login');
 Route::post('auth/signin', [AuthController::class,'signin']);
+Route::get('/register', [AuthController::class,'registrationOptions']);
 
-Route::get('/register', function() {
-    return view('auth.register');
-});
-
-// Students' Routes
+// Student Registration Routes
 Route::get('/register/student', [StudentController::class, 'create'] );
 Route::post('/register/student', [StudentController::class, 'store'] );
 
-// Schools' Routes
+// School Registration Routes
 Route::get('/register/school',  [SchoolController::class, 'create'] );
 Route::post('/register/school',  [SchoolController::class, 'store'] );
 
@@ -64,13 +55,11 @@ Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middlewa
 Route::post('/myschool/profile/update', [ProfileController::class,'update'] )->middleware('auth');
 Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middleware('auth');
 
-// My School Logo
+// My School Logo Routes
 Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth');
 Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
 
-// Application Routes
-// This is not a get request as such but more of a post but using a get method made it easier
-// to implement this
+// Student Application Routes
 Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth');
 Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
 Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
@@ -82,8 +71,7 @@ Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
 ->where('id', '[1-9]+');
 
 // Get school with name
-Route::get('/schools/{name}',  [SchoolController::class, 'index'] );
-
+Route::get('/schools/{name}',  [SchoolController::class, 'index']);
 
 // Search Routes
 Route::get('/search', [SchoolController::class, 'show'])->name('search');

@@ -55,6 +55,10 @@ class AuthController extends Controller
         //
     }
 
+    public function registrationOptions() {
+        return view('auth.register');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
