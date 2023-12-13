@@ -34,7 +34,6 @@ Route::get('/', function () {
 // Home page for authenticated users
 Route::get('/home', [AuthUserHomePageController::class, 'index'])->middleware('auth');
 
-
 // Guest Routes for unauthenticated users
 Route::get('/guest', [GuestController::class, 'index']);
 Route::get('/about', [GuestController::class, 'about']);
