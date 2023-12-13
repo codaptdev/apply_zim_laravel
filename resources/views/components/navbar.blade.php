@@ -49,20 +49,18 @@
                     <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/search')}}">Search</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/applications')}}">Applications</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
                 </div>
             @else
                 {{-- Full Nav for Schools --}}
                 <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/myschool">My School</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/applications')}}">Applications</a>
-                    <a class="hover:text-indigo-500 mx-2 text-black " href="/settings">Settings</a>
                 </div>
             @endif
 
             {{-- Action Button --}}
             <div class="w-1/5 flex flex-col justify-end items-center " >
-                <a href="/auth/signout" class="bg-indigo-500 drop-shadow-md px-9 py-3 rounded-xl text-white  " >Sign Out</a>
+                <a href="/auth/signout" class="bg-indigo-500 drop-shadow-md px-9 py-3 rounded-xl text-white" >Sign Out</a>
             </div>
 
         @endguest

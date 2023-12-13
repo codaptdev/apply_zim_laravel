@@ -32,13 +32,11 @@
                     <a class="hover:text-indigo-500 my-2 " href="/home">Home</a>
                     <a class="hover:text-indigo-500 my-2 " href="/search">Search</a>
                     <a class="hover:text-indigo-500 my-2 " href="/applications">Applications</a>
-                    <a class="hover:text-indigo-500 my-2 " href="/settings">Settings</a>
                 </div>
             @else
                 <div class=" flex flex-col justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
                     <a class="hover:text-indigo-500 my-2 " href="/myschool">My School</a>
                         <a class="hover:text-indigo-500 my-2 " href="/myschool/applications">Applications</a>
-                        <a class="hover:text-indigo-500 my-2 " href="/settings">Settings</a>
                 </div>
             @endif
 

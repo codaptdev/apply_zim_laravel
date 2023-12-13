@@ -12,9 +12,6 @@ class LogoController extends Controller
         return view('schools.logo');
     }
 
-    public function get() {
-
-    }
 
     public function update(Request $request) {
 
