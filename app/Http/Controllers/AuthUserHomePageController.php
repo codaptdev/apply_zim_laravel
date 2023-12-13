@@ -5,29 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\Student;
-class HomePageController extends Controller
+class AuthUserHomePageController extends Controller
+
 {
-    /** Show Index Route
-     *
-     * If a user is a guest then return the landing page
-     *
-     * Else if the user is authenticated redirect to the /home route
-     */
-    public function index(Request $request) {
-
-        if(auth()->guest()) {
-            return view('about.index');
-        } else {
-            return redirect('/home');
-        }
-
-    }
-
 
     /** Redirects an authenticated user to their home route depending on
      * their user type.
       */
-    public function home(Request $request) {
+    public function index(Request $request) {
         if(auth()->user()->user_type == 'STUDENT') {
             return $this->studentsHomeHelper($request);
 

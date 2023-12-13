@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\AuthUserHomePageController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +23,22 @@ use Illuminate\Http\Request;
 */
 
 // Home page for unauthenticated users
-Route::get('/', [HomePageController::class, 'index'])->name('index');
+Route::get('/', function () {
+    if(auth()->guest()) {
+        return redirect('/guest');
+    } else {
+        return redirect('/home');
+    }
+})->name('index');
 
 // Home page for authenticated users
-Route::get('/home', [HomePageController::class, 'home'])->middleware('auth');
+Route::get('/home', [AuthUserHomePageController::class, 'index'])->middleware('auth');
+
+
+// Guest Routes for unauthenticated users
+Route::get('/guest', [GuestController::class, 'index']);
+Route::get('/about', [GuestController::class, 'about']);
+Route::get('/register', [GuestController::class, 'register']);
 
 
 // Navigation
