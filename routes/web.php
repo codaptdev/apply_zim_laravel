@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 // Home page for unauthenticated users
 Route::get('/', function () {
     if(auth()->guest()) {
-        return redirect('/guest');
+        return \redirect('/guest');
     } else {
-        return redirect('/home');
+        return \redirect('/home');
     }
 })->name('index');
 
