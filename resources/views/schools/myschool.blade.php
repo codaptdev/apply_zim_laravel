@@ -2,11 +2,12 @@
     <div class="p-10">
 
         <div class="md:flex-row flex flex-col">
-            {{-- Logo --}}
-            <div class="flex border-slate-200 md:w-25 md:h-25  mr-5 rounded-xl" >
+            <!-- Logo -->
+            <div class="flex justify-center items-center   border-slate-300 w-60 h-60 md:h-40 md:w-40  mr-5 rounded-xl" >
                 @if ($school->logo_url !== null)
-                    <img src={{url('storage/'. $school->logo_url )}}  alt="School Logo" class='bg-slate-300  border-2  object-cover rounded-xl' >
+                <img src="{{url('storage/'. $school->logo_url )}}"  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
                 @endif
+
             </div>
 
 
@@ -33,7 +34,7 @@
 
             <x-action-card
             :title="'View Your School Profile'"
-            :action_url="'myschool/edit'"
+            :action_url="'schools/' . $school->id"
             :description="'Get a preview your schools public profile just like how it will be shown to students
             when they visit your page '"
             />
