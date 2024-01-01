@@ -17,26 +17,31 @@ class ApplicationController extends Controller
         if(auth()->user()->user_type == 'STUDENT') {
 
             // For Students
+            $student = Student::withUserId(auth()->user()->id);
 
-            $applications = Application::all()->where('student_id', auth()->user()->id);
-            $students = []; // The array of applications sent to the front end
+            $applications = Application::studentsAll($student->id);
+            $students_applications = []; // The array of applications sent to the front end
 
             foreach($applications as $application) {
                 $school = School::all()->find($application->school_id);
                 $school['date_applied'] = date_format($application->created_at, 'D d M y');;
-                $students[] = $school;
+                $students_applications[] = $school;
             }
 
             return view("students.applications", [
-                'schools' => $students,
+                'schools' => $students_applications,
             ]);
 
         } else {
 
             // For Schools
 
-            $applications = Application::all()->where('school_id', auth()->user()->id)->all();
-            $students = []; // The array of students sent to the front end
+            $school = School::withUserId(auth()->user()->id);
+
+            $applications = Application::schoolsAll($school->id);
+
+            /* Will hold the array of students who have made applications */
+            $students = [];
 
             foreach($applications as $application) {
                 $student = Student::find($application->student_id);
@@ -64,34 +69,28 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $school = School::find( $request->school_id );
 
         if(auth()->user()->user_type != 'STUDENT') {
             return redirect()->back()->with('error','Only student accounts can apply to schools');
         }
 
-        // Check if school exists!
+        $school = School::find( $request->school_id );
+
         if( $school != null) {
 
-            // Check if appliction does not exis
-            $application = Application::all()->where('school_id', $request->school_id)
-            ->where('student_id', auth()->user()->id)
-            ->first();
+            // Get the student model of the currently logged in account
+            $student = Student::withUserId(auth()->user()->id);
 
-            if( $application == null ) {
-                // Create the application
+            // Save application attempt if it doesn't exist already
+            if(!Application::exists($request->school_id, $student->id)) {
                 $application = new Application();
-                $application->student_id = auth()->user()->id;
+                $application->student_id = $student->id;
                 $application->school_id = $request->school_id;
-
                 $application->save();
-
-
-                return redirect($school->application_url);
-
-            } else {
-                return redirect($school->application_url);
             }
+
+            return redirect($school->application_url);
+
         } else {
             return view('schools.404', [
                 'nameOrId' => $request->school_id,
@@ -128,17 +127,14 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Application $application, int $id)
+    public function destroy(int $id)
     {
         if(auth()->user()->user_type == 'STUDENT') {
 
-            // dd('Tried to delete application with school: ' . $id);
+            $student = Student::withUserId(auth()->user()->id);
 
-            Application::where('school_id', $id)
-            ->where('student_id', auth()->user()->id)
-
+            Application::find($id, $student->id)
             ->delete();
-
 
             $school = School::find($id);
 
@@ -146,12 +142,11 @@ class ApplicationController extends Controller
 
         } else {
 
-            $application = Application::all()
-            ->where('student_id', $id)
-            ->where('school_id', auth()->user()->id)
-            ->firstOrFail();
+            $school = School::withUserId(auth()->user()->id);
 
-            $application->delete();
+            Application::find($school->id, $id)
+            ->delete();
+
             $student = School::find($id);
 
             return redirect()->back()->with('notice', 'Application from ' . $student->first_name . ' was deleted successfully ');
