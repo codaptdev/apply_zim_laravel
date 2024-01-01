@@ -9,9 +9,7 @@ class AuthUserHomePageController extends Controller
 
 {
 
-    /** Redirects an authenticated user to their home route depending on
-     * their user type.
-      */
+    /** Returns an appropriate view based on a user's account type.*/
     public function index(Request $request) {
         if(auth()->user()->user_type == 'STUDENT') {
             return $this->studentsHomeHelper($request);

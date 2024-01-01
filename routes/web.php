@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\AuthUserHomePageController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
@@ -22,20 +23,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Home page for unauthenticated users
-Route::get('/', function () {
-    if(auth()->guest()) {
-        return redirect('/guest');
-    } else {
-        return redirect('/home');
-    }
-})->name('index');
+// Index Route
+Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // Home page for authenticated users
-Route::get('/home', [AuthUserHomePageController::class, 'index'])->middleware('auth');
+Route::get('/home', [AuthUserHomePageController::class, 'index'])
+->middleware('auth')
+->name('auth-home');
 
 // Guest Routes for unauthenticated users
-Route::get('/guest', [GuestController::class, 'index']);
+Route::get('/guest', [GuestController::class, 'index'])->name('guest-index');
 Route::get('/about', [GuestController::class, 'about']);
 Route::get('/register', [GuestController::class, 'register']);
 
