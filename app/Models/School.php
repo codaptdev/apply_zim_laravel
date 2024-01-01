@@ -30,11 +30,13 @@ class School extends Model
         }
     }
 
+    // Relationship with the user account that created the school account
     public function user() {
-        return $this->belongsTo('users');
+        return $this->belongsTo(User::class);
     }
 
-    public function profile() {
-        return $this->hasOne('profiles');
+    // Refference to applications for made by students
+    public function applications() {
+        return $this->hasMany(Application::class);
     }
 }
