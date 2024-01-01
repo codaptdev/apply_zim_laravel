@@ -21,7 +21,7 @@ class AuthUserHomePageController extends Controller
 
     /** Helper function that  Returns the students home view */
     private function studentsHomeHelper(Request $request) {
-        $student = Student::find(auth()->user()->id);
+        $student = Student::withUserId(auth()->user()->id);
 
         $school_model = new School();
         $schools= $school_model->filter($request->key ?? '', $request->value ?? '');

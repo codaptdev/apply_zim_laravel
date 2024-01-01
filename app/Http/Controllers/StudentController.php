@@ -73,19 +73,14 @@ class StudentController extends Controller
             'user_type' => 'STUDENT',
         ]);
 
-        if (User::all()->where('email', $request->email)->count() > 0) {
+        // Create a user record in the database
+        $user->save();
 
-            redirect()->back()->withErrors([
-                'This email is already in use'
-            ]);
-        } else {
-            $user->save();
-        }
-
+        // Sign in and Create a student record in the database
         if (Auth::attempt($request->only(['email','password']))) {
 
             $student = new Student();
-            $student->id = auth()->user()->id;
+            $student->user_id = auth()->user()->id;
             $student->first_name = $request->first_name;
             $student->email = $request->email;
             $student->surname = $request->surname;
@@ -95,12 +90,8 @@ class StudentController extends Controller
             $student->save();
             return redirect('/home')->with('message', 'Welcome ' .$student->first_name . '. We are glad to have you on board');
         } else {
-            return redirect()->back()->withErrors([
-                'email' => 'That email already exists',
-                'password' => 'Sorry Somthing went wrong try again'
-            ]);
+            return redirect()->back()->withError('Sorry, Something went wrong. Please try again');
         }
-
 
     }
 

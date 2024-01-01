@@ -18,4 +18,10 @@ class Student extends Model
     public function applications() {
         return $this->hasMany(Application::class);
     }
+
+    public static function withUserId(int $user_id) {
+        return self::all()
+        ->where("user_id", $user_id)
+        ->first();
+    }
 }
