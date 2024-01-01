@@ -32,7 +32,7 @@ Route::get('/home', [AuthUserHomePageController::class, 'index'])
 ->name('auth-home');
 
 // Guest Routes for unauthenticated users
-Route::get('/guest', [GuestController::class, 'index'])->name('guest-index');
+Route::get('/guest', [GuestController::class, 'index']);
 Route::get('/about', [GuestController::class, 'about']);
 Route::get('/register', [GuestController::class, 'register']);
 

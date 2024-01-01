@@ -114,7 +114,7 @@
 
         @auth
 
-            @if (auth()->user()->user_type == 'STUDENT')
+            @if (auth()->user()->user_type == 'STUDENT' && $school->application_url != null)
                 <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
                     <a target="blank" href="/apply?school_id={{$school->id}}" class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply to {{$school->name}}</a>
                 </div>

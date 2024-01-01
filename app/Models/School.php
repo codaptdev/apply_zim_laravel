@@ -20,10 +20,9 @@ class School extends Model
      * If the `$key` param is an empty string it will return all schoools
      */
     public function filter(string $key = '', string $value = '') {
-        // Check if the key param is empty
-        $student = Student::withUserId(auth()->user()->id);
 
         if($key == '') {
+            $student = Student::withUserId(auth()->user()->id);
             return $this->all()->where('level', $student->level);
         } else {
             return $this->all()->where($key, $value);
