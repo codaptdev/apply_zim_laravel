@@ -102,20 +102,12 @@ class SchoolController extends Controller
             'user_type' => 'SCHOOL',
         ]);
 
-        if (User::all()->where('email', $request->email)->count() > 0) {
-
-            redirect()->back()->withErrors([
-                'This email is already in use'
-            ]);
-        } else {
-            $user->save();
-        }
-
+        $user->save();
 
         if (Auth::attempt($request->only(['email','password']))) {
 
             $school = new School();
-            $school->id = auth()->user()->id;
+            $school->user_id = auth()->user()->id;
             $school->name = $request->name;
             $school->email = $request->email;
             $school->year_established = $request->year_established;
@@ -125,7 +117,7 @@ class SchoolController extends Controller
             $school->save();
             return redirect('/home')->with('message', 'Welcome ' .$school->name . '. We are glad to have you on board');
         } else {
-            return redirect()->back();
+            return redirect()->back()->withError('Sorry something went wrong try again');
         }
 
     }
