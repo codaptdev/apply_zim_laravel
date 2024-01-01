@@ -20,8 +20,7 @@ class LogoController extends Controller
         ]);
 
         // Grab the auth school model
-        $school = School::find(auth()->user()->id);
-        // dd($school);
+        $school = School::withUserId(auth()->user()->id);
 
         // Store the file in the public dir in logos!
         $url = $request->file('logo')->store('logos', 'public');

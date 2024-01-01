@@ -152,7 +152,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        $school = School::all()->where('id', auth()->user()->id)->first();
+        $school = School::withUserId(auth()->user()->id);
         $cities = $this->cities;
         return view('schools.edit', compact('school', 'cities'));
     }
@@ -169,7 +169,7 @@ class SchoolController extends Controller
         ]);
 
 
-        $school = School::all()->where('id', auth()->user()->id)->first();
+        $school = School::withUserId(auth()->user()->id);
 
         $school->id = auth()->user()->id;
         $school->name = $request->name;
@@ -196,10 +196,11 @@ class SchoolController extends Controller
 
         if(auth()->user()->user_type == 'SCHOOL') {
 
-            $school = School::all()->where('id', auth()->user()->id)->first();
+            $school = School::withUserId(auth()->user()->id);
             return view('schools.myschool', [
                 'school' => $school
             ]);
+
         } else {
             return redirect('/home');
         }

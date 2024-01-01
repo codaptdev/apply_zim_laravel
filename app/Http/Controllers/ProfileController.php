@@ -47,7 +47,7 @@ class ProfileController extends Controller
             return redirect('/home');
         }
 
-        $school = School::find(auth()->user()->id);
+        $school = School::withUserId(auth()->user()->id);;
         $fallBack = $request->headers->get('referer');
 
         return view("profiles.edit", [
@@ -68,7 +68,7 @@ class ProfileController extends Controller
             'tuition_max' => ['required', 'numeric', 'min:0'],
         ]);
 
-        $school = School::find(auth()->user()->id);
+        $school = School::withUserId(auth()->user()->id);;
 
         $school->about = $request->about;
         $school->body = $request->body;

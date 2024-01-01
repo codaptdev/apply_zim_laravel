@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             // Primary key for the school table
-            $table->id('school_id');
+            $table->id();
 
             $table->integer('year_established');
             $table->string('name')->unique()->nullable(false);
