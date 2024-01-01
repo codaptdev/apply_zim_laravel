@@ -31,7 +31,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profile $profile)
+    public function show()
     {
         //
     }
@@ -40,7 +40,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request, Profile $profile)
+    public function edit(Request $request)
     {
 
         if (auth()->user()->user_type == 'STUDENT') {
