@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
 
-            // Reference to the user account that created the student
-            $table->integer('user_id')->nullable(false)->unique();
-            $table->foreign('user_id')->references('id')->on('users');
-
             // Primary key for the student table
-            $table->id('');
+            $table->id();
+
+            // Reference to the user account that created the student
+            $table->integer('user_id')->nullable(false);
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('first_name');
             $table->string('surname');
