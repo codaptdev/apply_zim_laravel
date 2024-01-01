@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->integer('student_id')->nullable(false);
             $table->integer('school_id')->nullable(false);
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('school_id')->references('id')->on('users');
+
+            // Reference to the student making the application
+            $table->foreign('student_id')->references('student_id')->on('students');
+
+            // Reference to the school that the student is applying to
+            $table->foreign('school_id')->references('school_id')->on('schools');
+
             $table->primary(['school_id', 'student_id']);
             $table->timestamps();
         });

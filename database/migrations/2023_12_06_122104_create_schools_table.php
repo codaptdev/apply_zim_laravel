@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->integer('id')->nullable(false);
+
+            // Reference to the user account that created the school
+            $table->integer('user_id')->nullable(false);
+            $table->foreign('user_id')->references('id')->on('users');
+
+            // Primary key for the school table
+            $table->id('school_id');
+
             $table->integer('year_established');
-            $table->foreign('id')->references('id')->on('users');
             $table->string('name')->unique()->nullable(false);
             $table->string('email')->unique()->nullable(false);
             $table->string('town_city');

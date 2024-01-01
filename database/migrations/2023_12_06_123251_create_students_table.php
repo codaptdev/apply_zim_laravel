@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->integer('id')->nullable(false);
-            $table->foreign('id')->references('id')->on('users');
+
+            // Reference to the user account that created the student
+            $table->integer('user_id')->nullable(false)->unique();
+            $table->foreign('user_id')->references('id')->on('users');
+
+            // Primary key for the student table
+            $table->id('student_id');
+
             $table->string('first_name');
             $table->string('surname');
             $table->string('email')->unique()->nullable(false);
