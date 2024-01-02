@@ -3,7 +3,7 @@
 
         {{-- Check if the owner of the school account is viewing the page --}}
         @auth
-            @if (auth()->user()->id == $school->id)
+            @if (auth()->user()->id == $school->user_id)
                 <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href="">ℹ️ This is how your public profile will look when students visit it</div>
             @endif
         @endauth
@@ -20,7 +20,7 @@
                 <p class="text-slate-400 text-2xl font-semibold ">{{$school->level}} SCHOOL</p>
 
                 @auth
-                    @if (auth()->user()->id == $school->id)
+                    @if (auth()->user()->id == $school->user_id)
                         <a  class="text-xl" href="{{url('/myschool/profile/edit')}}">Edit</a>
                     @endif
                 @endauth
@@ -93,24 +93,42 @@
         <br>
         <br>
         <br>
-        <x-markdown>{{$school->body}}</x-markdown>
+        <x-markdown id="mdc" class=" p-5 w-full h-full flex flex-col rounded-xl" >{{$school->body}}</x-markdown>
 
-        <div class="grid grid-cols-1 mt-10 gap-3 md:grid-cols-2">
+        <div class="grid w-full grid-cols-1 mt-10 gap-3 ">
 
-            @if ($school->tuition_min != null)
+            {{-- If the max tuition is 0 then school is free --}}
+
+            @if ($school->tuition_max === 0)
+            <div class=" text-center bg-green-100 rounded-xl p-5 w-full flex-auto h-full flex flex-col items-center justify-center" >
+                <p class="text-slate-400 text-2xl font-semibold "  >This Schools Tuition is</p>
+                <h1>Free</h1>
+            </div>
+            @else
+
+                @if ($school->tuition_min != null && $school->tuition_min !== 0)
                 <div class=" text-center bg-green-100 rounded-xl p-5 flex flex-col items-center justify-center" >
-                    <p class="text-slate-400 text-2xl font-semibold "  >Min Tuition USD</p>
-                    <h1>${{$school->tuition_min}}</h1>
-                </div>
-            @endif
+                        <p class="text-slate-400 text-2xl font-semibold "  >Min Tuition USD</p>
+                        <h1>${{$school->tuition_min}}</h1>
+                    </div>
+                @endif
 
-            @if ($school->tuition_max != null)
-                <div class=" text-center bg-orange-100 rounded-xl p-5 flex flex-col items-center justify-center" >
-                    <p class="text-slate-400 text-2xl font-semibold "  >Max Tuition USD</p>
-                    <h1>${{$school->tuition_max}}</h1>
-                </div>
-            @endif
-        </div>
+                    @if ($school->tuition_min === 0)
+                    <div class=" text-center bg-green-100 rounded-xl p-5 flex flex-col items-center justify-center" >
+                        <p class="text-slate-400 text-2xl font-semibold "  >Min Tuition USD</p>
+                        <h1>Free</h1>
+                    </div>
+                    @endif
+
+                    @if ($school->tuition_max != null)
+                    <div class=" text-center bg-orange-100 rounded-xl p-5 flex flex-col items-center justify-center" >
+                        <p class="text-slate-400 text-2xl font-semibold "  >Max Tuition USD</p>
+                        <h1>${{$school->tuition_max}}</h1>
+                    </div>
+                    @endif
+
+                @endif
+            </div>
 
         @if ($school->application_process != null)
             <div class="bg-slate-100 p-10 rounded-2xl my-10" >

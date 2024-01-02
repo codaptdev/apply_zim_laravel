@@ -31,7 +31,7 @@
             <p class="my-2 text-slate-500" > Your school's profile body is where you can include all the neccessary detail in Markdown
             </p>
 
-            <a class="mb-2" target="blank" href="https://www.markdownguide.org/cheat-sheet/">New to Markdown? Click here</a>
+            <a class="mb-2" target="blank" href="https://itsfoss.com/markdown-guide/">New to Markdown? Click here</a>
             <textarea
              required type="text"
              name="body"
@@ -82,7 +82,7 @@
             <br>
 
             <label>Tuition Min </label>
-            <input required type="number" min="0" value="{{$school->tuition_max}}" placeholder="e.g 2000" name="tuition_min" >
+            <input required type="number" min="0" value="{{$school->tuition_min}}" placeholder="e.g 2000" name="tuition_min" >
 
             <br>
 
