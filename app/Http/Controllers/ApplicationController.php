@@ -102,7 +102,7 @@ class ApplicationController extends Controller
     {
         $student = Student::withUserId(auth()->user()->id);
 
-        Application::find($id, $student->id)->delete();
+        Application::findAndDelete($id, $student->id);
 
         $school = School::find($id);
 

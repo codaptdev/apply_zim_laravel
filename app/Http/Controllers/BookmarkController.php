@@ -6,6 +6,7 @@ use Throwable;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\Bookmark;
+use App\Models\Application;
 use Illuminate\Http\Request;
 
 class BookmarkController extends Controller
@@ -30,13 +31,15 @@ class BookmarkController extends Controller
      *  - It is passed as a query param
      *  - e.g /bookmarks?schoolId=1
      */
-    public function store(Request $request, string $schoolId)
+    public function store(Request $request, $school_id)
     {
-        $bookmark = new Bookmark();
         $student = Student::withUserId(auth()->user()->id);
-        $school = School::find($schoolId);
+        $school = School::find($school_id);
 
-        $bookmark->school_id = $schoolId;
+
+        $bookmark = new Bookmark;
+
+        $bookmark->school_id = $school->id;
         $bookmark->student_id = $student->id;
 
         try {
@@ -58,8 +61,7 @@ class BookmarkController extends Controller
         $school = School::find($school_id);
 
         try {
-            $bookmark = Bookmark::findOrFail([$school_id, $student->id]);
-            $bookmark->delete();
+            Bookmark::findAndDelete($school_id, $student->id);
             return redirect()->back()->with('message', $school->name . ' was removed from Bookmarks');
 
         } catch (Throwable $e) {

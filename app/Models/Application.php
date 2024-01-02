@@ -11,6 +11,11 @@ class Application extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'school_id',
+        'student_id',
+    ];
+
     public function student() {
         return $this->belongsTo(Student::class);
     }
@@ -53,5 +58,11 @@ class Application extends Model
     public static function studentsAll(int $student_id) {
         return static::all()
         ->where('student_id', $student_id);
+    }
+
+    public static function findAndDelete(int $school_id, int $student_id) {
+        static::where('student_id', $student_id)
+        ->where('school_id', $school_id)
+        ->delete();
     }
 }

@@ -9,7 +9,25 @@ class Bookmark extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = ['school_id','student_id'];
+    public static function find(int $school_id, int $student_id) {
+        $application = static::all()
+        ->where('student_id', $student_id)
+        ->where('school_id', $school_id)
+        ->first();
+
+        return $application;
+    }
+
+    public static function findAndDelete(int $school_id, int $student_id) {
+        static::where('student_id', $student_id)
+        ->where('school_id', $school_id)
+        ->delete();
+    }
+
+    protected $fillable = [
+        'school_id',
+        'student_id'
+    ];
 
     public function school()
     {
@@ -34,16 +52,18 @@ class Bookmark extends Model
     }
 
     public static function forStudentWithId($student_id) {
-        $applications = static::all()
+        $bookmarks = static::all()
         ->where('student_id', $student_id);
 
-        foreach($applications as $application) {
-            $school = School::all()->find($application->school_id);
-            $application['created_at'] = date_format($application->created_at, 'D d M y');
-            $application['school'] = $school;
+        foreach($bookmarks as $bookmark) {
+            $school = School::all()->find($bookmark->school_id);
+            $bookmark['date_marked'] = date_format($bookmark->created_at, 'D d M y');
+            $bookmark['school'] = $school;
         }
 
-        return $applications;
+        return $bookmarks;
     }
+
+
 }
 
