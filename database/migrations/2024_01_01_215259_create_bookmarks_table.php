@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookmarks', function (Blueprint $table) {
-            $table->bigInteger('school_id')->nullable(false);
-            $table->bigInteger('student_id')->nulllable(false);
+            $table->integer('student_id')->nullable(false);
+            $table->integer('school_id')->nullable(false);
 
-            $table->foreign('school_id')->references('id')->on('schools');
+            // Reference to the student adding the bookmark
             $table->foreign('student_id')->references('id')->on('students');
 
-            $table->primary(['school_id','student_id']);
+            // Reference to the school that the student is being bookmarked to
+            $table->foreign('school_id')->references('id')->on('schools');
 
+            $table->primary(['school_id', 'student_id']);
             $table->timestamps();
         });
     }
