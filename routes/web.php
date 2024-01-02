@@ -36,6 +36,10 @@ Route::get('/guest', [GuestController::class, 'index']);
 Route::get('/about', [GuestController::class, 'about']);
 Route::get('/register', [GuestController::class, 'register']);
 
+// Test
+Route::get('/test', function() {
+    return 'Hello World, You are logged in as a student and you are allowed to see this page.';
+})->middleware('auth', 'user_check:student');
 
 // Navigation
 Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
