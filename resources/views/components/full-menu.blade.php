@@ -32,6 +32,7 @@
                     <a class="hover:text-indigo-500 my-2 " href="/home">Home</a>
                     <a class="hover:text-indigo-500 my-2 " href="/search">Search</a>
                     <a class="hover:text-indigo-500 my-2 " href="/applications">Applications</a>
+                    <a class="hover:text-indigo-500 my-2 " href="/bookmarks">Bookmarks</a>
                 </div>
             @else
                 <div class=" flex flex-col justify-center text-black items-center text-xl font-bold  gap-1 w-full" >

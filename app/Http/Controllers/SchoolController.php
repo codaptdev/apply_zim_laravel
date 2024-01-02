@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\School;
 use App\Models\User;
+use App\Models\School;
+use App\Models\Student;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -58,13 +60,21 @@ class SchoolController extends Controller
     {
         $school = School::find( $id );
 
+
+
         if($school === null) {
             return view('schools.404', [
                 'isId' => true,
                 'nameOrId' => $id
             ]);
         } else {
-            return view('schools.index', compact('school'));
+            if(auth()->user()->user_type === 'STUDENT') {
+                $student = Student::withUserId(auth()->user()->id);
+                $is_bookmarked = Bookmark::exists($id, $student->id);
+                return view('schools.index', compact('school', 'is_bookmarked'));
+            } else {
+                return view('schools.index', compact('school'));
+            }
         }
 
     }
@@ -193,16 +203,9 @@ class SchoolController extends Controller
     public function myschool()
 
     {
-
-        if(auth()->user()->user_type == 'SCHOOL') {
-
-            $school = School::withUserId(auth()->user()->id);
-            return view('schools.myschool', [
-                'school' => $school
-            ]);
-
-        } else {
-            return redirect('/home');
-        }
+        $school = School::withUserId(auth()->user()->id);
+        return view('schools.myschool', [
+            'school' => $school
+        ]);
     }
 }
