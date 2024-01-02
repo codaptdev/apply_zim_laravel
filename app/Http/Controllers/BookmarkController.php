@@ -41,7 +41,7 @@ class BookmarkController extends Controller
 
         try {
             $bookmark->saveOrFail();
-            return back()->with('message', $school->name . ' was successfully bookmarked');
+            return redirect()->back()->with('message', $school->name . ' was successfully bookmarked');
         } catch (Throwable $th) {
             return redirect()->back()->withError('Something wrong happened, Please try again');
         }

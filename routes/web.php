@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GuestController;
-use App\Http\Controllers\AuthUserHomePageController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\LogoController;
-use App\Http\Controllers\NavigationController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SchoolController;
-use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LogoController;
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AuthUserHomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,3 +83,11 @@ Route::get('/schools/{name}',  [SchoolController::class, 'index']);
 
 // Search Routes
 Route::get('/search', [SchoolController::class, 'show'])->name('search');
+
+// Student Bookmarks
+Route::get('/bookmarks', [BookmarkController::class, 'index'])
+->middleware('auth', 'user_check:student');
+
+Route::get('/bookmarks/delete/{school_id}', [BookmarkController::class, 'destroy'])
+->middleware('auth', 'user_check:student')
+->where('school_id', '[0-9]+');
