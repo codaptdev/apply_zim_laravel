@@ -1,6 +1,7 @@
 <x-main-layout>
     <div class="p-10 md:px-20">
 
+        {{-- Check if the owner of the school account is viewing the page --}}
         @auth
             @if (auth()->user()->id == $school->id)
                 <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href="">ℹ️ This is how your public profile will look when students visit it</div>
@@ -12,15 +13,7 @@
         <div class="md:flex-row flex flex-col">
 
         {{-- Logo --}}
-        <div class="flex justify-center items-center   border-slate-300 w-60 h-60 md:h-40 md:w-40  mr-5 rounded-xl" >
-            @if ($school->logo_url !== null)
-                <img src="{{url('storage/'. $school->logo_url )}}"  alt="School Logo" class='bg-slate-300  border-2 w-full h-full rounded-xl' >
-            @else
-                @if (auth()->user()->id == $school->id)
-                    <a href="{{url('/myschool/logo/edit')}}" >Upload A logo</a>
-                @endif
-            @endif
-        </div>
+        <x-logo-con :school="$school"></x-logo-con>
 
             <div class="flex flex-col flex-auto" >
                 <h1>{{$school->name}}</h1>
@@ -53,6 +46,21 @@
             @if ($school->twitter != null)
                 <a class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="{{$school->twitter}}">X (Twitter)</a>
             @endif
+
+            @if(auth()->user()->user_type === 'STUDENT' && !auth()->guest())
+                @if ($is_bookmarked)
+                    <x-pill
+                    :href="'/bookmarks/delete/' . $school->id"
+                    :color="'red'"
+                    >Unbookmark</x-pill>
+                @else
+                <x-pill
+                :href="'/bookmarks/add/' . $school->id"
+                :color="'grey'"
+                >Bookmark</x-pill>
+                @endif
+            @endif
+
         </div>
 
         <div class="w-full p-10 bg-slate-100 mt-5 rounded-2xl text-slate-700" >
