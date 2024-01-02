@@ -36,11 +36,6 @@ Route::get('/guest', [GuestController::class, 'index']);
 Route::get('/about', [GuestController::class, 'about']);
 Route::get('/register', [GuestController::class, 'register']);
 
-// Test
-Route::get('/test', function() {
-    return 'Hello World, You are logged in as a student and you are allowed to see this page.';
-})->middleware('auth', 'user_check:student');
-
 // Navigation
 Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
 
@@ -59,23 +54,23 @@ Route::get('/register/school',  [SchoolController::class, 'create'] );
 Route::post('/register/school',  [SchoolController::class, 'store'] );
 
 // My School Routes
-Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth');
-Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth');
-Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth');
+Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth', 'user_check:school');
+Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth', 'user_check:school');
+Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth', 'user_check:school');
 
 // Myschool Profile Routes
-Route::post('/myschool/profile/update', [ProfileController::class,'update'] )->middleware('auth');
-Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middleware('auth');
+Route::post('/myschool/profile/update', [ProfileController::class,'update'] )->middleware('auth', 'user_check:school');
+Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middleware('auth', 'user_check:school');
 
 // My School Logo Routes
-Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth');
-Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth');
+Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth', 'user_check:school');
+Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth', 'user_check:school');
 
 // Student Application Routes
-Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth');
-Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
+Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
+Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth', 'user_check:student');
 Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
-->middleware('auth')
+->middleware('auth', 'user_check:student')
 ->where('id', '[0-9]+');
 
 // Get school with ID
