@@ -90,4 +90,10 @@ Route::get('/bookmarks', [BookmarkController::class, 'index'])
 
 Route::get('/bookmarks/delete/{school_id}', [BookmarkController::class, 'destroy'])
 ->middleware('auth', 'user_check:student')
-->where('school_id', '[0-9]+');
+->where('school_id', '[0-9]+')
+;
+
+Route::get('/bookmarks/add/{school_id}', [BookmarkController::class, 'store'])
+->middleware('auth', 'user_check:student')
+->where('school_id', '[0-9]+')
+;
