@@ -49,6 +49,7 @@
                     <a class="hover:text-indigo-500 mx-2 text-black" href="/home">Home</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/search')}}">Search</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/applications')}}">Applications</a>
+                    <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/bookmarks')}}">Bookmarks</a>
                 </div>
             @else
                 {{-- Full Nav for Schools --}}

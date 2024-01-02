@@ -62,7 +62,7 @@ class BookmarkController extends Controller
 
         try {
             Bookmark::findAndDelete($school_id, $student->id);
-            return redirect()->back()->with('message', $school->name . ' was removed from Bookmarks');
+            return redirect()->back()->with('notice', $school->name . ' was removed from Bookmarks');
 
         } catch (Throwable $e) {
             return redirect()->back()->withError("Bookmark could not be removed because it doesn't exist");
