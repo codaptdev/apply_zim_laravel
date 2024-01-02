@@ -193,16 +193,9 @@ class SchoolController extends Controller
     public function myschool()
 
     {
-
-        if(auth()->user()->user_type == 'SCHOOL') {
-
-            $school = School::withUserId(auth()->user()->id);
-            return view('schools.myschool', [
-                'school' => $school
-            ]);
-
-        } else {
-            return redirect('/home');
-        }
+        $school = School::withUserId(auth()->user()->id);
+        return view('schools.myschool', [
+            'school' => $school
+        ]);
     }
 }
