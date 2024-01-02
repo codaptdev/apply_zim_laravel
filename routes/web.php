@@ -28,9 +28,7 @@ use App\Http\Controllers\AuthUserHomePageController;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // Home page for authenticated users
-Route::get('/home', [AuthUserHomePageController::class, 'index'])
-->middleware('auth')
-->name('auth-home');
+Route::get('/home', [AuthUserHomePageController::class, 'index'])->middleware('auth');
 
 // Guest Routes for unauthenticated users
 Route::get('/guest', [GuestController::class, 'index']);
@@ -75,11 +73,11 @@ Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'
 ->where('id', '[0-9]+');
 
 // Get school with ID
-Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
+Route::get('/schools/{id}',  [SchoolController::class, 'getSchoolByID'] )
 ->where('id', '[1-9]+');
 
 // Get school with name
-Route::get('/schools/{name}',  [SchoolController::class, 'index']);
+Route::get('/schools/{name}',  [SchoolController::class, 'getSchoolByName']);
 
 // Search Routes
 Route::get('/search', [SchoolController::class, 'show'])->name('search');
@@ -90,10 +88,8 @@ Route::get('/bookmarks', [BookmarkController::class, 'index'])
 
 Route::get('/bookmarks/delete/{school_id}', [BookmarkController::class, 'destroy'])
 ->middleware('auth', 'user_check:student')
-->where('school_id', '[0-9]+')
-;
+->where('school_id', '[0-9]+');
 
 Route::get('/bookmarks/add/{school_id}', [BookmarkController::class, 'store'])
 ->middleware('auth', 'user_check:student')
-->where('school_id', '[0-9]+')
-;
+->where('school_id', '[0-9]+');

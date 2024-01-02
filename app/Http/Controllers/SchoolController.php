@@ -41,22 +41,21 @@ class SchoolController extends Controller
     ];
 
     /** Get a school by its name */
-    public function index(string $name)
+    public function getSchoolByName(string $name)
     {
         $school = School::all()->where('name' , $name)->first();
 
         if($school === null) {
-            return view('schools.404', [
-                'isId' => false,
-                'nameOrId' => $name
-            ]);
+            $isId = false;
+            $nameOrId = $name;
+            return view('schools.404', compact('isId', 'nameOrId'));;
         } else {
             return view('schools.index', compact('school'));
         }
     }
 
     /** Get a school by its id */
-    public function indexWithID($id)
+    public function getSchoolByID($id)
     {
         $school = School::find( $id );
 
