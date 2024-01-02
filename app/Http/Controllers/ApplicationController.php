@@ -70,15 +70,10 @@ class ApplicationController extends Controller
     public function store(Request $request)
     {
 
-        if(auth()->user()->user_type != 'STUDENT') {
-            return redirect()->back()->with('error','Only student accounts can apply to schools');
-        }
-
         $school = School::find( $request->school_id );
 
         if( $school != null) {
 
-            // Get the student model of the currently logged in account
             $student = Student::withUserId(auth()->user()->id);
 
             // Save application attempt if it doesn't exist already
@@ -101,56 +96,16 @@ class ApplicationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Application $application)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Application $application)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Application $application)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(int $id)
     {
-        if(auth()->user()->user_type == 'STUDENT') {
+        $student = Student::withUserId(auth()->user()->id);
 
-            $student = Student::withUserId(auth()->user()->id);
+        Application::find($id, $student->id)->delete();
 
-            Application::find($id, $student->id)
-            ->delete();
+        $school = School::find($id);
 
-            $school = School::find($id);
-
-            return redirect('/applications')->with('notice', 'Application to ' . $school->name . ' was deleted successfully');
-
-        } else {
-
-            $school = School::withUserId(auth()->user()->id);
-
-            Application::find($school->id, $id)
-            ->delete();
-
-            $student = School::find($id);
-
-            return redirect()->back()->with('notice', 'Application from ' . $student->first_name . ' was deleted successfully ');
-
-        }
+        return redirect('/applications')->with('notice', 'Application to ' . $school->name . ' was deleted successfully');
     }
 }
