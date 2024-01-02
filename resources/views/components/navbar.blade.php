@@ -56,6 +56,7 @@
                 <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/myschool">My School</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/applications')}}">Applications</a>
+                    <a class="hover:text-indigo-500 mx-2 text-black " href="/statistics">Statistics</a>
                 </div>
             @endif
 

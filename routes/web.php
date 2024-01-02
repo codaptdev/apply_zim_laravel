@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
@@ -97,3 +98,7 @@ Route::get('/bookmarks/add/{school_id}', [BookmarkController::class, 'store'])
 ->middleware('auth', 'user_check:student')
 ->where('school_id', '[0-9]+')
 ;
+
+// School Statistics Routes
+Route::get('/statistics', [StatsController::class, 'index'])
+->middleware('auth', 'user_check:school');
