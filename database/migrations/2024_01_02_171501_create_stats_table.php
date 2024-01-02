@@ -19,6 +19,8 @@ return new class extends Migration
             // The school that the statistic belongs to!
             $table->integer('school_id');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade');
+            $table->string('town_city');
+            $table->string('level');
 
             $table->timestamps();
         });

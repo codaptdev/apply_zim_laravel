@@ -5,9 +5,15 @@
         <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  my-10 w-full gap-3">
 
             <x-stat-card
+                :title="'City most popular with'"
+                :value="'Chinhoyi'"
+            />
+
+            <x-stat-card
                 :title="'Profile Visits'"
                 :value="100"
             />
+
 
             <x-stat-card
                 :title="'Times Bookmarked'"
