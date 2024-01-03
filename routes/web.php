@@ -70,7 +70,7 @@ Route::post('/myschool/logo/update', [LogoController::class,'update'])->middlewa
 
 // Student Application Routes
 Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
-Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth', 'user_check:student');
+Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
 Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
 ->middleware('auth', 'user_check:student')
 ->where('id', '[0-9]+');
