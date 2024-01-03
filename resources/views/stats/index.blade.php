@@ -2,33 +2,51 @@
     <div class="flex p-10 flex-col justify-center items-center">
         <h1>Statistics</h1>
 
-        <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  my-10 w-full gap-3">
+        <br>
 
-            <x-stat-card
-                :title="'City most popular with'"
-                :value="'Chinhoyi'"
-            />
+        <div class="w-full mb-10" >
+            <x-pill :color="'blue'" :href="'/statistics/profile_visits_by_cities'" >Profile Visits By Cities</x-pill>
+        </div>
 
-            <x-stat-card
+        <x-stat-card
                 :title="'Profile Visits'"
-                :value="100"
-            />
+                :value="$profile_visits_count"
+        />
 
+        <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  mt-3 mb-10 w-full gap-3">
+
+            @if (count($city_counts) != 0)
+                <x-stat-card
+                :title="'City most popular with'"
+                :value="$max_city"
+                />
+            @endif
+
+            @if (count($city_counts) != 0)
+                <x-stat-card
+                    :title="'Visits from '. $max_city"
+                    :value="$city_counts[$max_city]"
+                />
+            @endif
 
             <x-stat-card
                 :title="'Times Bookmarked'"
-                :value="26"
+                :value="$times_bookmarked"
             />
 
             <x-stat-card
                 :title="'Attempts to Apply'"
-                :value="123"
+                :value="$application_attempts"
             />
 
-            <x-stat-card
+            {{-- <x-stat-card
                 :title="'Redirects to your socials'"
                 :value="56"
-            />
+            /> --}}
+
         </div>
+
+
+
     </div>
 </x-main-layout>

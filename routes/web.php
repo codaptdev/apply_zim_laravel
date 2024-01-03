@@ -102,3 +102,7 @@ Route::get('/bookmarks/add/{school_id}', [BookmarkController::class, 'store'])
 // School Statistics Routes
 Route::get('/statistics', [StatsController::class, 'index'])
 ->middleware('auth', 'user_check:school');
+
+// School Statistics Routes for Cities Profile Visits Breakdown
+Route::get('/statistics/profile_visits_by_cities', [StatsController::class, 'profileVisitsByCities'])
+->middleware('auth', 'user_check:school');
