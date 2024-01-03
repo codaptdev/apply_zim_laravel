@@ -4,6 +4,10 @@ The platform that brings schools and students
 
 <img src='./public/images/promo.png'>
 
+<img width="929" alt="image" src="https://github.com/Tadiwr/apply_zim_laravel/assets/80280920/9868191b-ae2c-4a61-b8c0-04b511c37dbc">
+
+<img width="930" alt="image" src="https://github.com/Tadiwr/apply_zim_laravel/assets/80280920/834369ad-7cc4-4a4c-aa0c-d64de125c526">
+
 ## Purpose?
 
 ApplyZim is a web app that allows students to discorver schools in Zimbabwe and get redirected to the schools application systems.
