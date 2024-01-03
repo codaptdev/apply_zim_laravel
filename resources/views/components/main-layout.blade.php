@@ -18,17 +18,16 @@
     <x-message />
 
     @guest
+        <footer class=" text-white fixed bottom-0 left-0  w-full p-3 justify-center items-center flex  flex-col md:flex-row bg-indigo-500" >
 
-
-        <footer class=" text-white fixed bottom-0 left-0  w-full p-5 justify-center items-center flex  flex-col md:flex-row bg-indigo-500" >
-
-            <div class="flex flex-col w-full text-xl flex-auto h-full justify-center items-start" >
+            <div class="flex flex-col w-full text-xl flex-auto h-full  justify-center items-start" >
                 <p>Apply Zim is a platform here for both</p>
                 <p class="font-semibold text-2xl" >Student & Schools</p>
             </div>
 
-            <div class="flex md:mt-0 mt-2 justify-start md:justify-end items-center w-full  md:w-1/4 font-bold h-full" >
-                <a href="/register" class="bg-white hover:text-indigo-700 py-3 px-6 rounded-full text-black" >Join ApplyZim</a>
+            <div class="flex md:mt-0 mt-2 justify-start md:justify-end  items-center w-full  md:w-3/4 font-bold h-full" >
+                <a href="/auth/login" class="bg-indigo-500 mr-2 py-2 px-6  border-2 border-white rounded-full text-white hover:bg-white hover:text-black" >Sign In</a>
+                <a href="/register" class="bg-white hover:text-indigo-700 py-2 px-6 rounded-full text-black" >Join ApplyZim</a>
             </div>
 
         </footer>
