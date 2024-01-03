@@ -76,11 +76,11 @@ Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'
 ->where('id', '[0-9]+');
 
 // Get school with ID
-Route::get('/schools/{id}',  [SchoolController::class, 'indexWithID'] )
+Route::get('/schools/{id}',  [ProfileController::class, 'indexWithID'] )
 ->where('id', '[1-9]+');
 
 // Get school with name
-Route::get('/schools/{name}',  [SchoolController::class, 'index']);
+Route::get('/schools/{name}',  [ProfileController::class, 'index']);
 
 // Search Routes
 Route::get('/search', [SchoolController::class, 'show'])->name('search');
