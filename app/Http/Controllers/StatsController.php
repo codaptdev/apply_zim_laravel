@@ -51,7 +51,13 @@ class StatsController extends Controller
         $city_data = $this->getCitiesThatVistedProfile($school);
         $city_counts = $city_data['counts'];
         $city_names = $city_data['cities'];
-        $max_city = $city_names[$city_data['max_index']];
+
+        if(count($city_counts) == 0) {
+            $max_city = $city_names[$city_data['max_index']];
+        } else {
+            $max_city = '';
+        }
+
 
         return view(
             'stats.profile_visits_by_cities',

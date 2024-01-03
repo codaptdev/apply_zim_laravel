@@ -8,26 +8,31 @@
 
             <h1 class="mb-10" >Breakdown of Profile Visits by Cities</h1>
 
-            <table class="">
+            @if (count($city_counts) === 0)
+                <p>You do not have any Profile Visits</p>
+            @else
+                <table class="">
 
-                <thead>
-                    <tr>
-                        <th>Town/City</th>
-                        <th>Count</th>
-                    </tr>
-                </thead>
+                    <thead>
+                        <tr>
+                            <th>Town/City</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
+                    <tbody>
 
-                    @foreach ($city_counts as $key => $count)
-                    <tr>
-                        <td>{{$key}}</td>
-                        <td>{{$count}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                        @foreach ($city_counts as $key => $count)
+                        <tr>
+                            <td>{{$key}}</td>
+                            <td>{{$count}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+        @endif
 
     </div>
 
