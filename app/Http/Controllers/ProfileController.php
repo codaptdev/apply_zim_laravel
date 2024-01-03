@@ -109,23 +109,32 @@ class ProfileController extends Controller
         "Plumtree",
     ];
 
-    private function profileVisitLog($school_id, $student_id) {
-        $profileVisit = new ProfileVisit;
+    private function profileVisitLog(int $school_id, int | null $student_id) {
+        $profileVisit = new ProfileVisit();
         $profileVisit->school_id = $school_id;
         $profileVisit->student_id = $student_id;
+
+        $profileVisit->save();
     }
 
     /** Helper function that renders a school profile page */
     private function renderProfile($school) {
+
         if(auth()->guest()) {
+            $this->profileVisitLog($school->id, null);
             return view('schools.index', compact('school'));
         }
 
         if(auth()->user()->user_type === 'STUDENT') {
             $student = Student::withUserId(auth()->user()->id);
             $is_bookmarked = Bookmark::exists($school->id, $student->id);
+
+            $this->profileVisitLog($school->id, $student->id);
             return view('schools.index', compact('school', 'is_bookmarked'));
+
         } else {
+
+            // Profile visit log isn't recorded here because its a school account thats visiting it!
             return view('schools.index', compact('school'));
         }
     }
