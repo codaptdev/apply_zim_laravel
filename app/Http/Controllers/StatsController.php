@@ -22,7 +22,12 @@ class StatsController extends Controller
         $city_data = $this->getCitiesThatVistedProfile($school);
         $city_counts = $city_data['counts'];
         $city_names = $city_data['cities'];
-        $max_city = $city_names[$city_data['max_index']];
+
+        if(count($city_counts) != 0) {
+            $max_city = $city_names[$city_data['max_index']];
+        } else {
+            $max_city = '';
+        }
 
         // Times Bookmarked
         $times_bookmarked = $this->getTimesBookmarked($school);
@@ -52,7 +57,7 @@ class StatsController extends Controller
         $city_counts = $city_data['counts'];
         $city_names = $city_data['cities'];
 
-        if(count($city_counts) == 0) {
+        if(count($city_counts) != 0) {
             $max_city = $city_names[$city_data['max_index']];
         } else {
             $max_city = '';

@@ -15,15 +15,19 @@
 
         <div class="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1  mt-3 mb-10 w-full gap-3">
 
-            <x-stat-card
-            :title="'City most popular with'"
-            :value="$max_city"
-            />
+            @if (count($city_counts) != 0)
+                <x-stat-card
+                :title="'City most popular with'"
+                :value="$max_city"
+                />
+            @endif
 
-            <x-stat-card
-                :title="'Visits from '. $max_city"
-                :value="$city_counts[$max_city]"
-            />
+            @if (count($city_counts) != 0)
+                <x-stat-card
+                    :title="'Visits from '. $max_city"
+                    :value="$city_counts[$max_city]"
+                />
+            @endif
 
             <x-stat-card
                 :title="'Times Bookmarked'"
