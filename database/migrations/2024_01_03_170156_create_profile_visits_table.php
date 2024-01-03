@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('student_id')->nullable(true);
 
             $table->foreign('school_id')->references('id')->on('schools');
-            $table->foreign('student_id')->references('id')->on('sctudent');
+            $table->foreign('student_id')->references('id')->on('students');
             $table->timestamps();
         });
     }
