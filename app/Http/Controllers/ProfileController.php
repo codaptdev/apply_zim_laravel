@@ -5,46 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\Bookmark;
+use App\Models\ProfileVisit;
+use Egulias\EmailValidator\Warning\DeprecatedComment;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    private $cities = [
-        "Harare",
-        "Bulawayo",
-        "Chitungwiza",
-        "Mutare",
-        "Gweru",
-        "Kwekwe",
-        "Zvishavane",
-        "Ruwa",
-        "Epworth",
-        "Masvingo",
-        "Marondera",
-        "Norton",
-        "Bindura",
-        "Hwange",
-        "Beitbridge",
-        "Gwanda",
-        "Chinhoyi",
-        "Kariba",
-        "Kadoma",
-        "Rusape",
-        "Plumtree",
-    ];
-
     /** Get a school by its name */
     public function index(string $name)
     {
         $school = School::all()->where('name' , $name)->first();
 
         if($school === null) {
-            return view('schools.404', [
-                'isId' => false,
-                'nameOrId' => $name
-            ]);
+            return $this->renderSchool404Page($name);
         } else {
-            return view('schools.index', compact('school'));
+            return $this->renderProfile($school);
         }
     }
 
@@ -53,26 +28,10 @@ class ProfileController extends Controller
     {
         $school = School::find( $id );
 
-
-
         if($school === null) {
-            return view('schools.404', [
-                'isId' => true,
-                'nameOrId' => $id
-            ]);
+            return $this->renderSchool404Page($id);
         } else {
-
-            if(auth()->guest()) {
-                return view('schools.index', compact('school'));
-            }
-
-            if(auth()->user()->user_type === 'STUDENT') {
-                $student = Student::withUserId(auth()->user()->id);
-                $is_bookmarked = Bookmark::exists($id, $student->id);
-                return view('schools.index', compact('school', 'is_bookmarked'));
-            } else {
-                return view('schools.index', compact('school'));
-            }
+            return $this->renderProfile($school);
         }
 
     }
@@ -125,4 +84,58 @@ class ProfileController extends Controller
 
         return redirect('/schools/'. $school->id)->with('message', 'Your profile was updated successfully');
     }
+
+    private $cities = [
+        "Harare",
+        "Bulawayo",
+        "Chitungwiza",
+        "Mutare",
+        "Gweru",
+        "Kwekwe",
+        "Zvishavane",
+        "Ruwa",
+        "Epworth",
+        "Masvingo",
+        "Marondera",
+        "Norton",
+        "Bindura",
+        "Hwange",
+        "Beitbridge",
+        "Gwanda",
+        "Chinhoyi",
+        "Kariba",
+        "Kadoma",
+        "Rusape",
+        "Plumtree",
+    ];
+
+    private function profileVisitLog($school_id, $student_id) {
+        $profileVisit = new ProfileVisit;
+        $profileVisit->school_id = $school_id;
+        $profileVisit->student_id = $student_id;
+    }
+
+    /** Helper function that renders a school profile page */
+    private function renderProfile($school) {
+        if(auth()->guest()) {
+            return view('schools.index', compact('school'));
+        }
+
+        if(auth()->user()->user_type === 'STUDENT') {
+            $student = Student::withUserId(auth()->user()->id);
+            $is_bookmarked = Bookmark::exists($school->id, $student->id);
+            return view('schools.index', compact('school', 'is_bookmarked'));
+        } else {
+            return view('schools.index', compact('school'));
+        }
+    }
+
+    private function renderSchool404Page($name_or_id) {
+        return view('schools.404', [
+            'isId' => false,
+            'nameOrId' => $name_or_id
+        ]);
+    }
+
+
 }

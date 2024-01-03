@@ -26,7 +26,7 @@
             </div>
 
             <div class="flex md:mt-0 mt-2 justify-start md:justify-end  items-center w-full  md:w-3/4 font-bold h-full" >
-                <a href="/auth/login" class="bg-indigo-500 mr-2 py-2 px-6  border-2 border-white rounded-full text-white hover:bg-white hover:text-black" >Sign In</a>
+                <a href="/auth/signin" class="bg-indigo-500 mr-2 py-2 px-6  border-2 border-white rounded-full text-white hover:bg-white hover:text-black" >Sign In</a>
                 <a href="/register" class="bg-white hover:text-indigo-700 py-2 px-6 rounded-full text-black" >Join ApplyZim</a>
             </div>
 
