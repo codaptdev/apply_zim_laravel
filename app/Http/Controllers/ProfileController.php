@@ -3,38 +3,79 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
+use App\Models\Student;
+use App\Models\Bookmark;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $cities = [
+        "Harare",
+        "Bulawayo",
+        "Chitungwiza",
+        "Mutare",
+        "Gweru",
+        "Kwekwe",
+        "Zvishavane",
+        "Ruwa",
+        "Epworth",
+        "Masvingo",
+        "Marondera",
+        "Norton",
+        "Bindura",
+        "Hwange",
+        "Beitbridge",
+        "Gwanda",
+        "Chinhoyi",
+        "Kariba",
+        "Kadoma",
+        "Rusape",
+        "Plumtree",
+    ];
+
+    /** Get a school by its name */
+    public function index(string $name)
     {
-        //
+        $school = School::all()->where('name' , $name)->first();
+
+        if($school === null) {
+            return view('schools.404', [
+                'isId' => false,
+                'nameOrId' => $name
+            ]);
+        } else {
+            return view('schools.index', compact('school'));
+        }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    /** Get a school by its id */
+    public function indexWithID($id)
     {
+        $school = School::find( $id );
+
+
+
+        if($school === null) {
+            return view('schools.404', [
+                'isId' => true,
+                'nameOrId' => $id
+            ]);
+        } else {
+
+            if(auth()->guest()) {
+                return view('schools.index', compact('school'));
+            }
+
+            if(auth()->user()->user_type === 'STUDENT') {
+                $student = Student::withUserId(auth()->user()->id);
+                $is_bookmarked = Bookmark::exists($id, $student->id);
+                return view('schools.index', compact('school', 'is_bookmarked'));
+            } else {
+                return view('schools.index', compact('school'));
+            }
+        }
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        //
-    }
-
 
     /**
      * Show the form for editing the specified resource.

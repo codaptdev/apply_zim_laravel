@@ -47,19 +47,21 @@
                 <a class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="{{$school->twitter}}">X (Twitter)</a>
             @endif
 
-            @if(auth()->user()->user_type === 'STUDENT' && !auth()->guest())
-                @if ($is_bookmarked)
-                    <x-pill
-                    :href="'/bookmarks/delete/' . $school->id"
-                    :color="'red'"
-                    >Unbookmark</x-pill>
-                @else
-                <x-pill
-                :href="'/bookmarks/add/' . $school->id"
-                :color="'grey'"
-                >Bookmark</x-pill>
+            @auth
+                @if(auth()->user()->user_type === 'STUDENT')
+                    @if ($is_bookmarked)
+                        <x-pill
+                        :href="'/bookmarks/delete/' . $school->id"
+                        :color="'red'"
+                        >Unbookmark</x-pill>
+                    @else
+                        <x-pill
+                        :href="'/bookmarks/add/' . $school->id"
+                        :color="'grey'"
+                        >Bookmark</x-pill>
+                    @endif
                 @endif
-            @endif
+            @endauth
 
         </div>
 
