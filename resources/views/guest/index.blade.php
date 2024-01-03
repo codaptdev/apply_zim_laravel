@@ -1,8 +1,7 @@
 <x-main-layout>
-    <div class="justify-center text-center items-center flex flex-col p-5 md:p-10">
+    <div class="justify-center text-center items-center flex flex-col p-5 md:p-12">
 
-        <h1 class="md:text-6xl text-5xl xl:text-8xl xl:mt-10 font-serif   " >Applying To School's In Zimbabwe Just Got Easier</h1>
-
+        <h1 class="md:text-8xl text-5xl xl:text-9xl xl:mt-10 font-serif " >Applying To School's In <span class="bg-indigo-500 text-white px-2" >Zimbabwe</span>  Just Got Easier</h1>
         <br>
         <br>
         <br>
