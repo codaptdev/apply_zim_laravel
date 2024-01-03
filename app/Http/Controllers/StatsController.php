@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Bookmark;
+use App\Models\Application;
 use App\Models\ProfileVisit;
 use Illuminate\Http\Request;
 
@@ -13,15 +15,33 @@ class StatsController extends Controller
     public function index() {
         $school = School::withUserId(auth()->user()->id);
 
+        // Profile Visits
         $profile_visits_count = $this->getProfileVisits($school);
 
+        // Cities
         $city_data = $this->getCitiesThatVistedProfile($school);
         $city_counts = $city_data['counts'];
         $city_names = $city_data['cities'];
         $max_city = $city_names[$city_data['max_index']];
 
+        // Times Bookmarked
+        $times_bookmarked = $this->getTimesBookmarked($school);
+
+        // Application Attempts
+        $application_attempts = $this->getAttemptsToApply($school);
+
         // Profile visits number
-        return view('stats.index', compact('profile_visits_count', 'city_counts', 'city_names', 'max_city'));
+        return view(
+            'stats.index',
+            compact(
+                'profile_visits_count',
+                'city_counts',
+                'city_names',
+                'max_city',
+                'times_bookmarked',
+                'application_attempts'
+            )
+        );
     }
 
     private function getProfileVisits(School $school) : int {
@@ -74,4 +94,20 @@ class StatsController extends Controller
         ];
 
     }
+
+    private function getTimesBookmarked($school) : int {
+        $bookmarks = Bookmark::all()
+        ->where('school_id', $school->id);
+
+        return $bookmarks->count();
+    }
+
+    private function getAttemptsToApply($school) : int {
+
+        $attempts = Application::all()
+        ->where('school_id', $school->id);
+
+        return $attempts->count();
+    }
 }
+
