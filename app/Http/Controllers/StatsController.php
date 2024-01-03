@@ -30,7 +30,6 @@ class StatsController extends Controller
         // Application Attempts
         $application_attempts = $this->getAttemptsToApply($school);
 
-        // Profile visits number
         return view(
             'stats.index',
             compact(
@@ -40,6 +39,26 @@ class StatsController extends Controller
                 'max_city',
                 'times_bookmarked',
                 'application_attempts'
+            )
+        );
+    }
+
+    public function profileVisitsByCities() {
+
+        $school = School::withUserId(auth()->user()->id);
+
+        // Cities
+        $city_data = $this->getCitiesThatVistedProfile($school);
+        $city_counts = $city_data['counts'];
+        $city_names = $city_data['cities'];
+        $max_city = $city_names[$city_data['max_index']];
+
+        return view(
+            'stats.profile_visits_by_cities',
+            compact(
+                'city_counts',
+                'city_names',
+                'max_city',
             )
         );
     }
