@@ -12,7 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\AuthUserHomePageController;
+use App\Http\Controllers\StudentsHomePageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +29,8 @@ use App\Http\Controllers\AuthUserHomePageController;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 
 // Home page for authenticated users
-Route::get('/home', [AuthUserHomePageController::class, 'index'])
-->middleware('auth')
-->name('auth-home');
+Route::get('/home', [StudentsHomePageController::class, 'index'])
+->middleware('auth', 'user_check:student');
 
 // Guest Routes for unauthenticated users
 Route::get('/guest', [GuestController::class, 'index']);
@@ -73,6 +72,7 @@ Route::group(['prefix' => 'myschool', 'middleware' => ['auth', 'user_check:schoo
     Route::post('/logo/update', [LogoController::class,'update']);
 
 });
+
 // Student Application Routes
 Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
 Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
