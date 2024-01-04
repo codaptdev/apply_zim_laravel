@@ -2,12 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Student extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'email',
+        'password',
+        'first_name',
+        'surname',
+        'town_city',
+        'level',
+        'user_id',
+    ];
 
     // Relationship with the user account that create the student account
     public function user() {
