@@ -5,18 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\Student;
-class AuthUserHomePageController extends Controller
+class StudentsHomePageController extends Controller
 
 {
 
     /** Returns an appropriate view based on a user's account type.*/
     public function index(Request $request) {
-        if(auth()->user()->user_type == 'STUDENT') {
-            return $this->studentsHomeHelper($request);
-
-        } else {
-            return $this->schoolsHomeHelper($request);
-        }
+        return $this->studentsHomeHelper($request);
     }
 
     /** Helper function that  Returns the students home view */
@@ -32,11 +27,6 @@ class AuthUserHomePageController extends Controller
             'filter_message' => $this->filterMessageHelper($request->key ?? '', $request->value ?? ''),
             'key' => $request->key ?? '',
         ]);
-    }
-
-    /** Helper function that Returns the schools `myschool` home page */
-    private function schoolsHomeHelper(Request $request) {
-        return redirect('/myschool');
     }
 
     /** Generate a greeting based on the time of day */
