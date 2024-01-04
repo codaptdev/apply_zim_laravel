@@ -3,12 +3,13 @@
 namespace Tests\Classes;
 
 use App\Models\User;
+use App\Models\School;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
 /** Trait with useful reusable code for testing  */
 trait TestFunctionsMixin {
-    private function seedJohnDoeHelper() {
+    public  function seedJohnDoeHelper() {
         $user = new User([
             'name' => 'John Doe',
             'email' => 'john@example.com',
@@ -40,7 +41,12 @@ trait TestFunctionsMixin {
         ];
     }
 
-    private function loginJohnDoe() : bool {
+    public function loginJohnDoe() : bool {
         return (Auth::attempt(['email' => 'john@example.com', 'password' => '12345678']));
     }
+
+    public function seedOneRandomSchool() : School {
+        return School::factory()->createOne();
+    }
+
 }

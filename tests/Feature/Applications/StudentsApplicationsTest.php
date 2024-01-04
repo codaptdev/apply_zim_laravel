@@ -30,7 +30,7 @@ class StudentsApplicationsTest extends TestCase
     }
 
     public function test_students_can_make_application() : void {
-        $school = School::factory()->createOne();
+        $school = $this->seedOneRandomSchool();
 
         // Create John Doe
         $seed = $this->seedJohnDoeHelper();
@@ -51,7 +51,7 @@ class StudentsApplicationsTest extends TestCase
     public function test_students_can_delete_appications() {
 
         // Arrange::
-        $school = School::factory()->createOne();
+        $school = $this->seedOneRandomSchool();
 
         // Create John Doe
         $seed = $this->seedJohnDoeHelper();
