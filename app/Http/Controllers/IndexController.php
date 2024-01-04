@@ -16,7 +16,13 @@ class IndexController extends Controller
         if(auth()->guest()) {
             return redirect('/guest');
         } else {
-            return redirect('/home');
+
+            if(auth()->user()->user_type === 'STUDENT') {
+                return redirect('/home');
+            } else {
+                return redirect('/myschool');
+            }
+
         }
     }
 }
