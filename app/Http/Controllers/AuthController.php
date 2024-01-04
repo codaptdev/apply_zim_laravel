@@ -69,7 +69,7 @@ class AuthController extends Controller
 
     public function signout() {
         auth()->logout();
-        return redirect('/home');
+        return redirect('/auth/signin');
     }
 
     public function signin(Request $request) {
@@ -79,11 +79,17 @@ class AuthController extends Controller
         ]);
 
         if  (auth()->attempt($request->only(['email', 'password']))) {
-            return redirect('/home');
+
+            return auth()->user()->user_type === 'STUDENT' ?
+                redirect('/home') : redirect('/myschool');
+
         } else {
+
             return redirect()->back()->withErrors([
                 'email' => 'Wrong email or password'
             ]);
         }
     }
+
+
 }

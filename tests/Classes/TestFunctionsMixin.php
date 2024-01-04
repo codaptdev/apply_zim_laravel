@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 /** Trait with useful reusable code for testing  */
 trait TestFunctionsMixin {
-    public  function seedJohnDoeHelper() {
+    public  function seedJohnDoeAndLogin() {
         $user = new User([
             'name' => 'John Doe',
             'email' => 'john@example.com',
@@ -51,6 +51,13 @@ trait TestFunctionsMixin {
         return School::factory()->createOne();
     }
 
+    public function seedOneRandomSchoolAndLogin() : School {
+        $school = School::factory()->createOne();
+        Auth::loginUsingId($school->user_id);
+
+        return $school;
+    }
+
     public function loginRandomSchool() : School {
         $school = School::factory()->createOne();
         $loginCreds = ['email' => $school->email, 'password' => '12345678'];
@@ -60,6 +67,14 @@ trait TestFunctionsMixin {
         }
 
         return $school;
+    }
+
+    public function seedJohnDoeAndLogout() {
+        $seed = $this->seedJohnDoeAndLogin();
+        Auth::logout();
+
+        return $seed;
+
     }
 
 }

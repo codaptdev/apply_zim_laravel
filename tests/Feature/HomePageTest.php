@@ -21,7 +21,7 @@ class HomePageTest extends TestCase
     }
 
     public function test_that_students_home_page_renders() : void {
-        $student = $this->seedJohnDoeHelper();
+        $student = $this->seedJohnDoeAndLogin();
 
         $request = $this->get('/home');
 
@@ -43,7 +43,7 @@ class HomePageTest extends TestCase
     }
 
     public function test_students_are_redirect_to_home_from_index() : void {
-        $student = $this->seedJohnDoeHelper();
+        $student = $this->seedJohnDoeAndLogin();
 
         $request = $this->get('/');
         $request->assertRedirect('/home');

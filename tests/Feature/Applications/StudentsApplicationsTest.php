@@ -17,7 +17,7 @@ class StudentsApplicationsTest extends TestCase
     public function test_students_applications_page_can_render(): void
     {
         // Create John Doe
-        $this->seedJohnDoeHelper();
+        $this->seedJohnDoeAndLogin();
 
         // Visit The applications page
         $response = $this->get('/applications');
@@ -33,7 +33,7 @@ class StudentsApplicationsTest extends TestCase
         $school = $this->seedOneRandomSchool();
 
         // Create John Doe
-        $seed = $this->seedJohnDoeHelper();
+        $seed = $this->seedJohnDoeAndLogin();
         $student = $seed['student'];
 
         // Assertions:: Check the Applications Table if its there!
@@ -54,7 +54,7 @@ class StudentsApplicationsTest extends TestCase
         $school = $this->seedOneRandomSchool();
 
         // Create John Doe
-        $seed = $this->seedJohnDoeHelper();
+        $seed = $this->seedJohnDoeAndLogin();
         $student = $seed['student'];
         $user = $seed['user'];
 
