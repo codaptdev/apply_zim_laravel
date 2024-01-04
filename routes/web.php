@@ -42,32 +42,37 @@ Route::get('/register', [GuestController::class, 'register']);
 Route::get('/menu', [NavigationController::class, 'fullScreenMenu']);
 
 // Auth Routes
-Route::get('auth/signout', [AuthController::class, 'signout']);
-Route::get('auth/signin', [AuthController::class,'index'])->name('login');
-Route::post('auth/signin', [AuthController::class,'signin']);
-Route::get('/register', [AuthController::class,'registrationOptions']);
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/signout', [AuthController::class, 'signout']);
+    Route::get('/signin', [AuthController::class,'index'])->name('login');
+    Route::post('/signin', [AuthController::class,'signin']);
+});
 
-// Student Registration Routes
-Route::get('/register/student', [StudentController::class, 'create'] );
-Route::post('/register/student', [StudentController::class, 'store'] );
-
-// School Registration Routes
-Route::get('/register/school',  [SchoolController::class, 'create'] );
-Route::post('/register/school',  [SchoolController::class, 'store'] );
+// Registration Routes
+Route::group(['prefix' => 'register'], function() {
+    Route::get('/student', [StudentController::class, 'create'] );
+    Route::post('/student', [StudentController::class, 'store'] );
+    Route::get('/school',  [SchoolController::class, 'create'] );
+    Route::post('/school',  [SchoolController::class, 'store'] );
+});
 
 // My School Routes
-Route::get('/myschool',  [SchoolController::class, 'myschool'] )->middleware('auth', 'user_check:school');
-Route::get('/myschool/edit',  [SchoolController::class, 'edit'] )->middleware('auth', 'user_check:school');
-Route::post('/myschool/update',  [SchoolController::class, 'update'] )->middleware('auth', 'user_check:school');
+Route::group(['prefix' => 'myschool', 'middleware' => ['auth', 'user_check:school']], function () {
 
-// Myschool Profile Routes
-Route::post('/myschool/profile/update', [ProfileController::class,'update'] )->middleware('auth', 'user_check:school');
-Route::get('/myschool/profile/edit', [ProfileController::class,'edit'])->middleware('auth', 'user_check:school');
+    // Dashboard Routes
+    Route::get('/',  [SchoolController::class, 'myschool'] );
+    Route::get('/edit',  [SchoolController::class, 'edit'] );
+    Route::post('/update',  [SchoolController::class, 'update'] );
 
-// My School Logo Routes
-Route::get('/myschool/logo/edit', [LogoController::class,'edit'])->middleware('auth', 'user_check:school');
-Route::post('/myschool/logo/update', [LogoController::class,'update'])->middleware('auth', 'user_check:school');
+    // Profile Routes
+    Route::post('/profile/update', [ProfileController::class,'update'] );
+    Route::get('/profile/edit', [ProfileController::class,'edit']);
 
+    // Logo Routes
+    Route::get('/logo/edit', [LogoController::class,'edit']);
+    Route::post('/logo/update', [LogoController::class,'update']);
+
+});
 // Student Application Routes
 Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
 Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
