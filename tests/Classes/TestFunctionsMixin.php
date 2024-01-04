@@ -5,6 +5,8 @@ namespace Tests\Classes;
 use App\Models\User;
 use App\Models\School;
 use App\Models\Student;
+use Exception;
+use PHPUnit\Event\Code\Throwable;
 use Illuminate\Support\Facades\Auth;
 
 /** Trait with useful reusable code for testing  */
@@ -47,6 +49,17 @@ trait TestFunctionsMixin {
 
     public function seedOneRandomSchool() : School {
         return School::factory()->createOne();
+    }
+
+    public function loginRandomSchool() : School {
+        $school = School::factory()->createOne();
+        $loginCreds = ['email' => $school->email, 'password' => '12345678'];
+
+        if (!Auth::attempt($loginCreds)) {
+            throw new Exception("💀 Couldn't login to school");
+        }
+
+        return $school;
     }
 
 }

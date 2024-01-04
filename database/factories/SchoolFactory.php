@@ -22,7 +22,7 @@ class SchoolFactory extends Factory
         $user = new User([
             'name' => fake()->company(),
             'email' => fake()->unique()->companyEmail() ,
-            'password' => Hash::make('12345678'),
+            'password' => '12345678',
             'user_type' => 'SCHOOL'
         ]);
 
@@ -37,8 +37,6 @@ class SchoolFactory extends Factory
             'level' => fake()->randomElement(['PRIMARY', 'SECONDARY', 'TERTIARY']),
             'application_url' => fake()->url(),
             'year_established' => fake()->year(),
-            // 'about' => fake()->paragraph(1),
-            // 'body' => fake()->paragraph(2),
             'tuition_min' => fake()->randomNumber(2),
             'tuition_max' => fake()->randomNumber(3),
         ];
