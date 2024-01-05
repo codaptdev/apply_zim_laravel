@@ -17,13 +17,15 @@
 
             <x-school-short-card :school='$school' />
 
-            @empty
-            @if ($query == '')
-            <p class="text-slate-400 text-xl text-center w-1/3" >Type a name of a school you are looking for in the search bar...</p>
-            @else
-            <p class="text-slate-400 text-xl " >The school "{{$query}}" was not found</p>
-            @endif
-            @endforelse
+            <div class="w-full justify-center items-center flex flex-col" >
+                @empty
+                @if ($query == '')
+                <p class="text-slate-400 text-xl text-center w-1/3 md:w-full" >Type a name of a school you are looking for in the search bar...</p>
+                @else
+                <p class="text-slate-400 text-xl text-center w-1/3 md:w-full" >The school "{{$query}}" was not found</p>
+                @endif
+                @endforelse
+            </div>
 
         </div>
 
