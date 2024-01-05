@@ -1,3 +1,5 @@
+@use(App\Models\Student)
+
 <div class=" flex flex-row items-center justify-start border-b-2 mb-5 w-full p-5 " >
 
     {{-- Hamburger on small screens --}}
@@ -61,8 +63,11 @@
             @endif
 
             {{-- Action Button --}}
-            <div class="w-1/5 flex flex-col justify-end items-center " >
-                <a href="/auth/signout" class="bg-indigo-500 drop-shadow-md px-9 py-3 rounded-xl text-white" >Sign Out</a>
+            <div class="w-1/5  flex h-full min-h-max flex-row justify-end items-center text-lg" >
+                <i class="fa-solid fa-user"></i>
+                <p class="font-medium" >{{ucfirst(strtok(auth()->user()->name, " "))}}</p>
+                <div class="h-7 min-h-fit w-px p-px bg-slate-500 mx-2 " ></div>
+                <a href="/auth/signout" class="text-indigo-500 hover:ml-1 transition-all font-normal hover:text-indigo-800" >Sign Out</a>
             </div>
 
         @endguest
