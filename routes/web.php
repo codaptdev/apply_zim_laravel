@@ -82,7 +82,7 @@ Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'
 
 // Get school with ID
 Route::get('/schools/{id}',  [ProfileController::class, 'indexWithID'] )
-->where('id', '[1-9]+');
+->where('id', '^\d+$');
 
 // Get school with name
 Route::get('/schools/{name}',  [ProfileController::class, 'index']);

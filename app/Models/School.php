@@ -23,9 +23,9 @@ class School extends Model
 
         if($key == '') {
             $student = Student::withUserId(auth()->user()->id);
-            return $this->all()->where('level', $student->level);
+            return $this->all()->where('level', $student->level)->shuffle();
         } else {
-            return $this->all()->where($key, $value);
+            return $this->all()->where($key, $value)->shuffle();
         }
     }
 

@@ -55,18 +55,20 @@
                 </div>
             @else
                 {{-- Full Nav for Schools --}}
-                <div class=" flex flex-row justify-center text-black items-center text-xl font-bold  gap-1 w-full" >
+                <div class=" flex flex-row justify-center text-black items-center text-xl font-bold gap-1 w-full" >
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/myschool">My School</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="{{url('/applications')}}">Applications</a>
                     <a class="hover:text-indigo-500 mx-2 text-black " href="/statistics">Statistics</a>
                 </div>
             @endif
 
-            {{-- Action Button --}}
-            <div class="w-1/5  flex h-full min-h-max flex-row justify-end items-center text-lg" >
-                <i class="fa-solid fa-user"></i>
-                <p class="font-medium" >{{ucfirst(strtok(auth()->user()->name, " "))}}</p>
-                <div class="h-7 min-h-fit w-px p-px bg-slate-500 mx-2 " ></div>
+            {{-- Action Row --}}
+            <div class="w-2/5 flex h-full min-h-max flex-row justify-end items-center text-lg" >
+                <div class="py-1 px-4 hover:bg-blue-100 rounded-full flex flex-row items-center " >
+                    <i class="fa-solid fa-user-circle mr-2 text-xl text-slate-600"></i>
+                    <p class="font-medium text-slate-600" >{{ucfirst(strtok(auth()->user()->name, " "))}}</p>
+                </div>
+                <div class="h-7 min-h-fit w-px bg-slate-500 mx-2 " ></div>
                 <a href="/auth/signout" class="text-indigo-500 hover:ml-1 transition-all font-normal hover:text-indigo-800" >Sign Out</a>
             </div>
 
