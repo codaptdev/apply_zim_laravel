@@ -1,7 +1,16 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+    font-family: 'Font Awesome 5 Free';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Font Awesome 5 Free'), local('FontAwesome'), url('/fonts/fa-solid-900.woff2') format('woff2'), url('/fonts/fa-solid-900.woff') format('woff');
+}
 
 .link-btn {
     background-color: rgb(75, 99, 255);
