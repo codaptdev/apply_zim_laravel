@@ -63,7 +63,6 @@ form {
     border: solid;
     border-color: rgb(233, 233, 233);
     border-width: 1px;
-
 }
 
 form>label {
@@ -136,9 +135,10 @@ a {
     color: white;
 }
 
-@media only screen and (max-width:800px) {
+@media only screen and (max-width:1024px) {
     form {
-        width: 90%;
+        width: 98%;
+        padding: 20px;
     }
 
     th, td {
