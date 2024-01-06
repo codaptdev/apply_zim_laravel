@@ -1,6 +1,6 @@
 <x-main-layout>
     <div class="flex p-10 flex-col justify-center items-center ">
-        <h1 class="text-center" >Your Applications Attempts History</h1>
+        <h1 class="text-center text-2xl md:text-6xl " >Your Applications Attempts History</h1>
 
         <p class="mt-5 text-center text-slate-600 font-medium text-md" >This is a list of schools that you have attempted to apply to by pressing the <strong>Apply button</strong> on
             their school profile page. This doesn't neccessarily mean that you applied for this schools but you clicked on

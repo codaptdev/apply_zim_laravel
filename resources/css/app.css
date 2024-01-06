@@ -143,7 +143,11 @@ a {
 
     th, td {
         padding: none;
+        font-size: 10px;
     }
+
+
+
 }
 
 table {
