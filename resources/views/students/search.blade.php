@@ -1,6 +1,6 @@
 <x-main-layout>
     <div class="flex md:px-20 px-5 flex-col items-center justify-center" >
-        <h1>Search for Schools</h1>
+        <h1 class="md:text-5xl text-3xl text-center" >Search for Schools</h1>
 
         {{-- Search Area --}}
         <div class="w-full flex flex-row md:w-3/4 " >
@@ -10,8 +10,16 @@
             </form>
         </div>
 
+        @if (strtoupper($query) === 'ALL')
+            <x-pill :color="'lime'" :href="''" >Showing All Schools</x-pill>
+            <div class="w-full mb-5" ></div>
+        @else
+            <x-pill :color="'slate'" :href="'/search?name=all'" >Show All Schools</x-pill>
+            <div class="w-full mb-5" ></div>
+        @endif
 
-        <div class="grid grid-cols-1 gap-3 w-full" >
+
+        <div class="grid grid-cols-1 gap-3 items-center justify-center w-full" >
 
             @forelse ($schools as $school)
 
@@ -20,9 +28,9 @@
             <div class="w-full justify-center items-center flex flex-col" >
                 @empty
                 @if ($query == '')
-                <p class="text-slate-400 text-xl text-center w-1/3 md:w-full" >Type a name of a school you are looking for in the search bar...</p>
+                <p class="text-slate-400 text-xl text-center w-full" >Type a name of a school you are looking for in the search bar...</p>
                 @else
-                <p class="text-slate-400 text-xl text-center w-1/3 md:w-full" >The school "{{$query}}" was not found</p>
+                <p class="text-slate-400 text-xl text-center w-full" >The school "{{$query}}" was not found</p>
                 @endif
                 @endforelse
             </div>
