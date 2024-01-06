@@ -1,5 +1,5 @@
 <x-main-layout>
-    <div class="p-10 md:px-20">
+    <div class="p-5 md:px-20">
 
         {{-- Check if the owner of the school account is viewing the page --}}
         @auth
@@ -30,7 +30,7 @@
         </div>
 
         {{-- Links --}}
-        <div class="w-full  grid grid-cols-3 gap-2 md:flex-row md:flex mt-3">
+        <div class="w-full  grid grid-cols-1 md:grid-cols-3 gap-2 md:flex-row md:flex mt-3">
             @if ($school->website_url != null)
                 <a target="blank" class="bg-green-200 border-2 border-green-400 text-green-800 py-2 px-4 rounded-full hover:bg-green-400" href="{{$school->website_url}}">
                     <i class="fa-solid fa-link"></i>
