@@ -10,13 +10,28 @@
             </form>
         </div>
 
-        @if (strtoupper($query) === 'ALL')
-            <x-pill :color="'lime'" :href="''" >Showing All Schools</x-pill>
-            <div class="w-full mb-5" ></div>
-        @else
-            <x-pill :color="'slate'" :href="'/search?name=all'" >Show All Schools</x-pill>
-            <div class="w-full mb-5" ></div>
-        @endif
+        {{-- <div class="w-full mb-5 h-scroll hidden" >
+
+            @if (strtoupper($query) === 'ALL')
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+                <a class="w-auto  bg-slate-300 mx-3" :href="''" >Showing All Schools</a>
+
+            @else
+                <x-pill :color="'slate'" :href="'/search?name=all'" >Show All Schools</x-pill>
+            @endif
+
+        </div> --}}
 
 
         <div class="grid grid-cols-1 gap-3 items-center justify-center w-full" >
