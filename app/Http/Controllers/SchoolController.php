@@ -125,7 +125,7 @@ class SchoolController extends Controller
             $school->town_city = $request->town_city;
             $school->address = $request->address;
             $school->save();
-            return redirect('/home')->with('message', 'Welcome ' .$school->name . '. We are glad to have you on board');
+            return redirect('/myschool')->with('message', 'Welcome ' .$school->name . '. We are glad to have you on board');
         } else {
             return redirect()->back()->withError('Sorry something went wrong try again');
         }

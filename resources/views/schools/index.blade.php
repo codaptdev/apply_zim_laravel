@@ -32,19 +32,31 @@
         {{-- Links --}}
         <div class="w-full  grid grid-cols-3 gap-2 md:flex-row md:flex mt-3">
             @if ($school->website_url != null)
-                <a class="bg-green-200 border-2 border-green-400 text-green-800 py-2 px-4 rounded-full hover:bg-green-400" href="{{$school->website_url}}">Website</a>
+                <a target="blank" class="bg-green-200 border-2 border-green-400 text-green-800 py-2 px-4 rounded-full hover:bg-green-400" href="{{$school->website_url}}">
+                    <i class="fa-solid fa-link"></i>
+                    Website
+                </a>
             @endif
             @if ($school->instagram != null)
-            <a class="bg-violet-200 border-2 border-violet-400  text-violet-800 py-2 px-4 rounded-full hover:bg-violet-400" href="{{$school->instagram}}">Instagram</a>
+            <a target="blank" class="bg-violet-200 border-2 border-violet-400  text-violet-800 py-2 px-4 rounded-full hover:bg-violet-400" href="{{$school->instagram}}">
+                <i class="fa-brands fa-instagram"></i>
+                Instagram
+            </a>
 
             @endif
 
             @if ($school->facebook != null)
-                <a class="bg-blue-200 border-2 border-blue-400  text-blue-800 py-2 px-4 rounded-full hover:bg-blue-400" href="{{$school->facebook}}">Facebook</a>
+                <a target="blank" class="bg-blue-200 border-2 border-blue-400  text-blue-800 py-2 px-4 rounded-full hover:bg-blue-400" href="{{$school->facebook}}">
+                    <i class="fa-brands fa-facebook"></i>
+                    Facebook
+                </a>
             @endif
 
             @if ($school->twitter != null)
-                <a class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="{{$school->twitter}}">X (Twitter)</a>
+                <a target="blank" class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="{{$school->twitter}}">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    X (Twitter)
+                </a>
             @endif
 
             @auth
@@ -53,12 +65,16 @@
                         <x-pill
                         :href="'/bookmarks/delete/' . $school->id"
                         :color="'red'"
-                        >Unbookmark</x-pill>
+                        >
+                        <i class="fa-solid fa-trash"></i>
+                        Unbookmark</x-pill>
                     @else
                         <x-pill
                         :href="'/bookmarks/add/' . $school->id"
                         :color="'grey'"
-                        >Bookmark</x-pill>
+                        >
+                        <i class="fa-solid fa-bookmark"></i>
+                        Bookmark</x-pill>
                     @endif
                 @endif
             @endauth
@@ -74,18 +90,18 @@
         <div class="grid md:grid-cols-3 w-full h-full gap-3 ">
 
             <div class=" text-center bg-slate-100 rounded-xl p-5 flex flex-col items-center justify-center" >
-                <p class="text-slate-400 text-2xl font-semibold "  >City</p>
-                <h1>{{$school->town_city}}</h1>
+                <p class="text-slate-400 text-xl font-semibold "  >City <i class="fa-solid fa-city"></i></p>
+                <h1 class="text-3xl">{{$school->town_city}}</h1>
             </div>
 
             <div class=" text-center bg-slate-100 rounded-xl p-5 flex flex-col items-center justify-center" >
-                <p class="text-slate-400 text-2xl font-semibold "  >Year Established</p>
-                <h1>{{$school->year_established}}</h1>
+                <p class="text-slate-400 text-xl font-semibold "  >Year Established <i class="fa-solid fa-calendar"></i></p>
+                <h1 class="text-3xl" >{{$school->year_established}}</h1>
             </div>
 
             <div class=" text-center h-full  w-full bg-slate-100 rounded-xl p-5 flex flex-col items-center justify-center" >
-                <p class="text-slate-400 text-2xl font-semibold "  >Address</p>
-                <h1 class="text-3xl text-center" >{{$school->address}}</h1>
+                <p class="text-slate-400 text-xl  font-semibold "  >Address <i class="fa-solid fa-location-dot"></i> </p>
+                <h1 class="text-xl text-center " >{{$school->address}}</h1>
             </div>
 
         </div>
@@ -143,8 +159,8 @@
         @auth
 
             @if (auth()->user()->user_type == 'STUDENT' && $school->application_url != null)
-                <div class="fixed  bottom-0 justify-center items-center  flex left-0 w-full p-10">
-                    <a target="blank" href="/apply?school_id={{$school->id}}" class="link-btn md:w-1/2 shadow-xl md:p-7 md:hover:w-3/5 " href="">Apply to {{$school->name}}</a>
+                <div class="fixed  bottom-0 justify-center items-center  flex flex-row left-0 w-full p-10">
+                    <a target="blank" href="/apply?school_id={{$school->id}}" class="flex flex-row link-btn md:w-1/2 shadow-xl md:p-3 md:hover:w-3/5 " href=""> <span class='flex flex-row justify-center items-center' >Apply to {{$school->name}} <i class="fa-solid fa-arrow-right ml-2"></i></span> </a>
                 </div>
             @endif
         @endauth
