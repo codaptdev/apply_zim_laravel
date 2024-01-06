@@ -1,17 +1,17 @@
 <x-main-layout>
 
     <div class="flex flex-col w-full justify-center items-center" >
-        <h1 class="text-5xl text-center text-slate-950" >{{$greeting}} 👋</h1>
+        <h1 class="text-2xl px-10 md:text-5xl text-center text-slate-950" >{{$greeting}} 👋</h1>
     </div>
 
     <div class="mt-10 flex flex-col justify-center items-center">
-        <h1 class="text-2xl text-slate-500" >{{$filter_message}}</h1>
+        <h1 class="text-2xl text-center  text-slate-500" >{{$filter_message}}</h1>
         @if ($key != '')
             <a href="/">Remove Filter</a>
         @endif
     </div>
 
-    
+
 
     <div class="my-10 w-full md:px-20 p-2 grid grid-cols-1 gap-3 ">
 
