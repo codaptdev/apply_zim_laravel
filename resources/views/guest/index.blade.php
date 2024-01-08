@@ -1,14 +1,13 @@
 <x-main-layout>
-    <div class="justify-center text-center items-center flex flex-col p-5 md:p-12">
+    <div class="justify-center text-center items-center flex flex-col p-5 md:p-5">
 
-        <h1 class="md:text-8xl text-5xl xl:text-9xl xl:mt-10 font-serif " >Applying To School's In <span class="bg-indigo-500 text-white px-2" >Zimbabwe</span>  Just Got Easier</h1>
+        <h1 class="md:text-8xl text-5xl font-serif font-extrabold" >Applying To School's In <span class="bg-indigo-500 font-serif font-ex text-white px-2" >Zimbabwe</span>  Just Got Easier</h1>
         <br>
         <br>
         <br>
         <a class="link-btn shadow-lg md:w-1/2" href="/register/student">I'm A Student, Get Me Started </a>
         <br>
         <a class="link-btn shadow-lg md:w-1/2" href="/register/student">We Are A School, Get Us Started!</a>
-
 
         <h1 class="text-slate-700 text-4xl md:text-5xl mt-20 md:mt-52 mb-20" >Search, Find & Discover the schools in Zimbabwe <br> And Make better application decisions</h1>
 

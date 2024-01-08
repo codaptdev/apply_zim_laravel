@@ -1,15 +1,26 @@
 @import '@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+}
 
 @font-face {
     font-family: 'Font Awesome 5 Free';
     font-style: normal;
     font-weight: 900;
     src: local('Font Awesome 5 Free'), local('FontAwesome'), url('/fonts/fa-solid-900.woff2') format('woff2'), url('/fonts/fa-solid-900.woff') format('woff');
+}
+
+.bold-header {
+    /* font-family: 'Syne'; */
+    font-family: 'Inter', sans-serif;
 }
 
 .link-btn {
