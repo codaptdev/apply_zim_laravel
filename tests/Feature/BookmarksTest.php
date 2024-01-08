@@ -37,4 +37,33 @@ class BookmarksTest extends TestCase
 
         Auth::logout();
     }
+
+    public function test_students_can_bookmark_a_school() {
+
+        $school = $this->seedOneRandomSchool();
+        $student = $this->seedJohnDoeAndLogin()['student'];
+        $request = $this->get('/bookmarks/add/' . $school->id);
+
+        $this->assertDatabaseHas('bookmarks', [
+            'school_id' => $school->id,
+            'student_id' => $student->id
+        ]);
+
+        Auth::logout();
+    }
+
+    public function test_students_can_remove_a_bookmark() {
+
+        $school = $this->seedOneRandomSchool();
+        $student = $this->seedJohnDoeAndLogin()['student'];
+
+        $request = $this->get('/bookmarks/delete/' . $school->id);
+
+        $this->assertDatabaseMissing('bookmarks', [
+            'school_id' => $school->id,
+            'student_id' => $student->id
+        ]);
+
+        Auth::logout();
+    }
 }

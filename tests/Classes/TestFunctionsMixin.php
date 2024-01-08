@@ -11,6 +11,21 @@ use Illuminate\Support\Facades\Auth;
 
 /** Trait with useful reusable code for testing  */
 trait TestFunctionsMixin {
+
+    /** John Doe is a fictional user loved by many.
+     * This function will seed him into the database of students and
+     * log him in
+     *
+     * @return array an associate array containing John Does user model and student model
+     *
+     * e.g
+     *  ```
+     *      return [
+     *          'user' => $user,
+     *          'student' => $student
+     *      ];
+     *  ```
+     */
     public  function seedJohnDoeAndLogin() {
         $user = new User([
             'name' => 'John Doe',
@@ -43,6 +58,9 @@ trait TestFunctionsMixin {
         ];
     }
 
+    /** Load dummy user John Doe, provided he was already seeded into the
+     * database.
+    */
     public function loginJohnDoe() : bool {
         return (Auth::attempt(['email' => 'john@example.com', 'password' => '12345678']));
     }
