@@ -5,9 +5,7 @@
         <br>
         <br>
         <br>
-        <a class="link-btn shadow-lg md:w-1/2" href="/register/student">I'm A Student, Get Me Started </a>
-        <br>
-        <a class="link-btn shadow-lg md:w-1/2" href="/register/student">We Are A School, Get Us Started!</a>
+        <a class="link-btn font-normal shadow-lg md:w-1/2" href="/about">Learn About ApplyZim</a>
 
         <h1 class="text-slate-700 text-4xl md:text-5xl mt-20 md:mt-52 mb-20" >Search, Find & Discover the schools in Zimbabwe <br> And Make better application decisions</h1>
 
