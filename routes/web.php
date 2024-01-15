@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RedirectLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
@@ -111,3 +112,5 @@ Route::get('/statistics', [StatsController::class, 'index'])
 // School Statistics Routes for Cities Profile Visits Breakdown
 Route::get('/statistics/profile_visits_by_cities', [StatsController::class, 'profileVisitsByCities'])
 ->middleware('auth', 'user_check:school');
+
+Route::get('/redirect', [RedirectLogController::class, 'index']);
