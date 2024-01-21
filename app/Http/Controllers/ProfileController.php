@@ -6,7 +6,6 @@ use App\Models\School;
 use App\Models\Student;
 use App\Models\Bookmark;
 use App\Models\ProfileVisit;
-use Egulias\EmailValidator\Warning\DeprecatedComment;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller

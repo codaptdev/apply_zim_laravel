@@ -32,13 +32,13 @@
         {{-- Links --}}
         <div class="w-full  grid grid-cols-1 md:grid-cols-3 gap-2 md:flex-row md:flex mt-3">
             @if ($school->website_url != null)
-                <a target="blank" class="bg-green-200 border-2 border-green-400 text-green-800 py-2 px-4 rounded-full hover:bg-green-400" href="{{$school->website_url}}">
+                <a target="blank" class="bg-green-200 border-2 border-green-400 text-green-800 py-2 px-4 rounded-full hover:bg-green-400" href="/redirect?school_id={{$school->id}}&url={{$school->website_url}}&type=website">
                     <i class="fa-solid fa-link"></i>
                     Website
                 </a>
             @endif
             @if ($school->instagram != null)
-            <a target="blank" class="bg-violet-200 border-2 border-violet-400  text-violet-800 py-2 px-4 rounded-full hover:bg-violet-400" href="{{$school->instagram}}">
+            <a target="blank" class="bg-violet-200 border-2 border-violet-400  text-violet-800 py-2 px-4 rounded-full hover:bg-violet-400" href="/redirect?school_id={{$school->id}}&url={{$school->instagram}}&type=instagram"">
                 <i class="fa-brands fa-instagram"></i>
                 Instagram
             </a>
@@ -46,14 +46,14 @@
             @endif
 
             @if ($school->facebook != null)
-                <a target="blank" class="bg-blue-200 border-2 border-blue-400  text-blue-800 py-2 px-4 rounded-full hover:bg-blue-400" href="{{$school->facebook}}">
+                <a target="blank" class="bg-blue-200 border-2 border-blue-400  text-blue-800 py-2 px-4 rounded-full hover:bg-blue-400" href="/redirect?school_id={{$school->id}}&url={{$school->facebook}}&type=facebook">
                     <i class="fa-brands fa-facebook"></i>
                     Facebook
                 </a>
             @endif
 
             @if ($school->twitter != null)
-                <a target="blank" class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="{{$school->twitter}}">
+                <a target="blank" class="bg-stone-200 border-2 border-stone-400  text-stone-800 py-2 px-4 rounded-full hover:bg-stone-400" href="/redirect?school_id={{$school->id}}&url={{$school->twitter}}&type=twitter">
                     <i class="fa-brands fa-x-twitter"></i>
                     X (Twitter)
                 </a>
