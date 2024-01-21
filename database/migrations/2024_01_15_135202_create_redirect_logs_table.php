@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
 
             // The school that the redirect is associated with
-            $table->integer('school_id');
+            $table->bigInteger('school_id');
 
             // e.g the type can be  instagram, facebook, website
             $table->string('type');
 
             // The destination of the redirect
             $table->string('to');
-            
-            $table->foreign('school_id')->references('schools')->on('id');
+
+            $table->foreign('school_id')->references('id')->on('schools');
             $table->timestamps();
         });
     }
