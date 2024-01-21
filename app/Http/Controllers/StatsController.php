@@ -6,6 +6,7 @@ use App\Models\School;
 use App\Models\Student;
 use App\Models\Bookmark;
 use App\Models\Application;
+use App\Models\RedirectLog;
 use App\Models\ProfileVisit;
 use Illuminate\Http\Request;
 
@@ -34,6 +35,7 @@ class StatsController extends Controller
 
         // Application Attempts
         $application_attempts = $this->getAttemptsToApply($school);
+        $redirects_count = RedirectLog::getSchoolsRedirectsCounts($school->id);
 
         return view(
             'stats.index',
@@ -43,7 +45,8 @@ class StatsController extends Controller
                 'city_names',
                 'max_city',
                 'times_bookmarked',
-                'application_attempts'
+                'application_attempts',
+                'redirects_count'
             )
         );
     }
