@@ -12,4 +12,13 @@ class RedirectLog extends Model
     public function school() {
         return $this->belongsTo(School::class);
     }
+
+    /** Gets all the redirects for a certain school and
+     * returns the count of those logs
+     */
+    public static function getSchoolsRedirectsCounts($school_id) {
+        $logs = static::all()->where('school_id', $school_id);
+
+        return $logs->count();
+    }
 }
