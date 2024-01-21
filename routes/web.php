@@ -113,4 +113,6 @@ Route::get('/statistics', [StatsController::class, 'index'])
 Route::get('/statistics/profile_visits_by_cities', [StatsController::class, 'profileVisitsByCities'])
 ->middleware('auth', 'user_check:school');
 
-Route::get('/redirect', [RedirectLogController::class, 'index']);
+// Example request could be /redirect?school_id=16&url=https://github.com/Tadiwr
+// This url logs redirects from school profile pages
+Route::get('/redirect', [RedirectLogController::class, 'index'] );
