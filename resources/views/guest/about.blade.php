@@ -8,7 +8,7 @@
 
             <div class="mb-10 flex w-full flex-col md:flex-row items-center justify-center">
                 <img class="w-10 h-10 rounded-full mr-3" src="images/tadiwa.jpeg" alt="Tadiwa's Pfp" srcset="">
-                <p class="text-slate-500 text-center" >By Tadiwanashe Shangwa (Developer) </p>
+                <p class="text-slate-500 text-center" >By Tadiwanashe Shangwa and Ryan Mwambe(Developers) </p>
             </div>
 
             <p>
