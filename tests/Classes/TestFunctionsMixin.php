@@ -77,4 +77,8 @@ trait TestFunctionsMixin {
 
     }
 
+    public function logout() {
+        Auth::logout();
+    }
+
 }

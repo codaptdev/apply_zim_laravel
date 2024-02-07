@@ -39,10 +39,10 @@
                 :value="$application_attempts"
             />
 
-            {{-- <x-stat-card
-                :title="'Redirects to your socials'"
-                :value="56"
-            /> --}}
+            <x-stat-card
+                :title="'Redirects to your sites'"
+                :value="$redirects_count"
+            />
 
         </div>
 
