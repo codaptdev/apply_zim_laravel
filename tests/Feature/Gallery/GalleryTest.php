@@ -29,7 +29,7 @@ class GalleryTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function text_can_add_to_gallery(): void {
+    public function test_can_add_to_gallery(): void {
 
         $image_name = 'gallery_items.jpg';
         $image_path = './' . $image_name;
