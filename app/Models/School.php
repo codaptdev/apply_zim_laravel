@@ -39,6 +39,10 @@ class School extends Model
         return $this->hasMany(Application::class);
     }
 
+    public function gallery_items() {
+        return $this->hasMany(SchoolGalleryItem::class);
+    }
+
     public static function withUserId(int $user_id) {
         return self::all()
         ->where("user_id", $user_id)
