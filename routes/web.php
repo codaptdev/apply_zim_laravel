@@ -124,4 +124,5 @@ Route::group(['prefix' => 'gallery'], function () {
     Route::get('/{school_id}', [SchoolGalleryItemController::class, 'index'])->where('school_id', '[0-9]+');
     Route::get('/edit', [SchoolGalleryItemController::class, 'edit'])->middleware(['auth', 'user_check:school']);
     Route::get('/create', [SchoolGalleryItemController::class, 'create'])->middleware(['auth', 'user_check:school']);;
+    Route::post('/', [SchoolGalleryItemController::class, 'save'])->where('school_id', '[0-9]+');
 });
