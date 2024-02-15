@@ -16,8 +16,10 @@ class SchoolGalleryItemController extends Controller
 
         try {
             $school = School::all()->firstOrFail('id', $school_id);
+            $gallery_items = $school->gallery_items;
             return view('gallery.index', [
-                'school' => $school
+                'school' => $school,
+                'gallery_items' => $gallery_items
             ]);
         } catch (\Throwable $th) {
             return view('schools.404', [
