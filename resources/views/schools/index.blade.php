@@ -18,7 +18,18 @@
             <div class="flex flex-col flex-auto" >
                 <h1>{{$school->name}}</h1>
                 <p class="text-slate-400 text-2xl font-semibold ">{{$school->level}} SCHOOL</p>
-                <a href="/gallery/{{$school->id}}" >View School Gallery</a>
+
+                @if (auth()->guest())
+                    <a href="/gallery/{{$school->id}}" >View School Gallery</a>
+                @else
+                    @if (auth()->user()->user_type == 'STUDENT')
+                        <a href="/gallery/{{$school->id}}" >View School Gallery</a>
+                    @else
+                        <a href="/gallery/edit" >Edit your school's gallery</a>
+                    @endif
+                @endif
+
+
 
                 @auth
                     @if (auth()->user()->id == $school->user_id)

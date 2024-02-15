@@ -51,6 +51,12 @@
             :description="'Upload a logo for your school if you already have not or replace your already uploaded logo with an new one!'"
             />
 
+            <x-action-card
+            :title="'Edit School Gallery'"
+            :action_url="'/gallery/edit'"
+            :description="'View, edit & upload to your schools gallery'"
+            />
+
             {{-- <a href="/schools/{{$school->name}}">View School Profile</a> --}}
             {{-- <a href="/myschool/profile/edit">Edit School Profile</a> --}}
             {{-- <a href="/myschool/logo/edit">Edit School Logo</a> --}}
