@@ -4,7 +4,7 @@
         {{-- Check if the owner of the school account is viewing the page --}}
         @auth
             @if (auth()->user()->id == $school->user_id)
-                <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href="">ℹ️ This is how your public profile will look when students visit it</div>
+                <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href=""> ✨ This is how your public profile will look when students visit it</div>
             @endif
         @endauth
 
