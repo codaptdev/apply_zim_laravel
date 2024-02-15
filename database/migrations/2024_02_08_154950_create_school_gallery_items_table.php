@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('school_gallery_items', function (Blueprint $table) {
             $table->id();
             $table->integer('school_id');
-            $table->foreign('school_id')->references('schools')->on('id');
+            $table->foreign('school_id')->references('id')->on('schools');
             $table->text('url');
             $table->text('des');
             $table->timestamps();
