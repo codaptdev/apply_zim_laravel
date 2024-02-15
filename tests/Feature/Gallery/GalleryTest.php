@@ -43,4 +43,19 @@ class GalleryTest extends TestCase
 
         Storage::disk('gallery_items')->assertExists($image_name);
     }
+
+    public function test_gallery_item_can_be_deleted() {
+        $image_name = 'gallery_items.jpg';
+        $image_path = './' . $image_name;
+
+        Storage::fake('gallery_items');
+
+        $response = $this->json('POST','gallery/', [
+            'gallery_item' => UploadedFile::fake()->image($image_path)
+        ]);
+
+        $response_2 = $this->json('DELETE', 'gallery/' . $image_name);
+
+        Storage::disk('gallery_items')->fake()->assertExists($image_name);
+    }
 }
