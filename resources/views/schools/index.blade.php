@@ -18,6 +18,7 @@
             <div class="flex flex-col flex-auto" >
                 <h1>{{$school->name}}</h1>
                 <p class="text-slate-400 text-2xl font-semibold ">{{$school->level}} SCHOOL</p>
+                <a href="/gallery/{{$school->id}}" >View School Gallery</a>
 
                 @auth
                     @if (auth()->user()->id == $school->user_id)
