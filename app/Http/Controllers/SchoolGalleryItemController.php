@@ -10,11 +10,18 @@ class SchoolGalleryItemController extends Controller
     // Get a grid of a schools gallery items
     public function index($school_id) {
 
-        $school = School::all()->firstOrFail('id', $school_id);
+        try {
+            $school = School::all()->firstOrFail('id', $school_id);
+            return view('gallery.index', [
+                'school' => $school
+            ]);
+        } catch (\Throwable $th) {
+            return view('schools.404', [
+                'isId' => true,
+                'nameOrId' => $school_id,
+            ]);
+        }
 
-        return view('gallery.index', [
-            'school' => $school
-        ]);
     }
 
     // Returns view to upload a gallery item
