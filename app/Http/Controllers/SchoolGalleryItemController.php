@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\School;
 use Illuminate\Http\Request;
+use App\Models\SchoolGalleryItem;
+use Illuminate\Support\Facades\Auth;
 
 class SchoolGalleryItemController extends Controller
 {
+
+
     // Get a grid of a schools gallery items
     public function index($school_id) {
 
@@ -31,6 +35,32 @@ class SchoolGalleryItemController extends Controller
 
     // Returns view to edit gallery items
     public function edit() {
-        return view('gallery.edit');
+
+        $school = School::withUserId(Auth::user()->id);
+        $gallery_items = School::withUserId(Auth::user()->id)->gallery_items;
+
+        return view('gallery.edit', [
+            'gallery_items' => $gallery_items
+        ]);
+    }
+
+    public function save(Request $request) {
+
+        $request->validate([
+            'gallery_item' => ['mimes:png,jpg,jpeg', 'required']
+        ]);
+
+        $url = $request->file('gallery_item')->store('gallery_items', 'public');
+        $school = School::withUserId(Auth::user()->id);
+
+        $gallery_item = new SchoolGalleryItem();
+        $gallery_item->url = $url;
+        $gallery_item->school_id = $school->id;
+        $gallery_item->des = '';
+
+        $gallery_item->save();
+
+        return redirect('gallery/edit',);
+
     }
 }
