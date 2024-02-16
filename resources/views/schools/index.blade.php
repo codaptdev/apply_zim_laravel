@@ -19,18 +19,6 @@
                 <h1>{{$school->name}}</h1>
                 <p class="text-slate-400 text-2xl font-semibold ">{{$school->level}} SCHOOL</p>
 
-                @if (auth()->guest())
-                    <a href="/gallery/{{$school->id}}" >View School Gallery</a>
-                @else
-                    @if (auth()->user()->user_type == 'STUDENT')
-                        <a href="/gallery/{{$school->id}}" >View School Gallery</a>
-                    @else
-                        <a href="/gallery/edit" >Edit your school's gallery</a>
-                    @endif
-                @endif
-
-
-
                 @auth
                     @if (auth()->user()->id == $school->user_id)
                         <a  class="text-xl" href="{{url('/myschool/profile/edit')}}">Edit</a>
@@ -117,6 +105,45 @@
             </div>
 
         </div>
+
+        @if ($school->gallery_items->count() > 0)
+            <div class="grid grid-cols-3 w-full gap-3 py-10 h-44 justify-start items-center mb-10" >
+
+                @foreach ($school->gallery_items->take(2) as $item)
+                    <div class="h-44 w-full relative" >
+                        <img src="/storage/{{($item->url)}}" alt="" class="w-full rounded-xl h-44 object-cover">
+                    </div>
+                @endforeach
+
+                @if (auth()->guest())
+                    <a href="/gallery/{{$school->id}}" class="w-full h-44  flex flex-row justify-center items-center p-5 bg-slate-100 hover:bg-slate-300 rounded-xl" >
+                        <p class="text-indigo-500 text-lg mr-3" >View Gallery</p>
+                        <i class="fa-solid fa-arrow-right text-lg  text-indigo-500"></i>
+                    </a>
+                @endif
+
+                @auth
+                    @if (auth()->user()->user_type == 'SCHOOL' && auth()->user()->id == $school->user_id)
+                        <a href="/gallery/edit" class="w-full h-44  flex flex-row justify-center items-center p-5 bg-slate-100 hover:bg-slate-300 rounded-xl" >
+                            <p class="text-indigo-500 text-lg mr-3" >Edit Gallery</p>
+                            <i class="fa-solid fa-pen-to-square text-lg  text-indigo-500"></i>
+                        </a>
+                    @endif
+                @endauth
+
+                @auth
+                    @if (auth()->user()->user_type == 'STUDENT')
+                        <a href="/gallery/{{$school->id}}" class="w-full h-44  flex flex-row justify-center items-center p-5 bg-slate-100 hover:bg-slate-300 rounded-xl" >
+                            <p class="text-indigo-500 text-lg mr-3" >View Gallery</p>
+                            <i class="fa-solid fa-arrow-right text-lg  text-indigo-500"></i>
+                        </a>
+                    @endif
+                @endauth
+
+            </div>
+        @else
+
+        @endif
 
 
 
