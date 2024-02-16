@@ -68,12 +68,17 @@ class SchoolController extends Controller
                 'nameOrId' => $id
             ]);
         } else {
+
+
             if(auth()->user()->user_type === 'STUDENT') {
                 $student = Student::withUserId(auth()->user()->id);
                 $is_bookmarked = Bookmark::exists($id, $student->id);
-                return view('schools.index', compact('school', 'is_bookmarked'));
+                $gallery_items = $school->gallery_items;
+
+                return view('schools.index', compact('school', 'is_bookmarked', 'gallery_items'));
             } else {
-                return view('schools.index', compact('school'));
+                $gallery_items = $school->gallery_items;
+                return view('schools.index', compact('school', 'gallery_items'));
             }
         }
 
