@@ -8,7 +8,7 @@
 
         <div class="grid grid-cols-1 w-full gap-3 px-10 h-56 justify-center items-center mb-10" >
 
-            <a href="/gallery/create" class="w-full h-56 flex flex-col justify-center items-center p-5 bg-slate-100 hover:bg-slate-300 rounded-xl" >
+            <a href="/gallery/create" class="w-1/4 h-56 flex flex-col justify-center items-center p-5 bg-slate-100 hover:bg-slate-300 rounded-xl" >
                 <i class="fa-solid fa-add text-3xl  text-slate-900"></i>
                 <p>Upload New Image</p>
             </a>
