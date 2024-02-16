@@ -6,6 +6,7 @@ use App\Models\School;
 use Illuminate\Http\Request;
 use App\Models\SchoolGalleryItem;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolGalleryItemController extends Controller
 {
@@ -64,5 +65,28 @@ class SchoolGalleryItemController extends Controller
 
         return redirect('gallery/edit',);
 
+    }
+
+    public function delete($item_id) {
+
+        // $name =  str_ $request->path
+
+        // dd($request->path);
+        $item = SchoolGalleryItem::find($item_id);
+
+        // dd($item);
+
+        // dd(public_path($request->path));
+
+        if ($item != null) {
+            Storage::delete($item->url);
+
+            $item->delete();
+
+            return back()->with('notice', 'Gallery Item was removed!');
+
+        } else {
+            return back()->with('message', 'Nothing happened');
+        }
     }
 }
