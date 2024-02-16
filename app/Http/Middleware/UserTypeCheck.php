@@ -36,7 +36,7 @@ class UserTypeCheck
             if ($is_from_origin) {
                 return redirect()
                 ->back()
-                ->withError($this->errorMessageHelper($required_user_type));
+                ->with('error', $this->errorMessageHelper($required_user_type));
             } else {
                 return redirect('/');
             }
