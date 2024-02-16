@@ -49,7 +49,7 @@ class SchoolGalleryItemController extends Controller
     public function save(Request $request) {
 
         $request->validate([
-            'gallery_item' => ['mimes:png,jpg,jpeg', 'required']
+            'gallery_item' => ['mimes:png,jpg,jpeg', 'required', 'max:3000']
         ]);
 
         $url = $request->file('gallery_item')->store('gallery_items', 'public');
