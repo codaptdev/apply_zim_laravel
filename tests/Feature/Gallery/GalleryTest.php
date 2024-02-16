@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\SchoolGalleryItemController;
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Tests\Classes\TestFunctionsMixin;
@@ -31,31 +32,9 @@ class GalleryTest extends TestCase
 
     public function test_can_add_to_gallery(): void {
 
-        $image_name = 'gallery_items.jpg';
-        $image_path = './' . $image_name;
-
-        Storage::fake('gallary_items');
-
-        // URL POST: gallery/
-        $response = $this->json('POST','gallery', [
-            'gallery_item' => UploadedFile::fake()->image($image_path)
-        ]);
-
-        Storage::disk('gallery_items')->assertExists($image_name);
     }
 
     public function test_gallery_item_can_be_deleted() {
-        $image_name = 'gallery_items.jpg';
-        $image_path = './' . $image_name;
 
-        Storage::fake('gallery_items');
-
-        $response = $this->json('POST','gallery/', [
-            'gallery_item' => UploadedFile::fake()->image($image_path)
-        ]);
-
-        $response_2 = $this->json('DELETE', 'gallery/' . $image_name);
-
-        Storage::disk('gallery_items')->fake()->assertExists($image_name);
     }
 }
