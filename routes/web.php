@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RedirectLogController;
+use App\Http\Controllers\SchoolGalleryItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
@@ -116,3 +117,12 @@ Route::get('/statistics/profile_visits_by_cities', [StatsController::class, 'pro
 // Example request could be /redirect?school_id=16&url=https://github.com/Tadiwr
 // This url logs redirects from school profile pages
 Route::get('/redirect', [RedirectLogController::class, 'index'] );
+
+// Routes for School Galleries
+
+Route::group(['prefix' => 'gallery'], function () {
+    Route::get('/{school_id}', [SchoolGalleryItemController::class, 'index'])->where('school_id', '[0-9]+');
+    Route::get('/edit', [SchoolGalleryItemController::class, 'edit'])->middleware(['auth', 'user_check:school']);
+    Route::get('/create', [SchoolGalleryItemController::class, 'create'])->middleware(['auth', 'user_check:school']);;
+    Route::post('/', [SchoolGalleryItemController::class, 'save'])->where('school_id', '[0-9]+');
+});

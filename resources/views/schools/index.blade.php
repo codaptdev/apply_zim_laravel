@@ -4,7 +4,7 @@
         {{-- Check if the owner of the school account is viewing the page --}}
         @auth
             @if (auth()->user()->id == $school->user_id)
-                <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href="">ℹ️ This is how your public profile will look when students visit it</div>
+                <div  class="text-xl  bg-slate-200 mb-10 w-full p-4 rounded-xl text-center " href=""> ✨ This is how your public profile will look when students visit it</div>
             @endif
         @endauth
 
@@ -18,6 +18,18 @@
             <div class="flex flex-col flex-auto" >
                 <h1>{{$school->name}}</h1>
                 <p class="text-slate-400 text-2xl font-semibold ">{{$school->level}} SCHOOL</p>
+
+                @if (auth()->guest())
+                    <a href="/gallery/{{$school->id}}" >View School Gallery</a>
+                @else
+                    @if (auth()->user()->user_type == 'STUDENT')
+                        <a href="/gallery/{{$school->id}}" >View School Gallery</a>
+                    @else
+                        <a href="/gallery/edit" >Edit your school's gallery</a>
+                    @endif
+                @endif
+
+
 
                 @auth
                     @if (auth()->user()->id == $school->user_id)
