@@ -33,26 +33,7 @@ class ApplicationController extends Controller
             ]);
 
         } else {
-
-            // For Schools
-
-            $school = School::withUserId(auth()->user()->id);
-
-            $applications = Application::schoolsAll($school->id);
-
-            /* Will hold the array of students who have made applications */
-            $students = [];
-
-            foreach($applications as $application) {
-                $student = Student::find($application->student_id);
-                $student['date_applied'] = date_format($application->created_at, 'D d M y');
-                $students[] = $student;
-            }
-
-            return view("schools.applications", [
-                'students' => $students,
-            ]);
-
+            return redirect('/applications/dashboard');
         }
     }
 
