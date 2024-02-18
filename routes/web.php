@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\ApplicationsDashboard;
 use App\Http\Controllers\RedirectLogController;
 use App\Http\Controllers\StudentsHomePageController;
 use App\Http\Controllers\ApplicationAnswerController;
@@ -82,17 +83,24 @@ Route::group(['prefix' => 'myschool', 'middleware' => ['auth', 'user_check:schoo
 Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function () {
 
 
-    Route::get('/applications', [ApplicationController::class, 'index']);
+    Route::get('/', [ApplicationController::class, 'index']);
     Route::get('/apply', [ApplicationController::class, 'store'])->middleware('user_check:student');
     Route::get('/delete/{id}', [ApplicationController::class, 'destroy'])->middleware('user_check:student')->where('id', '[0-9]+');
 
+    Route::get('/dashboard', [ApplicationsDashboard::class, 'index'])->middleware(['user_check:school']);;
+    Route::get('/dashboard/history', [ApplicationsDashboard::class, 'history'])->middleware(['user_check:school']);
+
     // Routes for Creating application forms for schools
-    Route::get('/forms/create', [ApplicationQuestionController::class, 'create']);
-    Route::post('/forms/create', [ApplicationQuestionController::class, 'store']);
+    Route::get('/dashboard/forms/create', [ApplicationQuestionController::class, 'create'])->middleware(['user_check:school']);;
+    Route::post('/dashboard/forms/create', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);;
+
+    // Routes for Editing application forms for schools
+    Route::get('/dashboard/forms/edit', [ApplicationQuestionController::class, 'create'])->middleware(['user_check:school']);;
+    Route::post('/dashboard/forms/edit', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);
 
     // Routes for Responding to forms for students
-    Route::get('/forms/respond', [ApplicationAnswerController::class, 'create']);
-    Route::post('/forms/respond', [ApplicationAnswerController::class, 'store']);
+    Route::get('/forms/respond', [ApplicationAnswerController::class, 'create'])->middleware(['user_check:student']);;
+    Route::post('/forms/respond', [ApplicationAnswerController::class, 'store'])->middleware(['user_check:student']);;
 
 });
 
