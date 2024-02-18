@@ -13,13 +13,13 @@
 
             <x-action-card
             :title="'Edit Application Form'"
-            :action_url="'/applications/forms/edit'"
+            :action_url="'/applications/dashboard/forms/edit'"
             :description="'Edit the form that students will fill in to apply to your schools'"
             />
 
             <x-action-card
             :title="'Preview Application Form'"
-            :action_url="'/applications/forms/preview'"
+            :action_url="'/applications/dashboard/forms/preview'"
             :description="'Preview the form that students will fill in to apply to your schools'"
             />
 
