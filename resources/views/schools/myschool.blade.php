@@ -23,7 +23,11 @@
         <h1 class="mb-5 text-slate-700" >Manage your School's Account</h1>
         <div class="grid grid-cols-1 md:grid-cols-3 md:gap-5 w-full h-full gap-3 ">
 
-
+            <x-action-card
+            :title="'Applications Dashboard'"
+            :action_url="'/applications/dashboard'"
+            :description="'View, edit & manage your schools application statistics'"
+            />
 
             <x-action-card
             :title="'Edit Your Schools Info'"
