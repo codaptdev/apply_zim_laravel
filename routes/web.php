@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\RedirectLogController;
-use App\Http\Controllers\SchoolGalleryItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
@@ -14,7 +12,11 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\RedirectLogController;
 use App\Http\Controllers\StudentsHomePageController;
+use App\Http\Controllers\ApplicationAnswerController;
+use App\Http\Controllers\SchoolGalleryItemController;
+use App\Http\Controllers\ApplicationQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,11 +78,23 @@ Route::group(['prefix' => 'myschool', 'middleware' => ['auth', 'user_check:schoo
 });
 
 // Student Application Routes
-Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
-Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
-Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
-->middleware('auth', 'user_check:student')
-->where('id', '[0-9]+');
+
+Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function () {
+
+
+    Route::get('/applications', [ApplicationController::class, 'index']);
+    Route::get('/apply', [ApplicationController::class, 'store'])->middleware('user_check:student');
+    Route::get('/delete/{id}', [ApplicationController::class, 'destroy'])->middleware('user_check:student')->where('id', '[0-9]+');
+
+    // Routes for Creating application forms for schools
+    Route::get('/forms/create', [ApplicationQuestionController::class, 'create']);
+    Route::post('/forms/create', [ApplicationQuestionController::class, 'store']);
+
+    // Routes for Responding to forms for students
+    Route::get('/forms/respond', [ApplicationAnswerController::class, 'create']);
+    Route::post('/forms/respond', [ApplicationAnswerController::class, 'store']);
+
+});
 
 // Get school with ID
 Route::get('/schools/{id}',  [ProfileController::class, 'indexWithID'] )
