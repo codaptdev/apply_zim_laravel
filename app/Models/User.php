@@ -55,4 +55,16 @@ class User extends Authenticatable
     public function student() {
         return $this->hasOne(Student::class);
     }
+
+    /** If the user has applied to a certain school */
+    public function hasAppliedTo($school_id) {
+
+        $student = Student::withUserId($this->id);
+
+        $applications = Application::where('school_id', $school_id)
+        ->where('student_id', $student->id)
+        ->get();
+
+        return $applications->count() > 0;
+    }
 }
