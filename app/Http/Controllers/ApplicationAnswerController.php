@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\School;
+use App\Models\Student;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Models\ApplicationAnswer;
@@ -20,31 +21,43 @@ class ApplicationAnswerController extends Controller
     }
 
     public function store(Request $request) {
+
+        $student = Student::withUserId(auth()->user()->id);
         $school = School::find($request->school_id);
-        $questions = $school->application_questions;
-        $application = new Application();
 
-        $application->student_id = auth()->user()->id;
-        $application->school_id = $request->school_id;
+        // dd($student->hasAppliedTo($request->school_id));
 
-        $application->was_internal = true;
+        // Check if student has applied before
+        if ($student->hasAppliedTo($request->school_id)) {
+
+            return redirect('/schools/' . $school->id)->with('error', 'You have already applied to ' . $school->name . ' before');
+
+        } else {
+
+            $questions = $school->application_questions;
+            $application = new Application();
+
+            $application->student_id = $student->id;
+            $application->school_id = $request->school_id;
+
+            $application->was_internal = true;
+
+            $application->save();
+
+            foreach ($questions as $key => $question) {
+                $answer = new ApplicationAnswer();
+
+                $answer->question_id = $question->id;
+                $answer->response = $request[$this->to_snake_case($question->label)];
+                $answer->application_id = $application->id;
+
+                $answer->save();
+            }
 
 
-        $application->save();
+            return redirect('/schools/' . $school->id)->with('message', 'School application successfully made to ' . $school->name);
 
-        foreach ($questions as $key => $question) {
-            $answer = new ApplicationAnswer();
-
-            $answer->question_id = $question->id;
-            $answer->response = $request[$this->to_snake_case($question->label)];
-            $answer->application_id = $application->id;
-
-            $answer->save();
         }
-
-
-        return redirect('/schools/' . $school->id)->with('message', 'School application successfully made to ' . $school->name);
-
     }
 
     // Return snake case

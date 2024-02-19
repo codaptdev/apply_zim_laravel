@@ -36,4 +36,14 @@ class Student extends Model
         ->where("user_id", $user_id)
         ->first();
     }
+
+    /** Returns true if a student has applied to a school before */
+    public function hasAppliedTo($school_id) {
+
+        $applications = Application::where('school_id', $school_id)
+        ->where('student_id', $this->id)
+        ->get();
+
+        return $applications->count() > 0;
+    }
 }
