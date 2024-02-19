@@ -90,13 +90,9 @@ Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function ()
     Route::get('/dashboard', [ApplicationsDashboard::class, 'index'])->middleware(['user_check:school']);;
     Route::get('/dashboard/history', [ApplicationsDashboard::class, 'history'])->middleware(['user_check:school']);
 
-    // Routes for Creating application forms for schools
-    Route::get('/dashboard/forms/create', [ApplicationQuestionController::class, 'create'])->middleware(['user_check:school']);;
-    Route::post('/dashboard/forms/create', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);;
-
     // Routes for Editing application forms for schools
     Route::get('/dashboard/forms/edit', [ApplicationQuestionController::class, 'edit'])->middleware(['user_check:school']);;
-    Route::post('/dashboard/forms/edit', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);
+    Route::post('/dashboard/forms/add', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);
 
     // Routes for Responding to forms for students
     Route::get('/forms/respond', [ApplicationAnswerController::class, 'create'])->middleware(['user_check:student']);;

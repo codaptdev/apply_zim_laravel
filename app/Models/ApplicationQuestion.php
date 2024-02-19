@@ -24,4 +24,13 @@ class ApplicationQuestion extends Model
         return static::all()
         ->where('school_id', $school_id);
     }
+
+    /** Returns the reponse types for questions */
+    public static function response_types () {
+        return ['Integer','Text','Image','Boolean', 'File'];
+    }
+
+    // public static function getEnumForResponseType() {
+
+    // }
 }
