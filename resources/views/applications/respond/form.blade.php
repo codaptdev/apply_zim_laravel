@@ -2,8 +2,9 @@
     <div class="flex flex-col justify-center items-center w-full">
         <h1>Apply to {{$school->name}}</h1>
 
-        <form action="/applications/forms/repond?school_id={{$school->id}}" class="p-10 mt-10 flex flex-col items-center justify-center" method="post">
+        <form action="/applications/forms/respond?school_id={{$school->id}}" class="p-10 mt-10 flex flex-col items-center justify-center" method="post">
 
+            @csrf
             {{-- Fields --}}
 
             @foreach ($questions as $question)
