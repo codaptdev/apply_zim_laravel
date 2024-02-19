@@ -60,7 +60,7 @@ class SchoolController extends Controller
     {
         $school = School::find( $id );
 
-
+        $has_form = $school->has_application_questions();
 
         if($school === null) {
             return view('schools.404', [
@@ -75,7 +75,7 @@ class SchoolController extends Controller
                 $is_bookmarked = Bookmark::exists($id, $student->id);
                 $gallery_items = $school->gallery_items;
 
-                return view('schools.index', compact('school', 'is_bookmarked', 'gallery_items'));
+                return view('schools.index', compact('school', 'is_bookmarked', 'gallery_items', 'has_form'));
             } else {
                 $gallery_items = $school->gallery_items;
                 return view('schools.index', compact('school', 'gallery_items'));

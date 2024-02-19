@@ -48,4 +48,13 @@ class School extends Model
         ->where("user_id", $user_id)
         ->first();
     }
+
+    public function application_questions() {
+        return $this->hasMany(ApplicationQuestion::class);
+    }
+
+    /** Returns true if the school has any application questions */
+    public function has_application_questions() {
+        return $this->application_questions->count() > 0;
+    }
 }
