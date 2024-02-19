@@ -30,6 +30,9 @@
                     <div class="w-1/4 p-1" >
                         <x-pill :href="''" :color="'blue'" >{{$question->response_type}}</x-pill>
                     </div>
+
+
+                     <a href="/applications/dashboard/forms/delete/{{$question->id}}" class="text-red-400"> <i class="fa-solid fa-trash pr-2" ></i>Delete</a>
                 </div>
             @empty
                 <p class="text-slate-400 p-10 text-center" >Your Application form has no questions yet so Students won't be able to apply to your school through ApplyZim</p>

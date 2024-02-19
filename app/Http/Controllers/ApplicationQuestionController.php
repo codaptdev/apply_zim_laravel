@@ -10,11 +10,15 @@ class ApplicationQuestionController extends Controller
 {
     public function store(Request $request) {
 
+        $request->validate([
+            'label' => ['required']
+        ]);
+
         $question = new ApplicationQuestion();
         $school = School::withUserId(auth()->user()->id);
 
         $question->label = $request->label;
-        $question->placeholder = $request->placeholder;
+        $question->placeholder = $request->placeholder ?? '';
         $question->response_type = $request->response_type;
         $question->school_id = $school->id;
 
@@ -33,5 +37,12 @@ class ApplicationQuestionController extends Controller
         $school = School::withUserId(auth()->user()->id);
         $questions = ApplicationQuestion::getSchoolsQuestions($school->id);
         return view('applications.dashboard.edit-form', compact('questions', 'school', 'reponse_types'));
+    }
+
+    public function destroy($question_id) {
+        $question = ApplicationQuestion::all()->find($question_id);
+        $question->delete();
+
+        return redirect()->back()->with('notice', 'Question was deleted');
     }
 }
