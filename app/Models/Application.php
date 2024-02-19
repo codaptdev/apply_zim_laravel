@@ -41,14 +41,14 @@ class Application extends Model
     }
 
     /** Get a specific application by the student's id and school's id */
-    public static function find(int $school_id, int $student_id) {
-        $application = static::all()
-        ->where('student_id', $student_id)
-        ->where('school_id', $school_id)
-        ->first();
+    // public static function find(int $school_id, int $student_id) {
+    //     $application = static::all()
+    //     ->where('student_id', $student_id)
+    //     ->where('school_id', $school_id)
+    //     ->first();
 
-        return $application;
-    }
+    //     return $application;
+    // }
 
     public static function schoolsAll(int $school_id) {
         return static::all()

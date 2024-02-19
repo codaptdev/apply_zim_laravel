@@ -33,4 +33,14 @@ class ApplicationQuestion extends Model
     // public static function getEnumForResponseType() {
 
     // }
+
+    public function answers() {
+        return $this->hasMany(ApplicationAnswer::class);
+    }
+
+    public function answersFor($application_id, $student_id) {
+        return $this->answers
+        ->where('application_id', $application_id)
+        ->where('student_id', $student_id);
+    }
 }
