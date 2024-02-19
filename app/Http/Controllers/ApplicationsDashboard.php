@@ -22,13 +22,11 @@ class ApplicationsDashboard extends Controller
             $students = [];
 
             foreach($applications as $application) {
-                $student = Student::find($application->student_id);
-                $student['date_applied'] = date_format($application->created_at, 'D d M y');
-                $students[] = $student;
+                $application['date_applied'] = date_format($application->created_at, 'D d M y');
             }
 
             return view("schools.applications", [
-                'students' => $students,
+                'applications' => $applications
             ]);
     }
 }
