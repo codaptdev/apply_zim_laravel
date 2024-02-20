@@ -46,4 +46,9 @@ class Student extends Model
 
         return $applications->count() > 0;
     }
+
+    public function getApplicationTo($school_id) {
+        return $this->applications()
+        ->where('school_id', $school_id);
+    }
 }
