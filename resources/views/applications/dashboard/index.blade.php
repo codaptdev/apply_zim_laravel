@@ -4,7 +4,7 @@
 
         <br>
 
-        <div class="grid grid-cols-1 p-10 lg:grid-cols-3 gap-3 justify-center items-center" >
+        <div class="grid grid-cols-1 p-10 md:grid-cols-3 gap-3 justify-center items-center" >
             <x-action-card
             :title="'Applications History'"
             :action_url="'/applications/dashboard/history'"
