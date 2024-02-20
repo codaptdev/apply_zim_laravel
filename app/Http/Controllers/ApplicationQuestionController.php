@@ -45,4 +45,11 @@ class ApplicationQuestionController extends Controller
 
         return redirect()->back()->with('notice', 'Question was deleted');
     }
+
+    public function preview() {
+        $school = School::withUserId(auth()->user()->id);
+        $questions = $school->application_questions;
+
+        return view('applications.dashboard.preview', compact('school', 'questions'));
+    }
 }
