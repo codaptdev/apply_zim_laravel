@@ -26,7 +26,6 @@ class ApplicationQuestionController extends Controller
 
         $question->save();
 
-
         return redirect('/applications/dashboard/forms/edit');
     }
 

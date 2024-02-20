@@ -197,7 +197,7 @@
 
         @auth
 
-            @if (auth()->user()->user_type == 'STUDENT' && $school->application_url != null && $school->userHasNotApplied(auth()->user()->id))
+            @if (auth()->user()->user_type == 'STUDENT' && ($school->application_url != null || $school->userHasNotApplied(auth()->user()->id)))
                 <div class="fixed  bottom-0 justify-center items-center  flex flex-row left-0 w-full p-10">
 
                     @if ($school->has_application_questions())
