@@ -10,7 +10,7 @@
         <br>
 
 
-        @if (empty($schools))
+        @if (empty($applications))
             <div class="w-full flex flex-col items-center justify-center text-center p-20">
                 <p class="text-slate-500 text-xl " >You have not Applied to any schools yet🤭</p>
                 <a class=" text-xl " href="/search" >Search Schools</a>
@@ -31,15 +31,16 @@
 
 
                     {{-- Data --}}
-                    @foreach ($schools as $school)
+                    @foreach ($applications as $application)
                     <tr  >
-                        <td class="hover:bg-slate-200" > <a href="/schools/{{$school->id}}">{{$school->name}}</a></td>
-                        <td class="hover:bg-slate-200"> <a href="{{$school->application_url}}">{{$school->application_url}}</a></td>
-                        <td class="hover:bg-slate-200" >{{$school->date_applied}}</td>
+                        <td class="hover:bg-slate-200" > <a href="/schools/{{$application->school->id}}">{{$application->school->name}}</a></td>
+                        <td class="hover:bg-slate-200"> <a href="/applications/{{$application->id}}">View Application</a></td>
+                        <td class="hover:bg-slate-200" >{{$application->date_applied}}</td>
                         <td class="hover:bg-red-200 hover:text-red-800 bg-red-400">
-                            <a href="/applications/delete/{{$school->id}}">Delete</a>
+                            <a href="/applications/delete/{{$application->id}}">Delete</a>
                         </td>
                     </tr>
+                    {{-- @endforeach --}}
                     @endforeach
 
                 </tbody>

@@ -10,7 +10,7 @@
         <br>
 
 
-        @if (empty($students))
+        @if (empty($applications))
             <div class="w-full flex flex-col items-center justify-center text-center p-20">
                 <p class="text-slate-500 text-xl " >You don't have any application attempts yet 🙉</p>
             </div>
@@ -22,6 +22,7 @@
                         <th>First Name</th>
                         <th>Surname</th>
                         <th>Date</th>
+                        <th>View Application</th>
                     </tr>
                 </thead>
 
@@ -29,11 +30,12 @@
 
 
                     {{-- Data --}}
-                    @foreach ($students as $key => $student)
+                    @foreach ($applications as $key => $application)
                     <tr>
-                        <td class="hover:bg-slate-200" >{{$student->first_name}}</td>
-                        <td class="hover:bg-slate-200" >{{$student->surname}}</td>
-                        <td class="hover:bg-slate-200" >{{$student->date_applied}}</td>
+                        <td class="hover:bg-slate-200" >{{$application->student->first_name}}</td>
+                        <td class="hover:bg-slate-200" >{{$application->student->surname}}</td>
+                        <td class="hover:bg-slate-200" >{{$application->date_applied}}</td>
+                        <td class="hover:bg-slate-200" ><a href="/applications/dashboard/history/{{$application->id}}">View Application</a></td>
                     </tr>
                     @endforeach
 

@@ -6,6 +6,7 @@ use App\Models\School;
 use App\Models\Student;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use App\Models\ApplicationAnswer;
 
 class ApplicationController extends Controller
 {
@@ -20,39 +21,21 @@ class ApplicationController extends Controller
             $student = Student::withUserId(auth()->user()->id);
 
             $applications = Application::studentsAll($student->id);
-            $students_applications = []; // The array of applications sent to the front end
+
 
             foreach($applications as $application) {
-                $school = School::all()->find($application->school_id);
-                $school['date_applied'] = date_format($application->created_at, 'D d M y');;
-                $students_applications[] = $school;
+                $application['school'] = School::all()->find($application->school_id);
+                $application['date_applied'] = date_format($application->created_at, 'D d M y');;
             }
 
+            // dd($applications);
             return view("students.applications", [
-                'schools' => $students_applications,
+                'applications' => $applications->all(),
+                'student' => $student
             ]);
 
         } else {
-
-            // For Schools
-
-            $school = School::withUserId(auth()->user()->id);
-
-            $applications = Application::schoolsAll($school->id);
-
-            /* Will hold the array of students who have made applications */
-            $students = [];
-
-            foreach($applications as $application) {
-                $student = Student::find($application->student_id);
-                $student['date_applied'] = date_format($application->created_at, 'D d M y');
-                $students[] = $student;
-            }
-
-            return view("schools.applications", [
-                'students' => $students,
-            ]);
-
+            return redirect('/applications/dashboard');
         }
     }
 
@@ -98,14 +81,34 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(int $application_id)
     {
         $student = Student::withUserId(auth()->user()->id);
 
-        Application::findAndDelete($id, $student->id);
+        $application = Application::all()->find($application_id);
 
-        $school = School::find($id);
+        $school = School::find($application->school_id);
+
+        $application->delete();
 
         return redirect('/applications')->with('notice', 'Application to ' . $school->name . ' was deleted successfully');
+    }
+
+    /** Returns a view with details about a student's application to a school */
+    public function student_application_index($application_id) {
+        $application = Application::find($application_id);
+        $questions = $application->school->application_questions;
+
+        foreach ($questions as $key => $question) {
+            $answer = ApplicationAnswer::all()
+            ->where('question_id', $question->id)
+            ->where('application_id', $application_id)
+            ->first();
+
+            $question['answer'] = $answer;
+
+        }
+
+        return view('students.application_index', compact('application', 'questions'));
     }
 }

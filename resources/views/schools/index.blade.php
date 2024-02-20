@@ -197,9 +197,15 @@
 
         @auth
 
-            @if (auth()->user()->user_type == 'STUDENT' && $school->application_url != null)
+            @if (auth()->user()->user_type == 'STUDENT' && ($school->application_url != null || $school->userHasNotApplied(auth()->user()->id)))
                 <div class="fixed  bottom-0 justify-center items-center  flex flex-row left-0 w-full p-10">
-                    <a target="blank" href="/apply?school_id={{$school->id}}" class="flex flex-row link-btn md:w-1/2 shadow-xl md:p-3 md:hover:w-3/5 " href=""> <span class='flex flex-row justify-center items-center' >Apply to {{$school->name}} <i class="fa-solid fa-arrow-right ml-2"></i></span> </a>
+
+                    @if ($school->has_application_questions())
+                        <a  href="/applications/forms/respond?school_id={{$school->id}}" class="flex flex-row link-btn md:w-1/2 shadow-xl md:p-3 md:hover:w-3/5 " href=""> <span class='flex flex-row justify-center items-center' >Apply to {{$school->name}} <i class="fa-solid fa-arrow-right ml-2"></i></span> </a>
+                    @else
+                        <a target="blank" href="/applications/apply?school_id={{$school->id}}" class="flex flex-row link-btn md:w-1/2 shadow-xl md:p-3 md:hover:w-3/5 " href=""> <span class='flex flex-row justify-center items-center' >Apply to {{$school->name}} <i class="fa-solid fa-arrow-right ml-2"></i></span> </a>
+                    @endif
+
                 </div>
             @endif
         @endauth

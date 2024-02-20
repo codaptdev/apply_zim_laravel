@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\RedirectLogController;
-use App\Http\Controllers\SchoolGalleryItemController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LogoController;
@@ -14,7 +12,12 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\ApplicationsDashboard;
+use App\Http\Controllers\RedirectLogController;
 use App\Http\Controllers\StudentsHomePageController;
+use App\Http\Controllers\ApplicationAnswerController;
+use App\Http\Controllers\SchoolGalleryItemController;
+use App\Http\Controllers\ApplicationQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,11 +79,32 @@ Route::group(['prefix' => 'myschool', 'middleware' => ['auth', 'user_check:schoo
 });
 
 // Student Application Routes
-Route::get('/apply', [ApplicationController::class, 'store'])->middleware('auth', 'user_check:student');
-Route::get('/applications', [ApplicationController::class, 'index'])->middleware('auth');
-Route::get('/applications/delete/{id}', [ApplicationController::class, 'destroy'])
-->middleware('auth', 'user_check:student')
-->where('id', '[0-9]+');
+
+Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function () {
+
+
+    Route::get('/', [ApplicationController::class, 'index']);
+    Route::get('/apply', [ApplicationController::class, 'store'])->middleware('user_check:student');
+    Route::get('/delete/{application_id}', [ApplicationController::class, 'destroy'])->middleware('user_check:student')->where('id', '[0-9]+');
+
+    Route::get('/dashboard', [ApplicationsDashboard::class, 'index'])->middleware(['user_check:school']);;
+    Route::get('/dashboard/history', [ApplicationsDashboard::class, 'history'])->middleware(['user_check:school']);
+    Route::get('/dashboard/history/{application_id}', [ApplicationsDashboard::class, 'history_index'])->middleware(['user_check:school']);
+
+    // Routes for Editing application forms for schools
+    Route::get('/dashboard/forms/edit', [ApplicationQuestionController::class, 'edit'])->middleware(['user_check:school']);;
+    Route::post('/dashboard/forms/add', [ApplicationQuestionController::class, 'store'])->middleware(['user_check:school']);
+    Route::get('/dashboard/forms/preview', [ApplicationQuestionController::class, 'preview'])->middleware(['user_check:school']);
+    Route::get('/dashboard/forms/delete/{question_id}', [ApplicationQuestionController::class, 'destroy'])->middleware(['user_check:school']);
+
+
+    // Routes for Responding to forms for students
+    Route::get('/forms/respond', [ApplicationAnswerController::class, 'create'])->middleware(['user_check:student']);;
+    Route::post('/forms/respond', [ApplicationAnswerController::class, 'store'])->middleware(['user_check:student']);;
+
+    // Routes for students
+    Route::get('/{application_id}', [ApplicationController::class, 'student_application_index'])->middleware(['user_check:student']);
+});
 
 // Get school with ID
 Route::get('/schools/{id}',  [ProfileController::class, 'indexWithID'] )

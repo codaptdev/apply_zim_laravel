@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('applications', function (Blueprint $table) {
+            $table->id();
             $table->integer('student_id')->nullable(false);
             $table->integer('school_id')->nullable(false);
 
@@ -20,8 +21,7 @@ return new class extends Migration
 
             // Reference to the school that the student is applying to
             $table->foreign('school_id')->references('id')->on('schools');
-
-            $table->primary(['school_id', 'student_id']);
+            $table->boolean('was_internal')->default(true);
             $table->timestamps();
         });
     }

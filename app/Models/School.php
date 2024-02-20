@@ -48,4 +48,29 @@ class School extends Model
         ->where("user_id", $user_id)
         ->first();
     }
+
+    public function application_questions() {
+        return $this->hasMany(ApplicationQuestion::class);
+    }
+
+    /** Returns true if the school has any application questions */
+    public function has_application_questions() {
+        return $this->application_questions->count() > 0;
+    }
+
+    public function hasApplied($student_id) {
+        $applications = Application::where('school_id', $this->id)
+        ->where('student_id', $student_id)
+        ->get();
+
+        return $applications->count() > 0;
+    }
+
+    public function hasNotApplied($student_id) {
+        return $this->hasApplied($student_id) == false;
+    }
+
+    public function userHasNotApplied($user_id) {
+        return $this->hasNotApplied(Student::withUserId($user_id)->id);
+    }
 }

@@ -50,7 +50,7 @@
                 We reccomend that you put the link to either a website or document spelling out the application procedure or a form where students can fill in
                 to apply.
             </p>
-            <input value="{{$school->application_url}}" required type="url" name="application_url" placeholder="e.g https://myschool.com" >
+            <input value="{{$school->application_url}}" type="url" name="application_url" placeholder="e.g https://myschool.com" >
 
             <br>
 
