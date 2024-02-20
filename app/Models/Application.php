@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\School;
 use App\Models\Student;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -15,6 +16,10 @@ class Application extends Model
         'school_id',
         'student_id',
     ];
+
+    public function answers() {
+        return $this->hasMany(ApplicationAnswer::class);
+    }
 
     public function student() {
         return $this->belongsTo(Student::class);
@@ -64,5 +69,12 @@ class Application extends Model
         static::where('student_id', $student_id)
         ->where('school_id', $school_id)
         ->delete();
+    }
+
+    public function delete() {
+        DB::transaction(function() {
+            $this->answers()->delete();
+            parent::delete();
+        });
     }
 }
