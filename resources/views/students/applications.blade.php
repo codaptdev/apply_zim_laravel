@@ -37,7 +37,7 @@
                         <td class="hover:bg-slate-200"> <a href="/applications/{{$application->id}}">View Application</a></td>
                         <td class="hover:bg-slate-200" >{{$application->date_applied}}</td>
                         <td class="hover:bg-red-200 hover:text-red-800 bg-red-400">
-                            <a href="/applications/delete/{{$application->school->id}}">Delete</a>
+                            <a href="/applications/delete/{{$application->id}}">Delete</a>
                         </td>
                     </tr>
                     {{-- @endforeach --}}

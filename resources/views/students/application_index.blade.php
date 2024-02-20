@@ -1,6 +1,6 @@
 <x-main-layout>
     <div class="flex flex-col w-full items-center justify-center" >
-        <h1>Application for {{$application->student->surname}}</h1>
+        <h1>Application to {{$application->school->name}}</h1>
 
         <div class="flex flex-col items-center justify-center w-full p-10" >
             @foreach ($questions as $question)
@@ -11,7 +11,7 @@
             @endforeach
         </div>
 
-        <a href="/applications/delete/{{$application->id}}" class="link-btn bg-red-400 md:w-1/2 w-3/4 ">Delete Application</a>
+        <a href="/applications/delete/{{$application->id}}" class=" red-link-btn md:w-1/2 w-3/4 ">Delete Application</a>
 
     </div>
 
