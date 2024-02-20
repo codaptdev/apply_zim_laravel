@@ -85,7 +85,7 @@ Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function ()
 
     Route::get('/', [ApplicationController::class, 'index']);
     Route::get('/apply', [ApplicationController::class, 'store'])->middleware('user_check:student');
-    Route::get('/delete/{id}', [ApplicationController::class, 'destroy'])->middleware('user_check:student')->where('id', '[0-9]+');
+    Route::get('/delete/{application_id}', [ApplicationController::class, 'destroy'])->middleware('user_check:student')->where('id', '[0-9]+');
 
     Route::get('/dashboard', [ApplicationsDashboard::class, 'index'])->middleware(['user_check:school']);;
     Route::get('/dashboard/history', [ApplicationsDashboard::class, 'history'])->middleware(['user_check:school']);
@@ -102,6 +102,8 @@ Route::group(['prefix' => 'applications', 'middleware' => ['auth']], function ()
     Route::get('/forms/respond', [ApplicationAnswerController::class, 'create'])->middleware(['user_check:student']);;
     Route::post('/forms/respond', [ApplicationAnswerController::class, 'store'])->middleware(['user_check:student']);;
 
+    // Routes for students
+    Route::get('/{application_id}', [ApplicationController::class, 'student_application_index'])->middleware(['user_check:student']);
 });
 
 // Get school with ID
