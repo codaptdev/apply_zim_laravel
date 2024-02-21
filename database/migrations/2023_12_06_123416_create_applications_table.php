@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('students');
 
             // Reference to the school that the student is applying to
+
             $table->foreign('school_id')->references('id')->on('schools');
             $table->boolean('was_internal')->default(true);
             $table->timestamps();
