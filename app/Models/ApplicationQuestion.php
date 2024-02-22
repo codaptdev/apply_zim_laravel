@@ -27,7 +27,8 @@ class ApplicationQuestion extends Model
 
     /** Returns the reponse types for questions */
     public static function response_types () {
-        return ['Integer','Text','Image','Boolean', 'File'];
+        // return ['Integer','Text','Image','Boolean', 'File'];
+        return ['Integer','Text','Boolean', 'Date'];
     }
 
     // public static function getEnumForResponseType() {

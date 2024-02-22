@@ -2,9 +2,8 @@
     <div class="flex p-10 flex-col justify-center items-center ">
         <h1 class="text-center" >Application Attempts From Students</h1>
 
-        <p class="mt-5 text-center text-slate-600 font-medium text-md xl:w-1/2" >This is a list of students that have attempted to apply to your school and where redirected to your application site by pressing the <strong> Apply button</strong> on
-            your school profile page. This doesn't neccessarily mean that these students applied to your school but they clicked on
-            <strong>Apply Button</strong>
+        <p class="mt-5 text-center text-slate-600 font-medium text-md xl:w-1/2" >
+            This is a list of students who submitted an application form or where redirected to an external site to apply
         </p>
 
         <br>

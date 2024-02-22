@@ -16,7 +16,7 @@
             <h1 class="text-slate-700 mt-20 text-4xl md:text-5xl" >ApplyZim is a central database for students to find and apply to schools and for Schools to be discovered
             </h1>
             <br>
-            <button class="link-btn md:w-1/2 my-10 ">Join ApplyZim</button>
+            <a href="/register" class="link-btn md:w-1/2 my-10 ">Join ApplyZim</a>
         </div>
     </div>
 </x-main-layout>
