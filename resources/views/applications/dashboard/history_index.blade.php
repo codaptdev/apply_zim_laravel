@@ -1,6 +1,12 @@
 <x-main-layout>
     <div class="flex flex-col w-full items-center justify-center" >
-        <h1>Application for {{$application->student->surname}}</h1>
+        <h1>Student's information</h1>
+        <br>
+        <p class="text-xl text-slate-500" >Name : <span class="font-bold text-black" >{{$application->student->first_name}} {{$application->student->surname}}</span></p>
+        <p class="text-xl text-slate-500" >Town/City : <span class="font-bold text-black" >{{$application->student->town_city}}</span></p>
+        <p class="text-xl text-slate-500" >Level : <span class="font-bold text-black" >{{$application->student->level}}</span></p>
+
+        <br>
 
         <div class="flex flex-col items-center justify-center w-full p-10" >
             @foreach ($questions as $question)
