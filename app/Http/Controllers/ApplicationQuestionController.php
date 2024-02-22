@@ -47,8 +47,14 @@ class ApplicationQuestionController extends Controller
 
     public function preview() {
         $school = School::withUserId(auth()->user()->id);
-        $questions = $school->application_questions;
 
-        return view('applications.dashboard.preview', compact('school', 'questions'));
+        if ($school->has_application_questions()) {
+            $questions = $school->application_questions;
+            return view('applications.dashboard.preview', compact('school', 'questions'));
+        } else {
+            return redirect('/applications/dashboard/forms/edit')->with('notice', 'You need to add questions to your application form before you can preview it');
+        }
+
+
     }
 }

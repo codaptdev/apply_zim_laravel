@@ -2,6 +2,11 @@
     <div class="flex flex-col w-full items-center justify-center" >
         <h1>Application for {{$application->student->surname}}</h1>
 
+
+        <dl>
+            hie
+        </dl>
+
         <div class="flex flex-col items-center justify-center w-full p-10" >
             @foreach ($questions as $question)
             <div class="items-center justify-center w-full p-5" >
