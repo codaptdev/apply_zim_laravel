@@ -6,7 +6,6 @@ use App\Models\School;
 use App\Models\Student;
 use App\Models\Application;
 use Illuminate\Http\Request;
-use App\Models\ApplicationAnswer;
 use App\Models\ApplicationQuestion;
 
 class ApplicationController extends Controller
@@ -18,18 +17,9 @@ class ApplicationController extends Controller
     {
         if(auth()->user()->user_type == 'STUDENT') {
 
-            // For Students
             $student = Student::withUserId(auth()->user()->id);
-
             $applications = Application::studentsAll($student->id);
 
-
-            foreach($applications as $application) {
-                $application['school'] = School::all()->find($application->school_id);
-                $application['date_applied'] = date_format($application->created_at, 'D d M y');;
-            }
-
-            // dd($applications);
             return view("students.applications", [
                 'applications' => $applications->all(),
                 'student' => $student

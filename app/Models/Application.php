@@ -61,8 +61,15 @@ class Application extends Model
     }
 
     public static function studentsAll(int $student_id) {
-        return static::all()
+        $applications = static::all()
         ->where('student_id', $student_id);
+
+        foreach($applications as $application) {
+            $application['school'] = School::find($application->school_id);
+            $application['date_applied'] = date_format($application->created_at, 'D d M y');;
+        }
+
+        return $applications;
     }
 
     public static function findAndDelete(int $school_id, int $student_id) {
