@@ -58,7 +58,7 @@
             <x-action-card
             :title="'Edit School Gallery'"
             :action_url="'/gallery/edit'"
-            :description="'View, edit & upload to your schools gallery'"
+            :description="'View, edit and upload images to your schools gallery'"
             />
 
             {{-- <a href="/schools/{{$school->name}}">View School Profile</a> --}}
