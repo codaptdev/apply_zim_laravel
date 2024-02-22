@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ApplicationAnswer;
 use App\Models\School;
 use App\Models\Student;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use App\Models\ApplicationAnswer;
+use App\Models\ApplicationQuestion;
 
 class ApplicationsDashboard extends Controller
 {
@@ -31,21 +32,11 @@ class ApplicationsDashboard extends Controller
             ]);
     }
 
+    /** Returns a view with the reponses of a student to an application form */
     public function history_index($application_id) {
 
         $application = Application::find($application_id);
-        $questions = $application->school->application_questions;
-
-        foreach ($questions as $key => $question) {
-            $answer = ApplicationAnswer::all()
-            ->where('question_id', $question->id)
-            ->where('application_id', $application_id)
-            ->first();
-
-            $question['answer'] = $answer;
-
-        }
-
+        $questions = ApplicationQuestion::questionAndAnswersFor($application_id);
 
         return view('applications.dashboard.history_index', compact('application', 'questions'));
 

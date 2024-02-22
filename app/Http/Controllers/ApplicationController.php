@@ -7,6 +7,7 @@ use App\Models\Student;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use App\Models\ApplicationAnswer;
+use App\Models\ApplicationQuestion;
 
 class ApplicationController extends Controller
 {
@@ -97,17 +98,7 @@ class ApplicationController extends Controller
     /** Returns a view with details about a student's application to a school */
     public function student_application_index($application_id) {
         $application = Application::find($application_id);
-        $questions = $application->school->application_questions;
-
-        foreach ($questions as $key => $question) {
-            $answer = ApplicationAnswer::all()
-            ->where('question_id', $question->id)
-            ->where('application_id', $application_id)
-            ->first();
-
-            $question['answer'] = $answer;
-
-        }
+        $questions = ApplicationQuestion::questionAndAnswersFor($application_id);
 
         return view('students.application_index', compact('application', 'questions'));
     }

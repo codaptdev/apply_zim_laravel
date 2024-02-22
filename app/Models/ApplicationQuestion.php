@@ -44,4 +44,36 @@ class ApplicationQuestion extends Model
         ->where('application_id', $application_id)
         ->where('student_id', $student_id);
     }
+
+    /** Returns a collection of questions that a student answered
+     *
+     * The answer for a question is returned as attribute on the question e.g
+     *
+     * ```php
+     *  $question1->answer->response;
+     * ```
+     */
+    public static function questionAndAnswersFor($application_id, ) {
+
+        $application = Application::find($application_id);
+        $all_questions = $application->school->application_questions;
+        $out_questions = [];
+
+        foreach ($all_questions as $key => $question) {
+
+            $answer = ApplicationAnswer::all()
+            ->where('question_id', $question->id)
+            ->where('application_id', $application_id)
+            ->first();
+
+            if ($answer !== null) {
+                $question['answer'] = $answer;
+                $out_questions[] = $question;
+            }
+
+
+        }
+
+        return $out_questions;
+    }
 }
